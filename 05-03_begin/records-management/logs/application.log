@@ -1,0 +1,75 @@
+2024-12-03T18:35:32.023+10:00  WARN 22089 --- [RecordsManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-03T18:35:53.936+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-03T18:35:53.937+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-12-03T18:36:05.058+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.DashboardController     : getDashboard(...)
+2024-12-03T18:36:05.059+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2024-12-03T18:36:09.279+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 1
+2024-12-03T18:36:21.596+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 1
+2024-12-03T18:36:54.575+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.DashboardController     : getDashboard(...)
+2024-12-03T18:36:54.575+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2024-12-03T18:36:55.161+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-7] c.m.r.controller.PersonController        : getPersonDetails(...)
+2024-12-03T18:36:55.662+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2024-12-03T18:36:59.115+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-10] c.m.r.controller.PersonController        : viewPersonFullDetails(...) - Loading full details view for person ID: 1
+2024-12-03T18:37:04.280+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PersonController        : editPersonFullDetails(...) - Loading full details view for person ID: 1
+2024-12-03T18:37:08.013+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.PersonController        : updatePersonFullDetails(...) - Updating details for person ID: 1
+2024-12-03T18:37:08.024+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-10] c.m.r.controller.PersonController        : viewPersonFullDetails(...) - Loading full details view for person ID: 1
+2024-12-03T18:37:22.959+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.DashboardController     : getDashboard(...)
+2024-12-03T18:37:22.959+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2024-12-03T18:37:23.548+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PersonController        : getPersonDetails(...)
+2024-12-03T18:37:24.047+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-8] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2024-12-03T18:37:26.554+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 2
+2024-12-03T18:37:38.651+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.StudentController       : updateStudent(...) - studentId: 2
+2024-12-03T18:37:53.979+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 2
+2024-12-03T18:38:07.230+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PriorSchoolController   : savePriorSchool(...) - studentId: 2
+2024-12-03T18:38:07.233+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PriorSchoolController   : saved prior school information
+2024-12-03T18:38:13.231+10:00  INFO 22089 --- [RecordsManagement] [http-nio-8080-exec-8] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 2
+2024-12-03T18:40:38.631+10:00  WARN 22089 --- [RecordsManagement] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2024-12-03T18:40:46.626+10:00  WARN 22454 --- [RecordsManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-03T18:40:57.425+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-03T18:40:57.426+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-12-03T18:40:57.464+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 2
+2024-12-03T18:41:02.327+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.DashboardController     : getDashboard(...)
+2024-12-03T18:41:02.327+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2024-12-03T18:41:02.936+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PersonController        : getPersonDetails(...)
+2024-12-03T18:41:03.435+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2024-12-03T18:41:04.700+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 2
+2024-12-03T18:41:30.075+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PriorSchoolController   : savePriorSchool(...) - studentId: 2
+2024-12-03T18:41:30.079+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PriorSchoolController   : saved prior school information
+2024-12-03T18:41:39.935+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 2
+2024-12-03T18:47:33.762+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PriorSchoolController   : savePriorSchool(...) - studentId: 2
+2024-12-03T18:47:33.765+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PriorSchoolController   : saved prior school information
+2024-12-03T18:47:39.990+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 2
+2024-12-03T18:47:52.990+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.StudentController       : updateStudent(...) - studentId: 2
+2024-12-03T18:48:00.712+10:00  INFO 22454 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 2
+2024-12-03T18:55:57.074+10:00  WARN 22454 --- [RecordsManagement] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2024-12-03T18:59:15.338+10:00  WARN 23688 --- [RecordsManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-03T18:59:18.645+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-03T18:59:18.646+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-12-03T18:59:18.722+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.DashboardController     : getDashboard(...)
+2024-12-03T18:59:18.723+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2024-12-03T18:59:20.153+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-8] c.m.r.controller.PersonController        : getPersonDetails(...)
+2024-12-03T18:59:20.652+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2024-12-03T18:59:22.606+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-10] c.m.r.controller.StudentController       : showAddStudentForm(...) - personId:1
+2024-12-03T18:59:38.886+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.StudentController       : saveStudent(...) - personId:1
+2024-12-03T18:59:45.939+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 4
+2024-12-03T19:03:01.859+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PersonController        : getPersonDetails(...)
+2024-12-03T19:03:02.359+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-10] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2024-12-03T19:03:03.462+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 4
+2024-12-03T19:03:14.155+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PriorSchoolController   : savePriorSchool(...) - studentId: 4
+2024-12-03T19:03:14.158+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PriorSchoolController   : saved prior school information
+2024-12-03T19:03:57.699+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PriorSchoolController   : savePriorSchool(...) - studentId: 4
+2024-12-03T19:03:57.702+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PriorSchoolController   : saved prior school information
+2024-12-03T19:04:02.018+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-7] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 4
+2024-12-03T19:04:28.125+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.PriorSchoolController   : savePriorSchool(...) - studentId: 4
+2024-12-03T19:04:28.128+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.PriorSchoolController   : saved prior school information
+2024-12-03T19:04:35.315+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.DashboardController     : getDashboard(...)
+2024-12-03T19:04:35.316+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2024-12-03T19:04:35.901+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PersonController        : getPersonDetails(...)
+2024-12-03T19:04:36.401+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2024-12-03T19:04:38.364+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 4
+2024-12-03T19:04:42.672+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.DashboardController     : getDashboard(...)
+2024-12-03T19:04:42.672+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2024-12-03T19:04:43.253+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PersonController        : getPersonDetails(...)
+2024-12-03T19:04:43.752+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-10] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2024-12-03T19:04:46.683+10:00  INFO 23688 --- [RecordsManagement] [http-nio-8080-exec-7] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 4
+2024-12-03T19:12:08.959+10:00  WARN 23688 --- [RecordsManagement] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]

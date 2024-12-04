@@ -1,0 +1,104 @@
+2024-11-12T00:14:05.913+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s613ms).
+2024-11-12T00:24:00.547+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m54s634ms).
+2024-11-12T00:52:30.564+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m29s836ms).
+2024-11-12T01:08:29.139+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s555ms).
+2024-11-12T01:24:28.018+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s872ms).
+2024-11-12T01:40:26.530+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s511ms).
+2024-11-12T01:55:55.117+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s587ms).
+2024-11-12T02:11:53.894+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s708ms).
+2024-11-12T02:25:29.612+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=13m5s711ms).
+2024-11-12T02:53:58.511+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s594ms).
+2024-11-12T03:09:57.222+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s701ms).
+2024-11-12T03:25:55.858+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s621ms).
+2024-11-12T03:41:24.494+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s636ms).
+2024-11-12T03:57:23.342+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s852ms).
+2024-11-12T04:14:21.934+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s583ms).
+2024-11-12T04:26:35.987+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m14s53ms).
+2024-11-12T04:55:04.784+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s601ms).
+2024-11-12T05:10:33.476+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s692ms).
+2024-11-12T05:26:32.205+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m28s723ms).
+2024-11-12T05:30:02.936+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m716ms).
+2024-11-12T05:48:18.371+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m15s315ms).
+2024-11-12T06:37:45.984+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m56s930ms).
+2024-11-12T12:01:07.082+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m18s182ms).
+2024-11-12T12:03:09.264+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m32s163ms).
+2024-11-12T13:21:44.374+10:00  WARN 13986 --- [RecordsManagement] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h18m35s110ms).
+2024-11-12T14:09:09.787+10:00  WARN 13986 --- [RecordsManagement] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2024-11-12T14:10:34.291+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : Driver class org.h2.Driver found in Thread context class loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@64db0cdd
+2024-11-12T14:10:34.700+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2024-11-12T14:10:34.704+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension.............false
+2024-11-12T14:10:34.705+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : autoCommit......................true
+2024-11-12T14:10:34.705+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : catalog.........................none
+2024-11-12T14:10:34.705+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionInitSql...............none
+2024-11-12T14:10:34.706+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionTestQuery.............none
+2024-11-12T14:10:34.707+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionTimeout...............30000
+2024-11-12T14:10:34.707+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSource......................none
+2024-11-12T14:10:34.707+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceClassName.............none
+2024-11-12T14:10:34.707+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI..................none
+2024-11-12T14:10:34.708+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceProperties............{password=<masked>}
+2024-11-12T14:10:34.708+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : driverClassName................."org.h2.Driver"
+2024-11-12T14:10:34.708+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName......none
+2024-11-12T14:10:34.708+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : healthCheckProperties...........{}
+2024-11-12T14:10:34.709+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry.............none
+2024-11-12T14:10:34.709+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : idleTimeout.....................600000
+2024-11-12T14:10:34.709+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout.......1
+2024-11-12T14:10:34.709+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries..........false
+2024-11-12T14:10:34.709+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : jdbcUrl.........................jdbc:h2:mem:records-management
+2024-11-12T14:10:34.710+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : keepaliveTime...................0
+2024-11-12T14:10:34.710+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold..........0
+2024-11-12T14:10:34.710+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : maxLifetime.....................1800000
+2024-11-12T14:10:34.710+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : maximumPoolSize.................10
+2024-11-12T14:10:34.710+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : metricRegistry..................none
+2024-11-12T14:10:34.710+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory...........none
+2024-11-12T14:10:34.710+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : minimumIdle.....................10
+2024-11-12T14:10:34.710+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : password........................<masked>
+2024-11-12T14:10:34.711+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : poolName........................"HikariPool-1"
+2024-11-12T14:10:34.711+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : readOnly........................false
+2024-11-12T14:10:34.711+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : registerMbeans..................false
+2024-11-12T14:10:34.711+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : scheduledExecutor...............none
+2024-11-12T14:10:34.712+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : schema..........................none
+2024-11-12T14:10:34.712+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : threadFactory...................internal
+2024-11-12T14:10:34.712+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : transactionIsolation............default
+2024-11-12T14:10:34.712+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : username........................"sa"
+2024-11-12T14:10:34.713+10:00 DEBUG 34455 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : validationTimeout...............5000
+2024-11-12T14:10:36.268+10:00  WARN 34455 --- [RecordsManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-12T14:10:42.180+10:00  WARN 34455 --- [RecordsManagement] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2024-11-12T14:11:06.816+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : Driver class org.h2.Driver found in Thread context class loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@64db0cdd
+2024-11-12T14:11:07.183+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2024-11-12T14:11:07.187+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension.............false
+2024-11-12T14:11:07.187+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : autoCommit......................true
+2024-11-12T14:11:07.187+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : catalog.........................none
+2024-11-12T14:11:07.187+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionInitSql...............none
+2024-11-12T14:11:07.187+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionTestQuery.............none
+2024-11-12T14:11:07.188+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionTimeout...............30000
+2024-11-12T14:11:07.189+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSource......................none
+2024-11-12T14:11:07.189+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceClassName.............none
+2024-11-12T14:11:07.189+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI..................none
+2024-11-12T14:11:07.189+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceProperties............{password=<masked>}
+2024-11-12T14:11:07.189+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : driverClassName................."org.h2.Driver"
+2024-11-12T14:11:07.190+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName......none
+2024-11-12T14:11:07.190+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : healthCheckProperties...........{}
+2024-11-12T14:11:07.190+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry.............none
+2024-11-12T14:11:07.190+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : idleTimeout.....................600000
+2024-11-12T14:11:07.190+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout.......1
+2024-11-12T14:11:07.191+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries..........false
+2024-11-12T14:11:07.191+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : jdbcUrl.........................jdbc:h2:mem:records-management
+2024-11-12T14:11:07.191+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : keepaliveTime...................0
+2024-11-12T14:11:07.191+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold..........0
+2024-11-12T14:11:07.191+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : maxLifetime.....................1800000
+2024-11-12T14:11:07.191+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : maximumPoolSize.................10
+2024-11-12T14:11:07.191+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : metricRegistry..................none
+2024-11-12T14:11:07.192+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory...........none
+2024-11-12T14:11:07.192+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : minimumIdle.....................10
+2024-11-12T14:11:07.192+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : password........................<masked>
+2024-11-12T14:11:07.192+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : poolName........................"HikariPool-1"
+2024-11-12T14:11:07.192+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : readOnly........................false
+2024-11-12T14:11:07.192+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : registerMbeans..................false
+2024-11-12T14:11:07.193+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : scheduledExecutor...............none
+2024-11-12T14:11:07.193+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : schema..........................none
+2024-11-12T14:11:07.193+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : threadFactory...................internal
+2024-11-12T14:11:07.193+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : transactionIsolation............default
+2024-11-12T14:11:07.194+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : username........................"sa"
+2024-11-12T14:11:07.194+10:00 DEBUG 34485 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : validationTimeout...............5000
+2024-11-12T14:11:08.635+10:00  WARN 34485 --- [RecordsManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-12T14:11:14.209+10:00  WARN 34485 --- [RecordsManagement] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
