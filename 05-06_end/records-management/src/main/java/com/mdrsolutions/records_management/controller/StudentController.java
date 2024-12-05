@@ -80,7 +80,7 @@ public class StudentController {
 
     @PostMapping("/student/update/{studentId}")
     public String updateStudent(@PathVariable("studentId") Long studentId,
-                                      @ModelAttribute Student student, Model model) {
+                                @ModelAttribute Student student, Model model) {
         // Update the student
         LOGGER.info("updateStudent(...) - studentId: {}", studentId);
         Student existingStudent = studentService.getStudentById(studentId);
