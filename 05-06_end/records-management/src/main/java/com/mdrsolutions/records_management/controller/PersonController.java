@@ -279,7 +279,7 @@ public class PersonController {
             model.addAttribute("alertLevel", alertLevel);
             model.addAttribute("phone", phoneNumber);
             model.addAttribute("personId", personId);
-            
+
             return FragmentsRendering
                     .with("person/phones-info :: phones-info")
                     .header(HtmxResponseHeader.HX_RESELECT.getValue(),"#phone-alert-message")
