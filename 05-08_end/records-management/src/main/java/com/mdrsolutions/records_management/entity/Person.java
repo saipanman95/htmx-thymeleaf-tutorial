@@ -240,4 +240,5 @@ public class Person {
     public void setEmploymentStatus(EmploymentStatus employmentStatus) {
         this.employmentStatus = employmentStatus;
     }
+
 }

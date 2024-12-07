@@ -80,11 +80,11 @@ public class StudentController {
 
     @PostMapping("/student/update/{studentId}")
     public String updateStudent(@PathVariable("studentId") Long studentId,
-                                @ModelAttribute Student student, Model model) {
+                                @ModelAttribute Student student, 
+                                Model model) {
         // Update the student
         LOGGER.info("updateStudent(...) - studentId: {}", studentId);
-        Student existingStudent = studentService.getStudentById(studentId);
-        PriorSchool priorSchool = priorSchoolService.findMostRecentSchool(studentId);
+        Student existingStudent = studentService.getStudentById(studentId); 
 
         existingStudent.setFirstName(student.getFirstName());
         existingStudent.setMiddleName(student.getMiddleName());

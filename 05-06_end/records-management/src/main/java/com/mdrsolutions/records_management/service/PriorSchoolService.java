@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PriorSchoolService {
@@ -44,8 +45,13 @@ public class PriorSchoolService {
         LOGGER.info("savePriorSchoolWith(...) - studentId = {}", studentId);
 
         PriorSchool school = savePriorSchool(priorSchool);
-        Optional<Student> optionalStudent = studentRepository.findById(studentId);
-        Student student = optionalStudent.get();
+
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalArgumentException("Student not found"));
+
+        Set<PriorSchool> priorSchoolSet = student.getPriorSchools();
+
+        priorSchoolSet.removeIf(ps -> ps.getId().equals(school.getId()));
 
         student.addPriorSchool(school);
 

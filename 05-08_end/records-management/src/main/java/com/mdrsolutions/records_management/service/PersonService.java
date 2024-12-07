@@ -5,6 +5,7 @@ import com.mdrsolutions.records_management.entity.Person;
 import com.mdrsolutions.records_management.repository.PersonRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,6 +16,9 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
+    public List<Person> findAll(){
+        return personRepository.findAll();
+    }
     public Person getPersonById(final Long personId){
         Optional<Person> person = personRepository.findById(personId);
         if(person.isPresent()){

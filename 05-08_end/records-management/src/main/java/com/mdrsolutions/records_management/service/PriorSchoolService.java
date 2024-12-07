@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PriorSchoolService {
@@ -37,19 +38,24 @@ public class PriorSchoolService {
     }
 
     public PriorSchool savePriorSchool(PriorSchool priorSchool) {
-        return priorSchoolRepository.save(priorSchool);
+        return priorSchoolRepository.saveAndFlush(priorSchool);
     }
 
     public Pair<Student,PriorSchool> savePriorSchoolWith(PriorSchool priorSchool, Long studentId){
         LOGGER.info("savePriorSchoolWith(...) - studentId = {}", studentId);
 
         PriorSchool school = savePriorSchool(priorSchool);
-        Optional<Student> optionalStudent = studentRepository.findById(studentId);
-        Student student = optionalStudent.get();
+
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new IllegalArgumentException("Student not found"));
+
+        Set<PriorSchool> priorSchoolSet = student.getPriorSchools();
+
+        priorSchoolSet.removeIf(ps -> ps.getId().equals(school.getId()));
 
         student.addPriorSchool(school);
 
-        student = studentRepository.save(student);
+        student = studentRepository.saveAndFlush(student);
         return Pair.of(student, school);
     }
 
@@ -57,9 +63,10 @@ public class PriorSchoolService {
         priorSchoolRepository.deleteById(id);
     }
 
-    public PriorSchool findMostRecentSchool(Long studentId) {
-        Optional<PriorSchool> lastPriorSchool = priorSchoolRepository.findMostRecentPriorSchool(studentId);
-        return lastPriorSchool.orElse(null);
+    public Optional<PriorSchool> findMostRecentSchool(Long studentId) {
+        List<PriorSchool> lastPriorSchool = priorSchoolRepository.findMostRecentPriorSchools(studentId);
+        return lastPriorSchool.isEmpty() ? Optional.empty() : Optional.of(lastPriorSchool.get(0));
+
     }
 
     public Long findStudentIdByPriorSchoolId(Long priorSchoolId){

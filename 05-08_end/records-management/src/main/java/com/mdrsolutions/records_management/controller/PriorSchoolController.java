@@ -30,7 +30,9 @@ public class PriorSchoolController {
     private final StudentService studentService;
     private final CheckStudentMissingFieldService missingFieldService;
 
-    public PriorSchoolController(PriorSchoolService priorSchoolService, StudentService studentService, CheckStudentMissingFieldService missingFieldService) {
+    public PriorSchoolController(PriorSchoolService priorSchoolService,
+                                 StudentService studentService,
+                                 CheckStudentMissingFieldService missingFieldService) {
         this.priorSchoolService = priorSchoolService;
         this.studentService = studentService;
         this.missingFieldService = missingFieldService;
@@ -111,6 +113,7 @@ public class PriorSchoolController {
         existingPriorSchool.setGradeLevel(priorSchool.getGradeLevel());
         existingPriorSchool.setDateStartedAttending(priorSchool.getDateStartedAttending());
         existingPriorSchool.setDateLastAttended(priorSchool.getDateLastAttended());
+        existingPriorSchool.setId(id);
 
         Pair<Student, PriorSchool> studentPriorSchoolPair = priorSchoolService.savePriorSchoolWith(existingPriorSchool, existingPriorSchool.getStudent().getStudentId());
 
@@ -134,7 +137,6 @@ public class PriorSchoolController {
 
         priorSchoolService.deletePriorSchool(id);
 
-        // Refresh the list
         List<PriorSchool> priorSchools = priorSchoolService.getPriorSchoolsByStudentId(studentId);
         model.addAttribute("priorSchools", priorSchools);
         model.addAttribute("studentId", studentId);

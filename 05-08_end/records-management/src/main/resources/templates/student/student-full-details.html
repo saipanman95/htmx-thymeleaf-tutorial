@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{user-layout}">
+      layout:decorate="~{user-layout}" xmlns:hx="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Student Full Details</title>
@@ -29,9 +29,13 @@
         </div>
 
         <!-- Review Required Section -->
-        <div id="mark-for-review" >
+        <div id="mark-for-review"
+             th:hx-get="@{/student/checkForReview/{studentId}(studentId=${student.studentId})}"
+             hx-trigger="triggerMarkForReview from:body"
+             hx-target="#mark-for-review"
+             hx-swap="innerHTML transition:true">
             <div th:if="${missingDetailsCount > 0}"
-                 th:replace="~{student/mark-for-review :: mark-for-review-info(missingDetailsList=${missingDetailsList})}">
+                 th:insert="~{student/mark-for-review :: mark-for-review-info(missingDetailsList=${missingDetailsList})}">
             </div>
         </div>
 
