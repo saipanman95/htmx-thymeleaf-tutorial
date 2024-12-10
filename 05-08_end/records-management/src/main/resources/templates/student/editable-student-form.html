@@ -64,6 +64,7 @@
                     <button type="submit" class="btn btn-success me-2"
                             th:hx-post="@{/student/update/{studentId}(studentId=${student.studentId})}"
                             hx-target="#student-info-content"
+                            onclick="swapFade('prior-school-form', false);removeStyleClasses('slide-it, slide-individual');"
                             hx-swap="outerHTML">
                         Save
                     </button>

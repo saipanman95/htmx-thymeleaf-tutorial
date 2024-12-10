@@ -32,9 +32,9 @@
         <div id="mark-for-review"
              th:hx-get="@{/student/checkForReview/{studentId}(studentId=${student.studentId})}"
              hx-trigger="triggerMarkForReview from:body"
-             hx-target="#mark-for-review"
+             hx-target="#mark-for-review-inner"
              hx-swap="innerHTML transition:true">
-            <div th:if="${missingDetailsCount > 0}"
+            <div th:if="${missingDetailsCount > 0}" id="mark-for-review-container"
                  th:insert="~{student/mark-for-review :: mark-for-review-info(missingDetailsList=${missingDetailsList})}">
             </div>
         </div>
@@ -50,7 +50,7 @@
 
         <!-- Prior Schools Section -->
         <div id="prior-schools-list">
-            <div th:replace="~{priorSchool/prior-schools :: prior-schools(priorSchools=${priorSchools}, studentId=${student.studentId})}"></div>
+            <div th:replace="~{priorSchool/prior-schools :: prior-schools(priorSchoolDtoList=${priorSchoolDtoList}, studentId=${student.studentId})}"></div>
             <!-- Placeholder for Prior School Form -->
             <div id="prior-school-form"></div>
         </div>

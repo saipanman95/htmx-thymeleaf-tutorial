@@ -52,6 +52,7 @@ public class DashboardController {
                 User user = optionalUser.get();
 
                 List<StudentDto> studentDtos = studentService.findStudentDtoListByPersonId(user.getPerson().getPersonId());
+                LOGGER.info("studentDtos size:{}",studentDtos.size());
 
                 model.addAttribute("user", user);
                 model.addAttribute("personId", user.getPerson().getPersonId());
@@ -86,6 +87,7 @@ public class DashboardController {
             Long personId = person.getPersonId();
 
             List<StudentDto> studentDtos = studentService.findStudentDtoListByPersonId(personId);
+            LOGGER.info("studentDtos size:{}",studentDtos.size());
 
             LOGGER.info("preparing to set model attributes");
             model.addAttribute("user", user);

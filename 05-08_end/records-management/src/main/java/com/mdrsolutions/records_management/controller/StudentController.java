@@ -1,6 +1,7 @@
 package com.mdrsolutions.records_management.controller;
 
 import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
+import com.mdrsolutions.records_management.controller.dto.PriorSchoolDto;
 import com.mdrsolutions.records_management.controller.dto.StudentDto;
 import com.mdrsolutions.records_management.entity.Person;
 import com.mdrsolutions.records_management.entity.PriorSchool;
@@ -54,14 +55,14 @@ public class StudentController {
         guardians.size(); // Forces initialization
 
         //retrieving presorted school list by last attended descending order
-        List<PriorSchool> sortedPriorSchools = priorSchoolService.getPriorSchoolsByStudentId(studentId);
+        List<PriorSchoolDto> sortedPriorSchoolDtoList = priorSchoolService.getPriorSchoolDtosByStudentId(studentId);
 
         // Check for missing fields
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(student);
 
         // Add attributes to the model
         model.addAttribute("student", student);
-        model.addAttribute("priorSchools", sortedPriorSchools);
+        model.addAttribute("priorSchoolDtoList", sortedPriorSchoolDtoList);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
