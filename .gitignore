@@ -1,2 +1,4 @@
 htmx-thymleaf/**/target/
+htmx-thymleaf/**/logs/
+
 
