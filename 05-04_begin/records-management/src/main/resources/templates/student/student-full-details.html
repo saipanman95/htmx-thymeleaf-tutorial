@@ -46,7 +46,7 @@
 
         <!-- Prior Schools Section -->
         <div id="prior-schools-list">
-            <div th:replace="~{priorSchool/prior-schools :: prior-schools(priorSchools=${priorSchools}, studentId=${student.studentId})}"></div>
+            <div th:replace="~{priorSchool/prior-schools :: prior-schools(priorSchoolDtoList=${priorSchoolDtoList}, studentId=${student.studentId})}"></div>
             <!-- Placeholder for Prior School Form -->
             <div id="prior-school-form"></div>
         </div>

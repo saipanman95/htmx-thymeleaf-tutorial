@@ -40,7 +40,6 @@
         <div class="box">
           <div class="button-group">
             <button class="btn btn-outline-light btn-sm"
-                    onclick="swapFade('prior-school-form', true); removeStyleClasses('slide-it, slide-individual')"
                     hx-swap="innerHTML transition:true show:#prior-school-form:bottom swap:.05s"
                     hx-target="#prior-school-form"
                     th:hx-get="@{/prior-schools/school/{id}/edit(id=${priorSchoolDto.priorSchoolId})}">

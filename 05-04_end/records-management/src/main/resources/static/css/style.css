@@ -226,3 +226,38 @@ a.edit-delete-icons:hover {
         grid-template-columns: 1fr; /* Stacks all columns */
     }
 }
+
+.fade-out-display-none {
+    animation: fadeOutAndHide 2s forwards; /* Animation duration: 2 seconds */
+}
+
+/* Define the keyframes for the fade-out and display-none effect */
+@keyframes fadeOutAndHide {
+    0% {
+        opacity: 1; /* Fully visible */
+    }
+    100% {
+        opacity: 0; /* Fully transparent */
+        display: none; /* Hide the element */
+    }
+}
+
+.fade-out-implosion {
+    animation: fadeOutImplosion 2s forwards; /* Animation duration: 2 seconds */
+}
+
+@keyframes fadeOutImplosion {
+    0% {
+        opacity: 1; /* Fully visible */
+        transform: scale(1); /* Normal size */
+    }
+    50% {
+        opacity: 0.5; /* Start fading out */
+        transform: scale(0.8); /* Shrinking slightly */
+    }
+    100% {
+        opacity: 0; /* Fully transparent */
+        transform: scale(0); /* Completely shrunk */
+        display: none; /* Element disappears */
+    }
+}
