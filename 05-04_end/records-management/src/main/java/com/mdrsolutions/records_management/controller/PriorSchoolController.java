@@ -48,6 +48,7 @@ public class PriorSchoolController {
         PriorSchoolDto priorSchoolDto = priorSchoolService.initializePriorSchoolDto(studentId);
         model.addAttribute("priorSchoolDto", priorSchoolDto);
         model.addAttribute("studentId", studentId);
+        model.addAttribute("editSchool", false);
         return "priorSchool/add-edit-prior-school :: prior-school-form";
     }
 
@@ -56,6 +57,8 @@ public class PriorSchoolController {
         PriorSchoolDto priorSchoolDto = priorSchoolService.getPriorSchoolDtoById(id);
         model.addAttribute("priorSchoolDto", priorSchoolDto);
         model.addAttribute("studentId", priorSchoolDto.studentId());
+        model.addAttribute("editSchool", true);
+
         return "priorSchool/add-edit-prior-school :: prior-school-form";
     }
 
@@ -81,12 +84,12 @@ public class PriorSchoolController {
                 "student/mark-for-review :: mark-for-review-info");
     }
 
-    @PutMapping("/school/{id}/update")
+    @PutMapping("/school/{priorSchoolId}/update")
     @HxRequest
-    public HtmxView updatePriorSchool(@PathVariable Long id,
+    public HtmxView updatePriorSchool(@PathVariable Long priorSchoolId,
                                     @ModelAttribute PriorSchoolDto priorSchoolDto,
                                     Model model) {
-        LOGGER.info("updatePriorSchool(...) - priorSchoolId: {}", id);
+        LOGGER.info("updatePriorSchool(...) - priorSchoolId: {}", priorSchoolId);
         
         Pair<Student, PriorSchoolDto> studentPriorSchoolPair = priorSchoolService.savePriorSchoolWith(priorSchoolDto, priorSchoolDto.studentId());
         List<PriorSchoolDto> priorSchoolDtoList = priorSchoolService.getPriorSchoolDtosByStudentId(priorSchoolDto.studentId());
