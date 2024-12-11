@@ -81,8 +81,9 @@ public class PriorSchoolController {
                 "student/mark-for-review :: mark-for-review-info");
     }
 
-    @PostMapping("/school/{id}/update")
-    public String updatePriorSchool(@PathVariable Long id,
+    @PutMapping("/school/{id}/update")
+    @HxRequest
+    public HtmxView updatePriorSchool(@PathVariable Long id,
                                     @ModelAttribute PriorSchoolDto priorSchoolDto,
                                     Model model) {
         LOGGER.info("updatePriorSchool(...) - priorSchoolId: {}", id);
@@ -92,12 +93,14 @@ public class PriorSchoolController {
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(studentPriorSchoolPair.getFirst());
 
         // Refresh the list
-        model.addAttribute("priorSchoolDtoList", priorSchoolDtoList);
-        model.addAttribute("studentId", priorSchoolDto.studentId());
+        model.addAttribute("priorSchoolDto", studentPriorSchoolPair.getSecond());
+        model.addAttribute("studentId", studentPriorSchoolPair.getFirst().getStudentId());
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
-        return "priorSchool/prior-schools :: prior-schools";
+        return new HtmxView("priorSchool/prior-school-table-row :: prior-school",
+                "student/mark-for-review :: mark-for-review-info");
+
     }
 
     @DeleteMapping("/delete/{id}")
