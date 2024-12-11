@@ -43,7 +43,7 @@ public class StudentService {
                 .map(student -> {
                     // Use checkStudentMissingFieldService to get MissingDetailsDto for each student
                     MissingDetailsDto missingDetailsDto = checkStudentMissingFieldService.checkForMissingFields(student);
-                    PriorSchool mostRecentSchool = priorSchoolService.findMostRecentSchool(student.getStudentId());
+                    Optional<PriorSchool> mostRecentSchool = priorSchoolService.findMostRecentSchool(student.getStudentId());
                     // Create a new StudentDto for each student
 
                     return new StudentDto(
@@ -54,7 +54,7 @@ public class StudentService {
                             student.getLastName(),                    // lastName
                             student.getSex(),
                             calculateAge(student.getDateOfBirth(), LocalDate.now()),
-                            (null == mostRecentSchool)? "?" : mostRecentSchool.getGradeLevel(),
+                            (mostRecentSchool.isEmpty())? "?" : mostRecentSchool.get().getGradeLevel(),
                             missingDetailsDto                         // missingDetailsDto
                     );
                 })

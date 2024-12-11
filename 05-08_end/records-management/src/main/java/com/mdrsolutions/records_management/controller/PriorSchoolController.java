@@ -65,7 +65,6 @@ public class PriorSchoolController {
         LOGGER.info("showEditPriorSchoolForm(...) - priorSchoolId:{}",id);
 
         PriorSchoolDto priorSchoolDto = priorSchoolService.getPriorSchoolDtoById(id);
-        LOGGER.info(priorSchoolDto.toString());
         model.addAttribute("priorSchoolDto", priorSchoolDto);
         model.addAttribute("studentId", priorSchoolDto.studentId());
         model.addAttribute("editSchool", true);

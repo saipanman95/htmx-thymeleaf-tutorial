@@ -82,7 +82,7 @@ public class PriorSchoolService {
 
     public Optional<PriorSchool> findMostRecentSchool(Long studentId) {
         List<PriorSchool> lastPriorSchool = priorSchoolRepository.findMostRecentPriorSchools(studentId);
-        return lastPriorSchool.isEmpty() ? Optional.empty() : Optional.of(lastPriorSchool.get(0));
+        return lastPriorSchool.isEmpty() ? Optional.empty() : Optional.of(lastPriorSchool.getFirst());
 
     }
 
@@ -92,11 +92,19 @@ public class PriorSchoolService {
 
     public PriorSchoolDto initializePriorSchoolDto(Long studentId) {
         return new PriorSchoolDto(studentId,
-                null,null,
-                null,null,null,
-                null, null, null,
-                null, null, null,
-                null, null);
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
     }
 
     private PriorSchool transform(PriorSchoolDto priorSchoolDto, Long studentId){
@@ -120,6 +128,7 @@ public class PriorSchoolService {
                 student1
         );
         ps.setId(priorSchoolDto.priorSchoolId());
+
         return ps;
     }
     private PriorSchoolDto transform(PriorSchool priorSchool){
