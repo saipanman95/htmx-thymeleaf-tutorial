@@ -24,6 +24,10 @@ public class PhoneNumberService {
         phoneNumberRepository.save(phoneNumber);
     }
 
+    public List<PhoneNumber> findPhonesByPersonId(Long personId){
+        return phoneNumberRepository.findByPersonPersonId(personId);
+    }
+
     public void deletePhone(Long phoneId){
         phoneNumberRepository.deleteById(phoneId);
     }

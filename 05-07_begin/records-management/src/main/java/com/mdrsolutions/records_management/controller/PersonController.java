@@ -237,6 +237,13 @@ public class PersonController {
     }
 
     //phones
+    @GetMapping("/person/{personId}/phones")
+    public String presentPhones(@PathVariable("personId") Long personId, Model model){
+        List<PhoneNumber> phones = phoneNumberService.findPhonesByPersonId(personId);
+        model.addAttribute("phoneNumbers", phones);
+        return "person/phones-info :: phones-info";
+    }
+
     @GetMapping("/person/{personId}/phone/add")
     public String showAddPhoneForm(@PathVariable("personId") Long personId, Model model) {
         model.addAttribute("phone", new PhoneNumber());
