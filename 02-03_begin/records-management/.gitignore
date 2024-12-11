@@ -38,3 +38,6 @@ out/
 
 ### Maven Build Path ###
 target/
+
+### keeping logs out ###
+logs/
