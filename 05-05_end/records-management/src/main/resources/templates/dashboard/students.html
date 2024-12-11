@@ -38,7 +38,7 @@
                         <button class="btn btn-outline-light btn-sm position-relative"
                                 th:hx-get="@{/student/view/{studentId}(studentId=${student.studentId})}"
                                 hx-target="body"
-                                hx-swap="innerHTML">
+                                hx-swap="innerHTML transition:true">
                             <i class="fa-solid fa-eye"></i> View Student
                             <span class="badge position-absolute top-0 start-100 translate-middle rounded-pill"
                                   th:classappend="${student.missingDetailsDto.missingCount == 0} ? ' bg-success' : ' bg-danger'"

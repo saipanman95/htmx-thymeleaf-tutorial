@@ -151,8 +151,8 @@ public class PersonController {
     @PutMapping(value = "/person/{personId}/email/update")
     @HxRequest
     public HtmxResponse updateEmail(@ModelAttribute Email email,
-                                    @PathVariable("personId") Long personId,
-                                    Model model) {
+                              @PathVariable("personId") Long personId,
+                              Model model) {
 
         // Verify that 'email' here contains the ID correctly and not the email string.
         LOGGER.info("Updating email for personId: {}, emailId: {}", personId, email.getEmailId());
@@ -220,8 +220,8 @@ public class PersonController {
 
     @DeleteMapping("/person/{personId}/email/delete/{emailId}")
     public HtmxView deleteEmail(@PathVariable("personId") Long personId,
-                                @PathVariable("emailId") Long emailId,
-                                Model model) {
+                                    @PathVariable("emailId") Long emailId,
+                                    Model model) {
         LOGGER.info("deleteEmail(...) - emailId {}", emailId);
         emailService.deleteEmail(emailId);
         Person person = personService.getPersonById(personId);
@@ -245,7 +245,7 @@ public class PersonController {
     @GetMapping("/person/{personId}/phone/edit/{phoneId}")
     public String showEditPhoneForm(@PathVariable("personId") Long personId,
                                     @PathVariable("phoneId") Long phoneId, Model model) {
-        // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
+       // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PhoneNumber> phoneNumber = phoneNumberService.getPhoneNumberById(phoneId);
         if (phoneNumber.isPresent()) {
             model.addAttribute("phone", phoneNumber.get());
@@ -259,8 +259,8 @@ public class PersonController {
     @PostMapping(value = "/person/{personId}/phone/save")
     @HxRequest
     public HtmxResponse savePhone(@ModelAttribute PhoneNumber phoneNumber,
-                                  @PathVariable("personId") Long personId,
-                                  Model model) {
+                            @PathVariable("personId") Long personId,
+                            Model model) {
         LOGGER.info("Saving phone for personId: {}, phoneId: {}", personId, phoneNumber.getPhoneId());
         Person person = personService.getPersonById(personId);
 
@@ -342,7 +342,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/person-address/edit/{addressId}")
     public String showEditPersonAddressForm(@PathVariable("personId") Long personId,
-                                            @PathVariable("addressId") Long addressId, Model model) {
+                                    @PathVariable("addressId") Long addressId, Model model) {
         // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PersonAddress> personAddress = personAddressService.getPersonAddressById(addressId);
         if (personAddress.isPresent()) {
@@ -385,7 +385,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/employer/edit/{employerId}")
     public String showEditEmployerForm(@PathVariable("personId") Long personId,
-                                       @PathVariable("employerId") Long employerId, Model model) {
+                                            @PathVariable("employerId") Long employerId, Model model) {
         Optional<Employer> employer = employerService.getEmployerById(employerId);
         if (employer.isPresent()) {
             model.addAttribute("employer", employer.get());
@@ -398,9 +398,9 @@ public class PersonController {
 
     @PostMapping("/person/{personId}/employer/save")
     public void saveEmployer(@ModelAttribute Employer employer,
-                             @PathVariable("personId") Long personId,
-                             Model model
-    ) {
+                               @PathVariable("personId") Long personId,
+                               Model model
+                               ) {
         // Verify that 'personAddress' here contains the ID correctly and not the email string.
         LOGGER.info("Saving phone for personId: {}, employerId: {}", personId, employer.getEmployerId());
         Person person = personService.getPersonById(personId);
