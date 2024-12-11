@@ -16,8 +16,13 @@ import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.FragmentsRendering;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/prior-schools")
@@ -64,10 +69,10 @@ public class PriorSchoolController {
 
     @PostMapping("/student/{studentId}/save")
     @HxRequest
-    public HtmxView savePriorSchool(@PathVariable Long studentId,
-                                        @ModelAttribute PriorSchoolDto priorSchoolDto,
-                                        Model model) {
-        LOGGER.info("savePriorSchool(...) - studentId: {}", studentId); 
+    public View savePriorSchool(@PathVariable Long studentId,
+                                @ModelAttribute PriorSchoolDto priorSchoolDto,
+                                Model model) {
+        LOGGER.info("savePriorSchool(...) - studentId: {}", studentId);
 
         PriorSchoolDto psDto = priorSchoolService.savePriorSchool(priorSchoolDto, studentId);
 
@@ -79,16 +84,17 @@ public class PriorSchoolController {
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
-        return new HtmxView(
-                "priorSchool/prior-school-table-row :: prior-school",
-                "student/mark-for-review :: mark-for-review-info");
+        return FragmentsRendering
+                .with("priorSchool/prior-school-table-row :: prior-school")
+                .fragment("student/mark-for-review :: mark-for-review-info")
+                .build();
     }
 
     @PutMapping("/school/{priorSchoolId}/update")
     @HxRequest
-    public HtmxView updatePriorSchool(@PathVariable Long priorSchoolId,
-                                    @ModelAttribute PriorSchoolDto priorSchoolDto,
-                                    Model model) {
+    public Collection<ModelAndView> updatePriorSchool(@PathVariable Long priorSchoolId,
+                                                      @ModelAttribute PriorSchoolDto priorSchoolDto,
+                                                      Model model) {
         LOGGER.info("updatePriorSchool(...) - priorSchoolId: {}", priorSchoolId);
         
         Pair<Student, PriorSchoolDto> studentPriorSchoolPair = priorSchoolService.savePriorSchoolWith(priorSchoolDto, priorSchoolDto.studentId());
@@ -101,9 +107,15 @@ public class PriorSchoolController {
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
-        return new HtmxView("priorSchool/prior-school-table-row :: prior-school",
-                "student/mark-for-review :: mark-for-review-info");
-
+        return List.of(
+                new ModelAndView("priorSchool/prior-school-table-row :: prior-school", Map.of(
+                        "priorSchoolDto", studentPriorSchoolPair.getSecond()
+                )),
+                new ModelAndView("student/mark-for-review :: mark-for-review-info", Map.of(
+                        "missingDetailsCount", missingDetailsDto.getMissingCount(),
+                        "missingDetailsList", missingDetailsDto.getMissingFields()
+                ))
+        );
     }
 
     @DeleteMapping("/delete/{id}")
