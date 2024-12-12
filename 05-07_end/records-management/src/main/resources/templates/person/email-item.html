@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="email-item(email, personId)" class="email-item col-md-12 mb-3">
+<div th:fragment="email-item(email, personId)" th:classappend="${fadeOut} ? 'fade-out-implosion' : ''"
+     class="email-item col-md-12 mb-3">
     <div class="border rounded p-2 position-relative">
         <strong th:text="${email.type}">Type:</strong>
         <div th:text="${email.emailAddress}">email@example.com</div>

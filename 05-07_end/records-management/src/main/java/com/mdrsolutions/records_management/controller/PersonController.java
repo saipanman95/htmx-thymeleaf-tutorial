@@ -221,19 +221,27 @@ public class PersonController {
 
 
     @DeleteMapping("/person/{personId}/email/delete/{emailId}")
-    public HtmxView deleteEmail(@PathVariable("personId") Long personId,
+    public View deleteEmail(@PathVariable("personId") Long personId,
                                     @PathVariable("emailId") Long emailId,
                                     Model model) {
         LOGGER.info("deleteEmail(...) - emailId {}", emailId);
+        Optional<Email> emailById = emailService.getEmailById(emailId);
+
         emailService.deleteEmail(emailId);
         Person person = personService.getPersonById(personId);
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
 
+        model.addAttribute("email", emailById.get());
+        model.addAttribute("personId", personId);
+        model.addAttribute("fadeOut",true);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
         LOGGER.info("completed call to delete email");
-        return new HtmxView("person/person-mark-for-review :: mark-for-review-info");
+        return FragmentsRendering
+                .with("person/email-item :: email-item")
+                .fragment("person/person-mark-for-review :: mark-for-review-info")
+                .build();
     }
 
     //phones
@@ -323,14 +331,27 @@ public class PersonController {
 
 
     @DeleteMapping("/person/{personId}/phone/delete/{phoneId}")
-    public RedirectView deletePhone(@PathVariable("personId") Long personId, @PathVariable("phoneId") Long phoneId, RedirectAttributes redirectAttributes) {
+    public View deletePhone(@PathVariable("personId") Long personId,
+                            @PathVariable("phoneId") Long phoneId,
+                            RedirectAttributes redirectAttributes,
+                            Model model) {
         LOGGER.info("deleteEmail(...) - phoneId {}", phoneId);
-        phoneNumberService.deletePhone(phoneId); // Assuming you have a service method for deleting the email
-        redirectAttributes.addFlashAttribute("successMessage", "Phone Number Deleted!");
-        RedirectView redirectView = new RedirectView("/person/view/" + personId);
-        redirectView.setStatusCode(HttpStatus.SEE_OTHER);
-        LOGGER.info("completed call to delete phone");
-        return redirectView;
+        Optional<PhoneNumber> phoneNumberById = phoneNumberService.getPhoneNumberById(phoneId);
+
+        phoneNumberService.deletePhone(phoneId);
+        Person person = personService.getPersonById(personId);
+        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+
+        model.addAttribute("phone", phoneNumberById.get());
+        model.addAttribute("personId", personId);
+        model.addAttribute("fadeOut",true);
+        model.addAttribute("missingDetailsCount",missingDetailsDto.getMissingCount());
+        model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+
+        return FragmentsRendering
+                .with("person/phone-item :: phone-item")
+                .fragment("person/person-mark-for-review :: mark-for-review-info")
+                .build();
     }
 
 
