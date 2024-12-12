@@ -1,11 +1,14 @@
 package com.mdrsolutions.records_management.controller;
 
 import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
+import com.mdrsolutions.records_management.controller.dto.PriorSchoolDto;
 import com.mdrsolutions.records_management.entity.PriorSchool;
 import com.mdrsolutions.records_management.entity.Student;
 import com.mdrsolutions.records_management.service.CheckStudentMissingFieldService;
 import com.mdrsolutions.records_management.service.PriorSchoolService;
 import com.mdrsolutions.records_management.service.StudentService;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxResponse;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxView;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,28 +42,26 @@ public class PriorSchoolController {
     @GetMapping("/student/{studentId}")
     public String showPriorSchools(@PathVariable Long studentId, Model model) {
         LOGGER.info("showPriorSchools");
-        List<PriorSchool> priorSchools = priorSchoolService.getPriorSchoolsByStudentId(studentId);
-        model.addAttribute("priorSchools", priorSchools);
+        List<PriorSchoolDto> priorSchoolDtoList = priorSchoolService.getPriorSchoolDtosByStudentId(studentId);
+        model.addAttribute("priorSchoolDtoList", priorSchoolDtoList);
         model.addAttribute("studentId", studentId);
-
         return "priorSchool/prior-schools :: prior-schools";
     }
 
     @GetMapping("/student/{studentId}/add")
     public String showAddPriorSchoolForm(@PathVariable Long studentId, Model model) {
-        PriorSchool priorSchool = new PriorSchool();
-        model.addAttribute("priorSchool", priorSchool);
+        PriorSchoolDto priorSchoolDto = priorSchoolService.initializePriorSchoolDto(studentId);
+        model.addAttribute("priorSchoolDto", priorSchoolDto);
         model.addAttribute("studentId", studentId);
         model.addAttribute("editSchool", false);
-
         return "priorSchool/add-edit-prior-school :: prior-school-form";
     }
 
     @GetMapping("/school/{id}/edit")
     public String showEditPriorSchoolForm(@PathVariable Long id, Model model) {
-        PriorSchool priorSchool = priorSchoolService.getPriorSchoolById(id);
-        model.addAttribute("priorSchool", priorSchool);
-        model.addAttribute("studentId", priorSchool.getStudent().getStudentId());
+        PriorSchoolDto priorSchoolDto = priorSchoolService.getPriorSchoolDtoById(id);
+        model.addAttribute("priorSchoolDto", priorSchoolDto);
+        model.addAttribute("studentId", priorSchoolDto.studentId());
         model.addAttribute("editSchool", true);
 
         return "priorSchool/add-edit-prior-school :: prior-school-form";
@@ -69,18 +70,16 @@ public class PriorSchoolController {
     @PostMapping("/student/{studentId}/save")
     @HxRequest
     public View savePriorSchool(@PathVariable Long studentId,
-                                @ModelAttribute PriorSchool priorSchool,
+                                @ModelAttribute PriorSchoolDto priorSchoolDto,
                                 Model model) {
         LOGGER.info("savePriorSchool(...) - studentId: {}", studentId);
+
+        PriorSchoolDto psDto = priorSchoolService.savePriorSchool(priorSchoolDto, studentId);
+
         Student student = studentService.getStudentById(studentId);
-        priorSchool.setStudent(student);
-
-        PriorSchool ps = priorSchoolService.savePriorSchool(priorSchool);
-
-        student = studentService.getStudentById(studentId);
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(student);
 
-        model.addAttribute("priorSchool", ps);
+        model.addAttribute("priorSchoolDto", psDto);
         model.addAttribute("studentId", studentId);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
@@ -91,39 +90,31 @@ public class PriorSchoolController {
                 .build();
     }
 
-    @PutMapping("/school/{id}/update")
+    @PutMapping("/school/{priorSchoolId}/update")
     @HxRequest
-    public Collection<ModelAndView> updatePriorSchool(@PathVariable Long id,
-                                                      @ModelAttribute PriorSchool priorSchool,
+    public Collection<ModelAndView> updatePriorSchool(@PathVariable Long priorSchoolId,
+                                                      @ModelAttribute PriorSchoolDto priorSchoolDto,
                                                       Model model) {
-        LOGGER.info("updatePriorSchool(...) - priorSchoolId: {}", id);
-        PriorSchool existingPriorSchool = priorSchoolService.getPriorSchoolById(id);
-        // Update fields
-        existingPriorSchool.setSchoolName(priorSchool.getSchoolName());
-        existingPriorSchool.setAddress(priorSchool.getAddress());
-        existingPriorSchool.setCity(priorSchool.getCity());
-        existingPriorSchool.setState(priorSchool.getState());
-        existingPriorSchool.setZip(priorSchool.getZip());
-        existingPriorSchool.setPhoneNumber(priorSchool.getPhoneNumber());
-        existingPriorSchool.setAdministratorFirstName(priorSchool.getAdministratorFirstName());
-        existingPriorSchool.setAdministratorLastName(priorSchool.getAdministratorLastName());
-        existingPriorSchool.setGpa(priorSchool.getGpa());
-        existingPriorSchool.setGradeLevel(priorSchool.getGradeLevel());
-        existingPriorSchool.setDateStartedAttending(priorSchool.getDateStartedAttending());
-        existingPriorSchool.setDateLastAttended(priorSchool.getDateLastAttended());
-
-        Pair<Student, PriorSchool> studentPriorSchoolPair = priorSchoolService.savePriorSchoolWith(existingPriorSchool, existingPriorSchool.getStudent().getStudentId());
-
+        LOGGER.info("updatePriorSchool(...) - priorSchoolId: {}", priorSchoolId);
+        
+        Pair<Student, PriorSchoolDto> studentPriorSchoolPair = priorSchoolService.savePriorSchoolWith(priorSchoolDto, priorSchoolDto.studentId());
+        List<PriorSchoolDto> priorSchoolDtoList = priorSchoolService.getPriorSchoolDtosByStudentId(priorSchoolDto.studentId());
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(studentPriorSchoolPair.getFirst());
 
+        // Refresh the list
+        model.addAttribute("priorSchoolDto", studentPriorSchoolPair.getSecond());
+        model.addAttribute("studentId", studentPriorSchoolPair.getFirst().getStudentId());
+        model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
+        model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+
         return List.of(
-                new ModelAndView("priorSchool/prior-school-table-row :: prior-school",
-                        Map.of("priorSchool", studentPriorSchoolPair.getSecond())),
-                new ModelAndView("student/mark-for-review :: mark-for-review-info",
-                        Map.of(
-                                "missingDetailsCount", missingDetailsDto.getMissingCount(),
-                                "missingDetailsList", missingDetailsDto.getMissingFields()
-                        ))
+                new ModelAndView("priorSchool/prior-school-table-row :: prior-school", Map.of(
+                        "priorSchoolDto", studentPriorSchoolPair.getSecond()
+                )),
+                new ModelAndView("student/mark-for-review :: mark-for-review-info", Map.of(
+                        "missingDetailsCount", missingDetailsDto.getMissingCount(),
+                        "missingDetailsList", missingDetailsDto.getMissingFields()
+                ))
         );
     }
 

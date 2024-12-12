@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:hx-on="http://www.w3.org/1999/xhtml" lang="en">
 <div th:fragment="prior-school-form">
   <div class="card bg-dark text-white mt-4">
     <div class="card-body">
-      <h4 class="card-title" th:text="${priorSchool.id != null} ? 'Edit Prior School' : 'Add Prior School'">Add/Edit Prior School</h4>
+      <h4 class="card-title" th:text="${priorSchoolDto.priorSchoolId != null} ? 'Edit Prior School' : 'Add Prior School'">Add/Edit Prior School</h4>
       <form th:action="@{/prior-schools/student/{studentId}/save(studentId=${studentId})}" method="post"
-            th:object="${priorSchool}">
-        <input type="hidden" th:field="*{id}"/>
+            th:object="${priorSchoolDto}">
+        <input type="hidden" th:field="*{priorSchoolId}"/>
+        <input type="hidden" th:field="*{studentId}"/>
         <!-- First Row: School Name -->
         <div class="row">
           <!-- School Name -->
@@ -81,37 +82,35 @@
           <!-- Date Started Attending -->
           <div class="mb-3 col-md-6">
             <label for="dateStartedAttending" class="form-label">Date Started Attending:</label>
-            <input type="date" class="form-control" id="dateStartedAttending" name="dateStartedAttending"
-                   th:value="${priorSchool.dateStartedAttending != null ? #temporals.format(priorSchool.dateStartedAttending, 'yyyy-MM-dd') : ''}">
+            <input type="date" class="form-control" id="dateStartedAttending" th:field="*{dateStartedAttending}">
           </div>
           <!-- Date Last Attended -->
           <div class="mb-3 col-md-6">
             <label for="dateLastAttended" class="form-label">Date Last Attended:</label>
-            <input type="date" class="form-control" id="dateLastAttended" name="dateLastAttended"
-                   th:value="${priorSchool.dateLastAttended != null ? #temporals.format(priorSchool.dateLastAttended, 'yyyy-MM-dd') : ''}">
+            <input type="date" class="form-control" id="dateLastAttended" th:field="*{dateLastAttended}">
           </div>
         </div>
 
         <!-- Buttons -->
         <div class="mt-4">
+          <!-- Update Button -->
+          <button type="submit" class="btn btn-success me-2" th:if="${editSchool}"
+                  th:hx-put="@{/prior-schools/school/{priorSchoolId}/update(priorSchoolId=${priorSchoolDto.priorSchoolId})}"
+                  th:hx-target="'#prior-school-' + ${priorSchoolDto.priorSchoolId}"
+                  hx-swap="outerHTML transition:true show:#prior-school-content:bottom swap:.05s"
+                  hx-on::after-request="swapFade('prior-school-form', false);"
+                  th:attr="data-csrf-header=${_csrf.headerName}, data-csrf-token=${_csrf.token}"
+                  hx-trigger="click">
+            Update
+          </button>
           <!-- Submit Button -->
           <button type="submit" class="btn btn-success me-2" th:if="${!editSchool}"
                   th:hx-post="@{/prior-schools/student/{studentId}/save(studentId=${studentId})}"
                   hx-target="#prior-school-content"
                   hx-swap="beforeend transition:true show:#prior-school-content:bottom swap:.05s"
-                  hx-on::after-request="swapFade('prior-school-form', false)"
+                  hx-on::after-request="swapFade('prior-school-form', false);"
                   hx-trigger="click">
             Save
-          </button>
-          <!-- Update Button -->
-          <button type="submit" class="btn btn-success me-2" th:if="${editSchool}"
-                  th:hx-put="@{/prior-schools/school/{studentId}/update(studentId=${studentId})}"
-                  th:hx-target="'#prior-school-' +${id}"
-                  hx-swap="outerHTML transition:true show:#prior-school-content:bottom swap:.05s"
-                  hx-on::after-request="swapFade('prior-school-form', false)"
-                  th:attr="data-csrf-header=${_csrf.headerName}, data-csrf-token=${_csrf.token}"
-                  hx-trigger="click">
-            Update
           </button>
           <!-- Cancel Button -->
           <button type="button" class="btn btn-secondary"
