@@ -250,60 +250,47 @@ public class PersonController {
         LOGGER.info("Saving phone for personId: {}, phoneId: {}", personId, phoneNumber.getPhoneId());
         Person person = personService.getPersonById(personId);
 
-        String alertMessage;
-        String alertLevel = "success";
-
-        if(phoneNumber.getNumber() == null || phoneNumber.getNumber().isEmpty() || phoneNumber.getNumber().isBlank()){
+        String phoneNum = phoneNumber.getNumber();
+        if (isBlank(phoneNum)) {
             LOGGER.info("Phone number is blank");
-            alertMessage = "This phone number cannot be blank.";
-            alertLevel = "danger";
-
-            model.addAttribute("alertMessage", alertMessage);
-            model.addAttribute("alertLevel", alertLevel);
-
-            model.addAttribute("phone", phoneNumber);
-            model.addAttribute("personId", personId);
-
-            // Set the HX-Reselect header for refinement after hx-select
-            response.setHeader("HX-Reselect", "#phone-alert-message");
-            response.setHeader("HX-Reswap", "beforebegin");
-
-            return "person/phones-info :: phones-info";
+            return prepareErrorResponse("This phone number cannot be blank.", "danger", personId, phoneNumber, model, response);
         }
 
-        if (phoneNumberService.isDuplicatePhoneNumberForPerson(person, phoneNumber.getNumber())) {
-            // Handling duplicate phone number scenario
-            alertMessage = "This phone number already exists.";
-            alertLevel = "danger";
-
-            model.addAttribute("alertMessage", alertMessage);
-            model.addAttribute("alertLevel", alertLevel);
-
-            model.addAttribute("phone", phoneNumber);
-            model.addAttribute("personId", personId);
-
-            // Set the HX-Reselect header for refinement after hx-select
-            response.setHeader("HX-Reselect", "#phone-alert-message");
-            response.setHeader("HX-Reswap", "beforebegin");
-
-            return "person/phones-info :: phones-info";
-        } else {
-            // Save or update phone number
-            phoneNumberService.saveOrUpdatePhone(person, phoneNumber);
-
-            alertMessage = "Phone number saved successfully.";
-            Set<PhoneNumber> updatedPhoneNumbers = person.getPhoneNumbers();
-
-            model.addAttribute("phoneNumbers", updatedPhoneNumbers);
-            model.addAttribute("personId", personId);
-
-            model.addAttribute("alertMessage", alertMessage);
-            model.addAttribute("alertLevel", alertLevel);
-
-            return "person/phones-info :: phones-info";
+        if (phoneNumberService.isDuplicatePhoneNumberForPerson(person, phoneNum)) {
+            LOGGER.info("Duplicate phone number detected");
+            return prepareErrorResponse("This phone number already exists.", "danger", personId, phoneNumber, model, response);
         }
+
+        // If we reach here, the phone number is valid and not a duplicate
+        phoneNumberService.saveOrUpdatePhone(person, phoneNumber);
+        Set<PhoneNumber> updatedPhoneNumbers = person.getPhoneNumbers();
+
+        model.addAttribute("phoneNumbers", updatedPhoneNumbers);
+        model.addAttribute("personId", personId);
+        model.addAttribute("alertMessage", "Phone number saved successfully.");
+        model.addAttribute("alertLevel", "success");
+
+        response.setHeader("HX-Reselect", "#phones-info");
+        return "person/phones-info :: phones-info";
     }
 
+    private boolean isBlank(String str) {
+        return str == null || str.trim().isEmpty();
+    }
+
+    private String prepareErrorResponse(String alertMessage, String alertLevel, Long personId,
+                                        PhoneNumber phoneNumber, Model model,
+                                        HttpServletResponse response) {
+        model.addAttribute("alertMessage", alertMessage);
+        model.addAttribute("alertLevel", alertLevel);
+        model.addAttribute("phone", phoneNumber);
+        model.addAttribute("personId", personId);
+
+        response.setHeader("HX-Reselect", "#phone-alert-message");
+        response.setHeader("HX-Reswap", "beforebegin");
+
+        return "person/phones-info :: phones-info";
+    }
 
     @DeleteMapping("/person/{personId}/phone/delete/{phoneId}")
     public RedirectView deletePhone(@PathVariable("personId") Long personId, @PathVariable("phoneId") Long phoneId, RedirectAttributes redirectAttributes) {
