@@ -6,6 +6,7 @@ import com.mdrsolutions.records_management.entity.Student;
 import com.mdrsolutions.records_management.repository.PriorSchoolRepository;
 import com.mdrsolutions.records_management.repository.StudentRepository;
 import com.mdrsolutions.records_management.util.DateConverter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.util.Pair;
@@ -29,7 +30,6 @@ public class PriorSchoolService {
         this.studentRepository = studentRepository;
     }
 
-
     public List<PriorSchoolDto> getPriorSchoolDtosByStudentId(Long studentId){
         List<PriorSchool> priorSchools = getPriorSchoolsByStudentId(studentId);
         List<PriorSchoolDto> priorSchoolDtoList = new ArrayList<>();
@@ -48,6 +48,7 @@ public class PriorSchoolService {
         final PriorSchool priorSchool = getPriorSchoolById(priorSchoolId);
         return transform(priorSchool);
     }
+
     public PriorSchool getPriorSchoolById(Long id) {
         return priorSchoolRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Prior School ID"));
@@ -83,7 +84,6 @@ public class PriorSchoolService {
     public Optional<PriorSchool> findMostRecentSchool(Long studentId) {
         List<PriorSchool> lastPriorSchool = priorSchoolRepository.findMostRecentPriorSchools(studentId);
         return lastPriorSchool.isEmpty() ? Optional.empty() : Optional.of(lastPriorSchool.getFirst());
-
     }
 
     public Long findStudentIdByPriorSchoolId(Long priorSchoolId){
@@ -124,7 +124,7 @@ public class PriorSchoolService {
                 priorSchoolDto.gpa(),
                 priorSchoolDto.gradeLevel(),
                 DateConverter.convert(priorSchoolDto.dateStartedAttending()),
-                        DateConverter.convert(priorSchoolDto.dateLastAttended()),
+                DateConverter.convert(priorSchoolDto.dateLastAttended()),
                 student1
         );
         ps.setId(priorSchoolDto.priorSchoolId());
@@ -149,6 +149,4 @@ public class PriorSchoolService {
                 DateConverter.convert(priorSchool.getDateLastAttended())
         );
     }
-
 }
-

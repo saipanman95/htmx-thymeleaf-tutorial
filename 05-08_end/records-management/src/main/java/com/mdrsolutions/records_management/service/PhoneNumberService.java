@@ -5,6 +5,7 @@ import com.mdrsolutions.records_management.entity.PhoneNumber;
 import com.mdrsolutions.records_management.repository.PhoneNumberRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,10 @@ public class PhoneNumberService {
     public void saveOrUpdatePhone(Person person, PhoneNumber phoneNumber) {
         phoneNumber.setPerson(person);
         phoneNumberRepository.save(phoneNumber);
+    }
+
+    public List<PhoneNumber> findPhonesByPersonId(Long personId){
+        return phoneNumberRepository.findByPersonPersonId(personId);
     }
 
     public void deletePhone(Long phoneId){

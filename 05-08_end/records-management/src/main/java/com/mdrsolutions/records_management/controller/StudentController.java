@@ -80,15 +80,11 @@ public class StudentController {
     }
 
     @PostMapping("/student/update/{studentId}")
-    @HxRequest
     public String updateStudent(@PathVariable("studentId") Long studentId,
-                                @ModelAttribute Student student,
-                                Model model,
-                                HtmxResponse htmxResponse
-    ) {
+                                      @ModelAttribute Student student, Model model) {
         // Update the student
         LOGGER.info("updateStudent(...) - studentId: {}", studentId);
-        Student existingStudent = studentService.getStudentById(studentId);
+        Student existingStudent = studentService.getStudentById(studentId); 
 
         existingStudent.setFirstName(student.getFirstName());
         existingStudent.setMiddleName(student.getMiddleName());
@@ -96,20 +92,17 @@ public class StudentController {
         existingStudent.setSuffix(student.getSuffix());
         existingStudent.setSex(student.getSex());
         existingStudent.setDateOfBirth(student.getDateOfBirth());
-        existingStudent.setStudentId(studentId);
+        // Update other fields as necessary
 
-        LOGGER.info("preparing to save student");
-        Student stud = studentService.saveStudent(existingStudent);
+        studentService.saveStudent(existingStudent);
 
-        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(stud);
+        // Check for missing fields
+        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(existingStudent);
 
+        // Add attributes to the model
         model.addAttribute("student", existingStudent);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
-
-        LOGGER.info("Attempting to send htmx header responses");
-        htmxResponse.setPushUrl("/student/view/"+ studentId );
-        htmxResponse.addTriggerAfterSwap("triggerMarkForReview");
 
         return "student/student-details-info :: student-details-info";
     }
@@ -143,19 +136,4 @@ public class StudentController {
         return "dashboard/students :: students";
     }
 
-    @GetMapping("/student/checkForReview/{studentId}")
-    @HxRequest
-    public String getDetailsMarkedForReview(@PathVariable("studentId") Long studentId, Model model){
-        Student student = studentService.getStudentById(studentId);
-
-        Set<Person> guardians = student.getGuardians();
-        guardians.size(); // Forces initialization
-
-        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(student);
-
-        model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
-        model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
-
-        return "student/mark-for-review :: mark-for-review-info";
-    }
 }

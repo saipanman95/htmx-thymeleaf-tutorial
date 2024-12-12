@@ -2,13 +2,14 @@ package com.mdrsolutions.records_management.controller;
 
 import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
 import com.mdrsolutions.records_management.controller.dto.StudentDto;
-import com.mdrsolutions.records_management.entity.Person;
+import com.mdrsolutions.records_management.entity.Student;
 import com.mdrsolutions.records_management.entity.User;
 import com.mdrsolutions.records_management.service.CheckPersonMissingFieldService;
 import com.mdrsolutions.records_management.service.StudentService;
 import com.mdrsolutions.records_management.service.UserService;
-import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequestHeader;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxLocation;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxPushUrl;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxReplaceUrl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,14 +30,13 @@ public class DashboardController {
     private final CheckPersonMissingFieldService missingFieldService;
     private final StudentService studentService;
 
-    public DashboardController(UserService userService,
-                               CheckPersonMissingFieldService missingFieldService,
-                               StudentService studentService) {
+    public DashboardController(UserService userService, CheckPersonMissingFieldService missingFieldService, StudentService studentService) {
         this.userService = userService;
         this.missingFieldService = missingFieldService;
         this.studentService = studentService;
     }
 
+    // If the user is authenticated, redirect them to the dashboard
     @GetMapping("/")
     public String homePage(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request, Model model) {
         if (userDetails != null) {
@@ -63,31 +63,27 @@ public class DashboardController {
                 model.addAttribute("isHtmxRequest", isHtmxRequest);
                 return "dashboard/dashboard";
             } else {
+                // Handle the case where the user is not found (optional)
                 return "redirect:/login?error";
             }
         }
-        return "welcome";
+        return "welcome";  // Load the welcome page for unauthenticated users
     }
 
     @HxPushUrl
     @GetMapping("/dashboard")
     public String getDashboard(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request, Model model) {
         Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
-        boolean isHtmxRequest = request.getHeader(HtmxRequestHeader.HX_REQUEST.getValue()) != null;
+        boolean isHtmxRequest = request.getHeader("HX-Request") != null;
         LOGGER.info("getDashboard(...)");
 
         if (optionalUser.isPresent()) {
             LOGGER.info("getDashboard(...) - optionalUser is Present");
             MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(optionalUser.get().getPerson());
 
-            LOGGER.info("preparing to retrieve user");
             User user = optionalUser.get();
-            Person person = user.getPerson();
-            Long personId = person.getPersonId();
+            List<StudentDto> studentDtos = studentService.findStudentDtoListByPersonId(user.getPerson().getPersonId());
 
-            List<StudentDto> studentDtos = studentService.findStudentDtoListByPersonId(personId);
-
-            LOGGER.info("preparing to set model attributes");
             model.addAttribute("user", user);
             model.addAttribute("personId", user.getPerson().getPersonId());
             model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
@@ -96,7 +92,6 @@ public class DashboardController {
             model.addAttribute("user", user);
             model.addAttribute("studentDtos", studentDtos);
             model.addAttribute("isHtmxRequest", isHtmxRequest);
-
             return "dashboard/dashboard";
         } else {
             // Handle the case where the user is not found (optional)

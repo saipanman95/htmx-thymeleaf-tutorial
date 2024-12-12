@@ -7,8 +7,6 @@ import com.mdrsolutions.records_management.entity.PriorSchool;
 import com.mdrsolutions.records_management.entity.Student;
 import com.mdrsolutions.records_management.repository.PersonRepository;
 import com.mdrsolutions.records_management.repository.StudentRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,17 +17,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(StudentService.class);
-
     private final StudentRepository studentRepository;
     private final CheckStudentMissingFieldService checkStudentMissingFieldService;
     private final PriorSchoolService priorSchoolService;
     private final PersonRepository personRepository;
 
     public StudentService(StudentRepository studentRepository,
-                          CheckStudentMissingFieldService checkStudentMissingFieldService,
-                          PriorSchoolService priorSchoolService,
-                          PersonRepository personRepository) {
+                          CheckStudentMissingFieldService checkStudentMissingFieldService, PriorSchoolService priorSchoolService, PersonRepository personRepository) {
         this.studentRepository = studentRepository;
         this.checkStudentMissingFieldService = checkStudentMissingFieldService;
         this.priorSchoolService = priorSchoolService;
@@ -37,30 +31,36 @@ public class StudentService {
     }
 
     public List<Student> findStudentsByPersonId(final Long personId) {
-        LOGGER.info("findStudentsByPersonId(...) personId:{}", personId);
-        return studentRepository.findStudentsByPersonId(personId);
+        return studentRepository.findAllByGuardians_PersonId(personId);
     }
 
     public List<StudentDto> findStudentDtoListByPersonId(final Long personId){
-
+        // Fetch the list of students associated with the given personId
         List<Student> students = findStudentsByPersonId(personId);
+
+        // Iterate over the students list and convert each Student into a StudentDto
         List<StudentDto> studentDtos = students.stream()
                 .map(student -> {
+                    // Use checkStudentMissingFieldService to get MissingDetailsDto for each student
                     MissingDetailsDto missingDetailsDto = checkStudentMissingFieldService.checkForMissingFields(student);
                     Optional<PriorSchool> mostRecentSchool = priorSchoolService.findMostRecentSchool(student.getStudentId());
+                    // Create a new StudentDto for each student
 
-                    return new StudentDto (
-                            student.getStudentId(),
-                            personId,
-                            student.getFirstName(),
-                            student.getMiddleName(),
-                            student.getLastName(),
+                    return new StudentDto(
+                            student.getStudentId(),                   // studentId
+                            personId,       // personId (assuming getPerson() is not null)
+                            student.getFirstName(),                   // firstName
+                            student.getMiddleName(),                  // middleName
+                            student.getLastName(),                    // lastName
                             student.getSex(),
                             calculateAge(student.getDateOfBirth(), LocalDate.now()),
                             (mostRecentSchool.isEmpty())? "?" : mostRecentSchool.get().getGradeLevel(),
-                            missingDetailsDto
+                            missingDetailsDto                         // missingDetailsDto
                     );
-                }).collect(Collectors.toList());
+                })
+                .collect(Collectors.toList());
+
+        // Return the list of StudentDto objects
         return studentDtos;
     }
 
@@ -70,7 +70,7 @@ public class StudentService {
     }
 
     public Student saveStudent(Student existingStudent) {
-        return studentRepository.saveAndFlush(existingStudent);
+        return studentRepository.save(existingStudent);
     }
 
     private String calculateAge(LocalDate dateOfBirth, LocalDate now){

@@ -229,5 +229,4 @@ public class PriorSchool {
     public void setStudent(Student student) {
         this.student = student;
     }
-
 }

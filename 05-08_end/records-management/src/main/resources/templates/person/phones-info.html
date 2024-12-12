@@ -88,8 +88,8 @@
                     hx-trigger="click"
                     hx-encoding="application/x-www-form-urlencoded">Save</button>
             <button type="button" class="btn btn-secondary"
-                    th:hx-get="@{/person/view/{personId}(personId=${personId})}"
-                    hx-target="body" hx-swap="outerHTML">Cancel</button>
+                    th:hx-get="@{/person/{personId}/phones(personId=${personId})}"
+                    hx-target="#phones-info" hx-swap="outerHTML">Cancel</button>
         </div>
     </form>
 </div>
