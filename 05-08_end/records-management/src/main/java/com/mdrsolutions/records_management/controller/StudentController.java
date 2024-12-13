@@ -80,8 +80,11 @@ public class StudentController {
     }
 
     @PostMapping("/student/update/{studentId}")
+    @HxRequest
     public String updateStudent(@PathVariable("studentId") Long studentId,
-                                      @ModelAttribute Student student, Model model) {
+                                @ModelAttribute Student student,
+                                Model model,
+                                HtmxResponse htmxResponse) {
         // Update the student
         LOGGER.info("updateStudent(...) - studentId: {}", studentId);
         Student existingStudent = studentService.getStudentById(studentId); 
@@ -103,6 +106,9 @@ public class StudentController {
         model.addAttribute("student", existingStudent);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+
+        htmxResponse.setPushUrl("/student/view/"+ studentId);
+        htmxResponse.addTrigger("triggerMarkForReview");
 
         return "student/student-details-info :: student-details-info";
     }
@@ -136,4 +142,20 @@ public class StudentController {
         return "dashboard/students :: students";
     }
 
+    @GetMapping("/student/checkForReview/{studentId}")
+    @HxRequest
+    public String getDetailsMarkedForReview(@PathVariable("studentId") Long studentId,
+                                            Model model){
+        Student student = studentService.getStudentById(studentId);
+        Set<Person> guardians = student.getGuardians();
+        guardians.size(); //Forces initialization
+
+        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(student);
+
+        model.addAttribute("student", student);
+        model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
+        model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+
+        return "student/mark-for-review :: mark-for-review-info";
+    }
 }

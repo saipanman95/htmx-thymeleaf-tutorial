@@ -29,9 +29,9 @@
         </div>
 
         <!-- Review Required Section -->
-        <div id="mark-for-review" >
+        <div id="mark-for-review-outer">
             <div th:if="${missingDetailsCount > 0}"
-                 th:replace="~{student/mark-for-review :: mark-for-review-info(missingDetailsList=${missingDetailsList})}">
+                 th:replace="~{student/mark-for-review :: mark-for-review-info(missingDetailsList=${missingDetailsList}, student=${student})}">
             </div>
         </div>
 

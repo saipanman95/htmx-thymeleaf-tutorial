@@ -80,6 +80,7 @@ public class PriorSchoolController {
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(student);
 
         model.addAttribute("priorSchoolDto", psDto);
+        model.addAttribute("student", student);
         model.addAttribute("studentId", studentId);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
@@ -103,6 +104,7 @@ public class PriorSchoolController {
 
         // Refresh the list
         model.addAttribute("priorSchoolDto", studentPriorSchoolPair.getSecond());
+        model.addAttribute("student", studentPriorSchoolPair.getFirst());
         model.addAttribute("studentId", studentPriorSchoolPair.getFirst().getStudentId());
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());

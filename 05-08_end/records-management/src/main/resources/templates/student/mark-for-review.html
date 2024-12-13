@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div th:fragment="mark-for-review-info(missingDetailsList)" id="mark-for-review"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:hx="http://www.w3.org/1999/xhtml" lang="en">
+<div th:fragment="mark-for-review-info(missingDetailsList, student)" id="mark-for-review"
+     hx:get="@{/student/checkForReview/{studentId}(studentId=${student.studentId})}"
+     hx-trigger="triggerMarkForReview from:body"
+     hx-target="#mark-for-review"
+     hx-swap="innerHTML transition:true"
      hx-swap-oob="outerHTML: #mark-for-review">
   <div class="card bg-warning text-dark mt-4">
     <div class="card-body">
