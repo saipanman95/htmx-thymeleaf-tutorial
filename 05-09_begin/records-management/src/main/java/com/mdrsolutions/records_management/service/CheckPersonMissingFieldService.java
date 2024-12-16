@@ -74,6 +74,10 @@ public class CheckPersonMissingFieldService {
         return master;
     }
 
+    public MissingDetailsDto checkForMissingFields(PersonAddress personAddress){
+        return checkForDetails(personAddress);
+    }
+
     private void sumUpMissingDetails(MissingDetailsDto missingDetailsDto) {
         master.getMissingFields().addAll(missingDetailsDto.getMissingFields());
         master.setMissingCount(master.getMissingCount() + missingDetailsDto.getMissingCount());

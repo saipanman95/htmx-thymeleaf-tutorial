@@ -1,22 +1,19 @@
-<!DOCTYPE html>
 <html lang="en"
+      layout:decorate="~{user-layout}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{user-layout}">
-<head>
-    <meta charset="UTF-8">
-    <title>Person Full Details</title>
-</head>
-<body>
+      xmlns:th="http://www.thymeleaf.org">
+
 <div layout:fragment="content">
     <div class="container mt-5 slide-it">
         <h2 class="text-white  text-primary">Person Full Details</h2>
 
 
-        <div th:if="${message}" class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert" th:if="${message}">
+            <br>
             <span th:text="${message}"></span>
         </div>
-        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+        <div class="alert alert-danger" role="alert" th:if="${errorMessage}">
+            <br>
             <span th:text="${errorMessage}"></span>
         </div>
 
@@ -37,13 +34,12 @@
         <!-- Phone Numbers Section -->
         <div th:insert="~{person/phones-info :: phones-info(phoneNumbers=${person.phoneNumbers})}"></div>
 
-        <!-- Mailing Address Section (To be added when Address entity is available) -->
-        <div th:insert="~{person/person-address-info :: addresses-info(addresses=${person.addresses}, personId=${person.personId})}"></div>
+        <!-- Mailing Address Section -->
+        <div th:insert="~{person/person-address-info :: addresses-info(addressDtoList=${personAddressDtoList}, personId=${person.personId})}"></div>
 
         <!-- Employers Section -->
         <div th:insert="~{person/employers-info :: employers-info(employers=${person.employers}, personId=${person.personId})}"></div>
 
     </div>
 </div>
-</body>
 </html>

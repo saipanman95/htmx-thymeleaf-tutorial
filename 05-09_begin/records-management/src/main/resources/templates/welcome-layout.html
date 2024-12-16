@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+      xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>Welcome to Records Management</title>
@@ -14,6 +13,7 @@
 <header th:insert="~{fragments/header :: publicHeader}"></header> <!-- Public header -->
 
 <div class="container">
+    <br>
     <div th:insert="~{fragments/messages :: messages}"></div>
     <div layout:fragment="content"></div> <!-- Content injected here for welcome page -->
 </div>
