@@ -1,13 +1,13 @@
 package com.mdrsolutions.records_management.controller;
 
 import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
+import com.mdrsolutions.records_management.controller.dto.PersonAddressDto;
 import com.mdrsolutions.records_management.entity.*;
 import com.mdrsolutions.records_management.service.*;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,18 +26,18 @@ public class PersonController {
     private final CheckPersonMissingFieldService missingFieldService;
     private final EmailService emailService;
     private final PhoneNumberService phoneNumberService;
-    private final PersonAddressService personAddressService;
     private final EmployerService employerService;
+    private final PersonAddressService personAddressService;
 
     public PersonController(PersonService personService,
                             CheckPersonMissingFieldService missingFieldService,
-                            EmailService emailService, PhoneNumberService phoneNumberService, PersonAddressService personAddressService, EmployerService employerService) {
+                            EmailService emailService, PhoneNumberService phoneNumberService, PersonAddressService personAddressService, EmployerService employerService, PersonAddressService personAddressService1) {
         this.personService = personService;
         this.missingFieldService = missingFieldService;
         this.emailService = emailService;
         this.phoneNumberService = phoneNumberService;
-        this.personAddressService = personAddressService;
         this.employerService = employerService;
+        this.personAddressService = personAddressService1;
     }
 
 
@@ -56,9 +56,13 @@ public class PersonController {
     @GetMapping("/person/view/{personId}")
     public String viewPersonFullDetails(@PathVariable("personId") Long personId, Model model) {
         LOGGER.info("viewPersonFullDetails(...) - Loading full details view for person ID: {}", personId);
+
         Person person = personService.getPersonById(personId);
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+        List<PersonAddressDto> personAddressDtoList =personAddressService.findPersonAddressDtoListByPersonId(personId);
+
         model.addAttribute("person", person);
+        model.addAttribute("personAddressDtoList", personAddressDtoList);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
@@ -352,50 +356,6 @@ public class PersonController {
                 .with("person/phone-item :: phone-item")
                 .fragment("person/person-mark-for-review :: mark-for-review-info")
                 .build();
-    }
-
-
-    //person address section
-    @GetMapping("/person/{personId}/person-address/add")
-    public String showAddPersonAddressForm(@PathVariable("personId") Long personId, Model model) {
-        model.addAttribute("address", new PersonAddress());
-        model.addAttribute("personId", personId);
-        return "person/modify/editable-person-address-form :: address-form";
-    }
-
-    @GetMapping("/person/{personId}/person-address/edit/{addressId}")
-    public String showEditPersonAddressForm(@PathVariable("personId") Long personId,
-                                    @PathVariable("addressId") Long addressId, Model model) {
-        // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
-        Optional<PersonAddress> personAddress = personAddressService.getPersonAddressById(addressId);
-        if (personAddress.isPresent()) {
-            model.addAttribute("address", personAddress.get());
-            model.addAttribute("addressId", addressId);
-            return "person/modify/editable-person-address-form :: address-form";
-        }
-        model.addAttribute("errorMessage", "phone does not exist");
-        return "person/modify/editable-phone-form :: phone-form";
-    }
-
-    @PostMapping("/person/{personId}/person-address/save")
-    public String savePersonAddress(@ModelAttribute PersonAddress personAddress, @PathVariable("personId") Long personId, Model model) {
-        // Verify that 'personAddress' here contains the ID correctly and not the email string.
-        LOGGER.info("Saving phone for personId: {}, addressId: {}", personId, personAddress.getAddressId());
-        Person person = personService.getPersonById(personId);
-        personAddressService.saveOrUpdatePersonAddress(person, personAddress);
-        return "redirect:/person/view/" + personId;
-    }
-
-
-    @DeleteMapping("/person/{personId}/person-address/delete/{addressId}")
-    public RedirectView deletePersonAddress(@PathVariable("personId") Long personId, @PathVariable("addressId") Long addressId, RedirectAttributes redirectAttributes) {
-        LOGGER.info("deletePersonAddress(...) - addressId {}", addressId);
-        personAddressService.deletePersonAddress(addressId);
-        redirectAttributes.addFlashAttribute("successMessage", "Person Address Deleted!");
-        RedirectView redirectView = new RedirectView("/person/view/" + personId);
-        redirectView.setStatusCode(HttpStatus.SEE_OTHER);
-        LOGGER.info("completed call to person address");
-        return redirectView;
     }
 
     //employers-info
