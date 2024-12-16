@@ -1,55 +1,47 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div th:fragment="address-form(address, personId)">
-  <form th:action="@{/person/{personId}/person-address/save(personId=${personId})}" th:object="${address}" method="post">
-    <!-- Hidden input for addressId to ensure it's passed when editing -->
-    <input type="hidden" th:field="*{addressId}" />
-
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+  <div th:fragment="address-form(addressDto, personId)" class="modal-body bg-light text-dark">
+   <form method="post" th:action="@{/person/{personId}/person-address/save(personId=${personId})}" th:object="${addressDto}">
+    <!-- Hidden input for addressId to ensure it's passed when editing --> <input th:field="*{addressId}" type="hidden">
     <div class="mb-3">
-      <label for="addressType" class="form-label">Address Type</label>
-      <select id="addressType" th:field="*{addressType}" class="form-select">
-        <option value="">Please Pick One</option>
-        <option value="MAILING">Mailing</option>
-        <option value="PHYSICAL">Physical</option>
-      </select>
+     <label class="form-label" for="addressType">Address Type</label> <select class="form-select" id="addressType" th:field="*{addressType}"> <option value="">Please Pick One</option> <option value="MAILING">Mailing</option> <option value="PHYSICAL">Physical</option> </select>
     </div>
-
     <div class="mb-3">
-      <label for="address1" class="form-label">Address Line 1</label>
-      <input id="address1" type="text" th:field="*{address1}" class="form-control" required>
+     <label class="form-label" for="address1">Address Line 1</label> <input class="form-control" id="address1" required th:field="*{address1}" type="text">
     </div>
-
     <div class="mb-3">
-      <label for="address2" class="form-label">Address Line 2</label>
-      <input id="address2" type="text" th:field="*{address2}" class="form-control">
+     <label class="form-label" for="address2">Address Line 2</label> <input class="form-control" id="address2" th:field="*{address2}" type="text">
     </div>
-
     <div class="mb-3">
-      <label for="city" class="form-label">City</label>
-      <input id="city" type="text" th:field="*{city}" class="form-control" required>
+     <label class="form-label" for="city">City</label> <input class="form-control" id="city" required th:field="*{city}" type="text">
     </div>
-
     <div class="mb-3">
-      <label for="state" class="form-label">State</label>
-      <input id="state" type="text" th:field="*{state}" class="form-control" required>
+     <label class="form-label" for="state">State</label> <input class="form-control" id="state" required th:field="*{state}" type="text">
     </div>
-
     <div class="mb-3">
-      <label for="zip" class="form-label">ZIP</label>
-      <input id="zip" type="text" th:field="*{zip}" class="form-control" required>
+     <label class="form-label" for="zip">ZIP</label> <input class="form-control" id="zip" required th:field="*{zip}" type="text">
     </div>
-
     <div class="mb-3">
-      <label for="countryCd" class="form-label">Country Code</label>
-      <input id="countryCd" type="text" th:field="*{countryCd}" class="form-control" required>
+     <label class="form-label" for="countryCd">Country Code</label> <input class="form-control" id="countryCd" required th:field="*{countryCd}" type="text">
     </div>
-
     <div class="d-flex justify-content-end">
-      <button type="submit" class="btn btn-success me-2">Save</button>
-      <button type="button" class="btn btn-secondary"
-              th:hx-get="@{/person/view/{personId}(personId=${personId})}"
-              hx-target="body" hx-swap="outerHTML">Cancel</button>
+     <button class="btn btn-success me-2" data-bs-dismiss="modal"
+             hx-swap="beforeend "
+             hx-target="#person-address-list-container"
+             th:hx-post="@{/person/{personId}/person-address/save(personId=${personId})}"
+             hx-select-oob="#address-alert-message:outerHTML"
+             th:if="${newAddress}" type="submit">Save</button>
+     <button class="btn btn-success me-2" data-bs-dismiss="modal"
+             hx-swap="outerHTML"
+             th:hx-target="${'#person-address-parent-' + addressDto.addressId}"
+             th:hx-post="@{/person/{personId}/person-address/save(personId=${personId})}"
+             hx-select-oob="#address-alert-message:outerHTML"
+             th:if="${!newAddress}" type="submit">Update</button>
+     <button class="btn btn-secondary" data-bs-dismiss="modal"
+             hx-swap="outerHTML transition:true show:#person-address-info:top"
+             hx-target="body"
+             th:hx-get="@{/person/view/{personId}(personId=${personId})}"
+             type="button">Cancel</button>
     </div>
-  </form>
-</div>
+   </form>
+  </div>
 </html>

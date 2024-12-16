@@ -39,3 +39,4 @@ out/
 ### Maven Build Path ###
 target/
 /logs/
+/logs/
