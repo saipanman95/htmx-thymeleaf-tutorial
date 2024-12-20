@@ -333,7 +333,6 @@ public class PersonController {
 
     }
 
-
     @DeleteMapping("/person/{personId}/phone/delete/{phoneId}")
     public View deletePhone(@PathVariable("personId") Long personId,
                             @PathVariable("phoneId") Long phoneId,

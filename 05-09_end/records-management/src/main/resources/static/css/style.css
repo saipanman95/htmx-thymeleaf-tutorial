@@ -261,3 +261,7 @@ a.edit-delete-icons:hover {
         display: none; /* Element disappears */
     }
 }
+
+.modal-backdrop:nth-child(2n-1) {
+    display: none !important;
+}
