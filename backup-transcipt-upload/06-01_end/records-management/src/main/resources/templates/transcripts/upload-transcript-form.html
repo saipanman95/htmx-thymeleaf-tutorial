@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="upload-transcript-form(priorSchools, studentId, isEdit, transcriptId)">
+    <div class="card bg-dark text-white mt-4">
+        <div class="card-body">
+            <h4 class="card-title" th:text="${isEdit} ? 'Edit Transcript' : 'Upload Transcript'"></h4>
+
+            <form method="post" enctype="multipart/form-data"
+                  th:action="@{/transcripts/student/{studentId}/upload(studentId=${studentId})}"
+                  th:object="${transcriptDto}"
+                  th:hx-target="${isEdit} ? '#transcript-' + ${transcriptId} : '#transcript-list-items'"
+                  th:hx-swap="${isEdit} ? 'outerHTML transition:true' : 'afterend transition:true'"
+                  _='on htmx:xhr:progress(loaded, total) set #progress.value to (loaded/total)*100'>
+
+                <!-- Dropdown for selecting prior schools -->
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="priorSchool" class="form-label">Select School</label>
+                        <select id="priorSchool" th:field="*{priorSchoolId}" class="form-select" required>
+                            <option value="" disabled selected>Select a school</option>
+                            <option th:each="school : ${priorSchools}"
+                                    th:value="${school.id}"
+                                    th:selected="${school.id == transcriptDto.priorSchoolId}"
+                                    th:text="${school.schoolName}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="gradeCompilationDate" class="form-label">Compilation Date</label>
+                        <input type="date" id="gradeCompilationDate" class="form-control" th:field="*{gradeCompilationDate}">
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="cumulativeGPA" class="form-label">CumulativeGPA</label>
+                        <input type="number" id="cumulativeGPA" class="form-control" th:field="*{cumulativeGPA}">
+                    </div>
+                </div>
+
+                <!-- File upload field -->
+                <div class="mb-3">
+                    <label for="transcriptFile" class="form-label">Upload Transcript (PDF)</label>
+                    <input type="file" id="transcriptFile"  name="transcriptFile" class="form-control"
+                           accept="application/pdf" required>
+                </div>
+
+                <!-- Progress Bar -->
+                <progress id="progress" value="0" max="100"></progress>
+
+                <div class="d-flex justify-content-end">
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary"
+                            th:text="${isEdit} ? 'Update' : 'Upload'">
+                        Upload
+                    </button>
+
+                    <!-- Cancel Button -->
+                    <button type="button" class="btn btn-secondary"
+                            th:hx-get="@{/student/view/{studentId}(studentId=${studentId})}"
+                            hx-target="body"
+                            hx-swap="outerHTML transition:true">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

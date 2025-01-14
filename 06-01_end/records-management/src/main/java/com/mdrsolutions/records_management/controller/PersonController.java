@@ -91,8 +91,13 @@ public class PersonController {
     @PostMapping("/person/update/{personId}")
     public String updatePersonFullDetails(@PathVariable("personId") Long personId,
                                           @ModelAttribute("person") Person updatedPerson,
-                                          Model model) {
+                                          Model model,
+                                          HtmxResponse htmxResponse) throws InterruptedException {
         LOGGER.info("updatePersonFullDetails(...) - Updating details for person ID: {}", personId);
+
+        LOGGER.info("Sleeping for 4 seconds");
+        Thread.sleep(4000);
+        LOGGER.info("finished sleeping");
 
         try {
             // Fetch the existing person from the database
@@ -110,12 +115,16 @@ public class PersonController {
 
             // Save the updated person back to the database
             personService.savePerson(existingPerson);
-
+            // return updated person
+            Person person = personService.getPersonById(existingPerson.getPersonId());
             // Add success message
+
+            model.addAttribute("person", person);
             model.addAttribute("message", "Person details updated successfully.");
 
             // Redirect to the full details view after a successful update
-            return "redirect:/person/view/" + personId;
+            htmxResponse.setPushUrl("/person/view/"+personId);
+            return "person/person-info :: personal-info";
         } catch (Exception e) {
             LOGGER.error("Error updating person details: {}", e.getMessage());
 
@@ -332,7 +341,6 @@ public class PersonController {
                 .build();
 
     }
-
 
     @DeleteMapping("/person/{personId}/phone/delete/{phoneId}")
     public View deletePhone(@PathVariable("personId") Long personId,

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="transcript">
+<div class="wrapper-transcripts-grid body" th:id="'transcript-' + ${transcriptDto.transcriptId}">
+  <div class="box" th:text="${transcriptDto.priorSchoolName}">School Name</div>
+  <div class="box" th:text="${transcriptDto.gradeCompilationDate}">Grade Compilation Date</div>
+  <div class="box" th:text="${transcriptDto.cumulativeGPA}">Cumulative GPA</div>
+  <div class="box">
+    <div class="button-group">
+      <button class="btn btn-outline-light btn-sm"
+              hx-swap="innerHTML transition:true show:#transcript-form:bottom swap:.05s"
+              hx-target="#transcript-form"
+              onclick="swapFade('transcript-form', true); removeStyleClasses('slide-it, slide-individual')"
+              th:hx-get="@{/transcripts/upload/form/student/{studentId}(studentId=${studentId}, transcriptId=${transcriptDto.transcriptId})}"
+      >
+        Edit
+      </button>
+      <a class="btn btn-primary btn-sm"
+         th:href="@{/transcripts/pdf/{id}(id=${transcriptDto.transcriptId})}">
+        Download
+      </a>
+      <button class="btn btn-danger btn-sm"
+              hx-confirm="Are you sure you want to delete this transcript?"
+              hx-swap="outerHTML"
+              hx-target="closest div.box"
+              th:hx-delete="@{/transcripts/delete/{id}(id=${transcriptDto.transcriptId})}">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+</th:block>
+</html>

@@ -3,11 +3,9 @@ package com.mdrsolutions.records_management.controller;
 import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
 import com.mdrsolutions.records_management.controller.dto.PersonAddressDto;
 import com.mdrsolutions.records_management.entity.Person;
-import com.mdrsolutions.records_management.entity.PersonAddress;
 import com.mdrsolutions.records_management.service.CheckPersonMissingFieldService;
 import com.mdrsolutions.records_management.service.PersonAddressService;
 import com.mdrsolutions.records_management.service.PersonService;
-import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -19,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.FragmentsRendering;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class PersonAddressController {
@@ -94,19 +92,23 @@ public class PersonAddressController {
         model.addAttribute("afterSave", true);
 
         //determine message alert types to be returned in model attributes
-        if(!missingAddressDetailsDto.getMissingFields().isEmpty()){
-            StringBuilder sb = new StringBuilder();
-            sb.append("Address was updated but there are details that need to be addressed in one or more addresses, which include: ");
-            for (String message : missingAddressDetailsDto.getMissingFields()){
-                sb.append(" **").append(message).append(". \n\n");
-            }
+        String alertMessage;
+        String alertLevel;
 
-            model.addAttribute("alertMessage",sb.toString() );
-            model.addAttribute("alertLevel", "warning");
+        if (!missingAddressDetailsDto.getMissingFields().isEmpty()) {
+            String details = missingAddressDetailsDto.getMissingFields()
+                    .stream()
+                    .map(field -> "**" + field + ". \n\n")
+                    .collect(Collectors.joining());
+            alertMessage = "Address was updated but there are details that need to be addressed in one or more addresses, which include: " + details;
+            alertLevel = "warning";
         } else {
-            model.addAttribute("alertMessage", "Address was successfully updated");
-            model.addAttribute("alertLevel", "success");
+            alertMessage = "Address was successfully updated";
+            alertLevel = "success";
         }
+
+        model.addAttribute("alertMessage", alertMessage);
+        model.addAttribute("alertLevel", alertLevel);
 
         return FragmentsRendering
                 .with("person/person-address-item :: address-item")

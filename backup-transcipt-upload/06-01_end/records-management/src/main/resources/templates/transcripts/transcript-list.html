@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="transcript-list(transcripts, studentId)">
+    <div class="card bg-dark text-white mt-4">
+        <div class="card-body" id="transcript-content">
+            <h4 class="card-title">Transcripts</h4>
+            <button class="btn btn-primary mb-3"
+                    hx-swap="innerHTML transition:true show:#transcript-form:bottom swap:.05s"
+                    hx-target="#transcript-form"
+                    onclick="swapFade('transcript-form', true); removeStyleClasses('slide-it, slide-individual')"
+                    th:hx-get="@{/transcripts/upload/form/student/{studentId}(studentId=${studentId})}">
+                Upload Transcript
+            </button>
+            <!-- Alternate Grid display-->
+            <div class="wrapper-transcripts-grid header" id="transcript-list-items">
+                <div class="box">School Name</div>
+                <div class="box">Grade Compilation Date</div>
+                <div class="box">Cumulative GPA</div>
+                <div class="box">Actions</div>
+            </div>
+            <th:block th:each="transcriptDto : ${transcripts}">
+                <div class="wrapper-transcripts-grid body" th:id="'transcript-' + ${transcriptDto.transcriptId}">
+                    <div class="box" th:text="${transcriptDto.priorSchoolName}">School Name</div>
+                    <div class="box" th:text="${transcriptDto.gradeCompilationDate}">Grade Compilation Date</div>
+                    <div class="box" th:text="${transcriptDto.cumulativeGPA}">Cumulative GPA</div>
+                    <div class="box">
+                        <div class="button-group">
+                            <button class="btn btn-outline-light btn-sm"
+                                    hx-swap="innerHTML transition:true show:#transcript-form:bottom swap:.05s"
+                                    hx-target="#transcript-form"
+                                    onclick="swapFade('transcript-form', true); removeStyleClasses('slide-it, slide-individual')"
+                                    th:hx-get="@{/transcripts/upload/form/student/{studentId}(studentId=${studentId}, transcriptId=${transcriptDto.transcriptId})}">
+                                Edit
+                            </button>
+                            <a class="btn btn-primary btn-sm"
+                               th:href="@{/transcripts/pdf/{id}(id=${transcriptDto.transcriptId})}">
+                                Download
+                            </a>
+                            <button class="btn btn-danger btn-sm"
+                                    hx-confirm="Are you sure you want to delete this transcript?"
+                                    hx-swap="outerHTML"
+                                    hx-target="closest div.box"
+                                    th:hx-delete="@{/transcripts/delete/{id}(id=${transcriptDto.transcriptId})}">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div> <!-- wrapper-transcripts-grid body-->
+            </th:block>
+        </div> <!-- end of card body -->
+
+    </div>
+    <div id="transcript-form" hx-select-oob="outerHTML"></div>
+</div>
