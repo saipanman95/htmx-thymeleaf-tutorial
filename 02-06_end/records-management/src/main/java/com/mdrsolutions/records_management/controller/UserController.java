@@ -22,8 +22,8 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/user-info/edit")
-    public String showEditUserForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    @GetMapping("/user-info/view")
+    public String showUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         // Get the current user's email based on their authentication
         Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
 
