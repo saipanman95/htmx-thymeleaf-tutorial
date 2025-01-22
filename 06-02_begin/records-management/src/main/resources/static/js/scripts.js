@@ -30,16 +30,19 @@ function removeStyleClasses(classNames) {
 }
 
 
-document.body.addEventListener('htmx:configRequest', function(event) {
-    const target = event.target;
-    const csrfHeader = target.getAttribute('data-csrf-header');
-    const csrfToken = target.getAttribute('data-csrf-token');
+if (!window.htmxConfigRequestListenerAdded) {
+    document.body.addEventListener('htmx:configRequest', function(event) {
+        const target = event.target;
+        const csrfHeader = target.getAttribute('data-csrf-header');
+        const csrfToken = target.getAttribute('data-csrf-token');
 
-    // If CSRF attributes are found, add them to the request headers
-    if (csrfHeader && csrfToken) {
-        event.detail.headers[csrfHeader] = csrfToken;
-    }
-});
+        // If CSRF attributes are found, add them to the request headers
+        if (csrfHeader && csrfToken) {
+            event.detail.headers[csrfHeader] = csrfToken;
+        }
+    });
+    window.htmxConfigRequestListenerAdded = true;
+}
 
 // Listen directly for the 'emailUpdated' event
 if(!window.emailUpdatedListenerAdded){
