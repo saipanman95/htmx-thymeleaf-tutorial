@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/user-info/view")
-    public String showEditUserForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public String showUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         // Get the current user's email based on their authentication
         Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
 
