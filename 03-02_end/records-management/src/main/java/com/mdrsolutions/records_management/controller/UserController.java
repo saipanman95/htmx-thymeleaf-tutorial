@@ -51,7 +51,7 @@ public class UserController {
                 .orElse("<span class='text-success'>Username available</span>");
     }
 
-    @GetMapping("/user-info/edit")
+    @GetMapping("/user-info/view")
     public String showEditUserForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         return getCurrentUser(userDetails)
                 .map(user -> {
