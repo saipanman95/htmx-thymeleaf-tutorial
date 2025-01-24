@@ -39,9 +39,8 @@ public class DashboardController {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             model.addAttribute("user", user);
-            model.addAttribute("personId", user.getPerson().getPersonId());
             model.addAttribute("person", user.getPerson());
-            model.addAttribute("user", user);
+            model.addAttribute("personId", user.getPerson().getPersonId());
             model.addAttribute("isHtmxRequest", isHtmxRequest);
             return "dashboard/dashboard";
         } else {

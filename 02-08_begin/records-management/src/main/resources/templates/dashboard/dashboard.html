@@ -34,7 +34,7 @@
             </div>
         </div>
         <!-- Other Dashboard Sections -->
-        <div th:insert="~{dashboard/person-info :: personal-info}"></div>
+        <div th:insert="~{dashboard/person-info :: personal-info (person=${person})}"></div>
         <div th:insert="~{dashboard/students :: students}"></div>
     </div>
 </div>

@@ -36,6 +36,7 @@ public class DashboardController {
 
             User user = optionalUser.get();
             model.addAttribute("user", user);
+            model.addAttribute("person", user.getPerson());
             return "dashboard/dashboard";
         } else {
             // Handle the case where the user is not found (optional)
