@@ -40,7 +40,6 @@ public class DashboardController {
         if (userDetails != null) {
             LOGGER.info("homePage(...)");
             Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
-
             boolean isHtmxRequest = request.getHeader("HX-Request") != null;
 
             if (optionalUser.isPresent()) {

@@ -34,11 +34,12 @@ public class DashboardController {
 
     // If the user is authenticated, redirect them to the dashboard
     @GetMapping("/")
-    public String homePage(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request, Model model) {
+    public String homePage(@AuthenticationPrincipal UserDetails userDetails,
+                           HttpServletRequest request,
+                           Model model) {
         if (userDetails != null) {
             LOGGER.info("homePage(...)");
             Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
-
             boolean isHtmxRequest = request.getHeader("HX-Request") != null;
 
             if (optionalUser.isPresent()) {
@@ -49,12 +50,11 @@ public class DashboardController {
 
                 List<Student> students = studentService.findStudentsByPersonId(user.getPerson().getPersonId());
 
-                model.addAttribute("user", user);
-                model.addAttribute("personId", user.getPerson().getPersonId());
                 model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
                 model.addAttribute("missingDetailsList",missingDetailsDto.getMissingFields());
-                model.addAttribute("person", user.getPerson());
                 model.addAttribute("user", user);
+                model.addAttribute("personId", user.getPerson().getPersonId());
+                model.addAttribute("person", user.getPerson());
                 model.addAttribute("students", students);
                 model.addAttribute("isHtmxRequest", isHtmxRequest);
                 return "dashboard/dashboard";
