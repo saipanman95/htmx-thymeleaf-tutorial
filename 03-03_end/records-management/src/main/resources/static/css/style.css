@@ -1,6 +1,24 @@
 body {
     padding-top: 80px; /* Adjust based on the height of your navbar */
 }
+.outer-fade {
+    opacity: 0;
+    animation: outerFadeIn 1.5s ease-in forwards;
+}
+
+@keyframes outerFadeIn { to { opacity: 1; } }
+
+.loading-dashboard-elem {
+    opacity: 0;
+    animation: loadingFadeIn 0.3s ease-in forwards;
+    border: 2px #212529 solid; background: #212529;
+    border-radius: 5px;
+    height: 100px; margin-top: 20px; padding: 10px;
+    color: white; font-size: 24px;
+    visibility: visible;
+}
+
+@keyframes loadingFadeIn { to { opacity: 1; } }
 .gradient-custom {
     /* fallback for old browsers */
     background: #6a11cb;
