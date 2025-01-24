@@ -37,7 +37,6 @@ if (!window.htmxConfigRequestListenerAdded) {
 
         // If CSRF attributes are found, add them to the request headers
         if (csrfHeader && csrfToken) {
-            console.debug("csrf tokens found and sent");
             event.detail.headers[csrfHeader] = csrfToken;
         }
     });

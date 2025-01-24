@@ -29,7 +29,8 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public String getDashboard(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public String getDashboard(@AuthenticationPrincipal UserDetails userDetails,
+                               Model model) {
         Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
         if (optionalUser.isPresent()) {
 

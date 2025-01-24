@@ -30,7 +30,9 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public String getDashboard(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request, Model model) {
+    public String getDashboard(@AuthenticationPrincipal UserDetails userDetails,
+                               HttpServletRequest request,
+                               Model model) {
         Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
         boolean isHtmxRequest = request.getHeader("HX-Request") != null;
 
