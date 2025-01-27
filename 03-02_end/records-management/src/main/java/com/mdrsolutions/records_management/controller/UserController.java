@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("/user-info/view")
-    public String showEditUserForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    public String showUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         return getCurrentUser(userDetails)
                 .map(user -> {
                     model.addAttribute("user", user);

@@ -5,6 +5,7 @@ import com.mdrsolutions.records_management.entity.*;
 import com.mdrsolutions.records_management.repository.PersonRepository;
 import com.mdrsolutions.records_management.service.*;
 import com.mdrsolutions.records_management.util.CheckMissingDetails;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -50,14 +51,22 @@ public class PersonController {
     }
 
     @GetMapping("/person/view/{personId}")
-    public String viewPersonFullDetails(@PathVariable("personId") Long personId, Model model) {
+    public String viewPersonFullDetails(@PathVariable("personId") Long personId, Model model, HttpServletRequest request) {
         LOGGER.info("viewPersonFullDetails(...) - Loading full details view for person ID: {}", personId);
+
         Person person = personService.getPersonById(personId);
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+
         model.addAttribute("person", person);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
-        return "person/person-full-details";
+
+        boolean isHtmxRequest = request.getHeader("HX-Request") != null;
+        if(!isHtmxRequest){
+            return "person/person-full-details";
+        } else {
+            return "person/person-full-details :: person-full-details";
+        }
     }
 
     @GetMapping("/person/edit/{personId}")
