@@ -25,8 +25,7 @@ h2 {
     height: 100%;
     padding: 25px;
     margin-top: 145px;
-    background: rgba(0, 0, 0, 0.6) url("../img/stock-adobe-1000_F_846627255_VM0oICD46N7mHRrO2K1nuyJAPvsimli1.jpg") no-repeat center !important;
-    /*background: rgba(0, 0, 0, 0.6) url("../img/adobe-stock-1000_F_866206799_DxxhAxtdWSLb78c6FrC5xfg3XEObktTD.jpg") no-repeat center !important;*/
+    background: rgba(0, 0, 0, 0.6);
     background-size: cover !important;
     background-blend-mode: darken !important;
     background-attachment: fixed !important;
