@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# List of target directories
+TARGET_DIRECTORIES=(
+    "02-06_begin" "03-04_end" "03-10_begin" "04-05_end" "05-03_begin" "05-08_end" "06-05_begin"
+    "01-04_begin" "02-06_end" "03-05_begin" "03-10_end" "04-06_begin" "05-03_end" "05-09_begin"
+    "01-04_end" "02-07_begin" "03-05_end" "04-01_begin" "04-06_end" "05-04_begin" "05-09_end"
+    "02-01_begin" "02-07_end" "03-06_begin" "04-01_end" "04-07_begin" "05-04_end" "06-01_begin"
+    "02-01_end" "02-08_begin" "03-06_end" "04-02_begin" "04-07_end" "05-05_begin" "06-01_end"
+    "02-03_begin" "02-08_end" "03-07_begin" "04-02_end" "04-08_begin" "05-05_end" "06-02_begin"
+    "02-03_end" "03-02_begin" "03-07_end" "04-03_begin" "04-08_end" "05-06_begin" "06-02_end"
+    "02-04_begin" "03-02_end" "03-08_begin" "04-03_end" "04-09_begin" "05-06_end" "06-03_begin"
+    "02-04_end" "03-03_begin" "03-08_end" "04-04_begin" "04-09_end" "05-07_begin" "06-03_end"
+    "02-05_begin" "03-03_end" "03-09_begin" "04-04_end" "05-02_begin" "05-07_end" "06-04_begin"
+    "02-05_end" "03-04_begin" "03-09_end" "04-05_begin" "05-02_end" "05-08_begin" "06-04_end"
+)
+
+# Loop through each target directory, delete the .idea directory, and update Git
+for TARGET_DIR in "${TARGET_DIRECTORIES[@]}"; do
+    TARGET_PATH="${TARGET_DIR}/.idea"
+
+    # Check if the .idea directory exists
+    if [ -d "$TARGET_PATH" ]; then
+        rm -rf "$TARGET_PATH"                # Delete the directory
+        git rm -r --cached "$TARGET_PATH"    # Remove it from Git's index (if tracked)
+        echo "Deleted and staged removal for $TARGET_PATH"
+    else
+        echo "$TARGET_PATH does not exist."
+    fi
+done
+
+# Commit changes
+git commit -m "Deleted .idea directories and updated Git index"
+
+echo "Deletion and Git update completed."
+
