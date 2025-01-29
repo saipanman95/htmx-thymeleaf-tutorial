@@ -17,7 +17,7 @@ TARGET_DIRECTORIES=(
 
 # Loop through each target directory, delete the .idea directory, and update Git
 for TARGET_DIR in "${TARGET_DIRECTORIES[@]}"; do
-    TARGET_PATH="${TARGET_DIR}/.idea"
+    TARGET_PATH="${TARGET_DIR}/.DS_Store"
 
     # Check if the .idea directory exists
     if [ -d "$TARGET_PATH" ]; then
