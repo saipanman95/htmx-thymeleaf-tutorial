@@ -142,3 +142,41 @@
 2025-01-31T07:59:03.620+10:00 DEBUG 61455 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : username........................"sa"
 2025-01-31T07:59:03.620+10:00 DEBUG 61455 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : validationTimeout...............5000
 2025-01-31T07:59:05.019+10:00  WARN 61455 --- [RecordsManagement] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-01-31T08:49:24.109+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : Driver class org.h2.Driver found in Thread context class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1cf4f579
+2025-01-31T08:49:24.471+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2025-01-31T08:49:24.475+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension.............false
+2025-01-31T08:49:24.475+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : autoCommit......................true
+2025-01-31T08:49:24.475+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : catalog.........................none
+2025-01-31T08:49:24.476+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : connectionInitSql...............none
+2025-01-31T08:49:24.476+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : connectionTestQuery.............none
+2025-01-31T08:49:24.477+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : connectionTimeout...............30000
+2025-01-31T08:49:24.477+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : dataSource......................none
+2025-01-31T08:49:24.477+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : dataSourceClassName.............none
+2025-01-31T08:49:24.477+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI..................none
+2025-01-31T08:49:24.478+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : dataSourceProperties............{password=<masked>}
+2025-01-31T08:49:24.478+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : driverClassName................."org.h2.Driver"
+2025-01-31T08:49:24.478+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName......none
+2025-01-31T08:49:24.478+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : healthCheckProperties...........{}
+2025-01-31T08:49:24.478+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry.............none
+2025-01-31T08:49:24.479+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : idleTimeout.....................600000
+2025-01-31T08:49:24.479+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout.......1
+2025-01-31T08:49:24.479+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries..........false
+2025-01-31T08:49:24.479+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : jdbcUrl.........................jdbc:h2:mem:records-management
+2025-01-31T08:49:24.480+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : keepaliveTime...................0
+2025-01-31T08:49:24.480+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold..........0
+2025-01-31T08:49:24.480+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : maxLifetime.....................1800000
+2025-01-31T08:49:24.480+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : maximumPoolSize.................10
+2025-01-31T08:49:24.480+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : metricRegistry..................none
+2025-01-31T08:49:24.481+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory...........none
+2025-01-31T08:49:24.481+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : minimumIdle.....................10
+2025-01-31T08:49:24.481+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : password........................<masked>
+2025-01-31T08:49:24.481+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : poolName........................"HikariPool-1"
+2025-01-31T08:49:24.481+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : readOnly........................false
+2025-01-31T08:49:24.482+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : registerMbeans..................false
+2025-01-31T08:49:24.482+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : scheduledExecutor...............none
+2025-01-31T08:49:24.482+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : schema..........................none
+2025-01-31T08:49:24.482+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : threadFactory...................internal
+2025-01-31T08:49:24.483+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : transactionIsolation............default
+2025-01-31T08:49:24.483+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : username........................"sa"
+2025-01-31T08:49:24.483+10:00 DEBUG 64923 --- [RecordsManagement] [main] com.zaxxer.hikari.HikariConfig           : validationTimeout...............5000
+2025-01-31T08:49:25.785+10:00  WARN 64923 --- [RecordsManagement] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning

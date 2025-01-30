@@ -108,15 +108,18 @@ public class PersonController {
             existingPerson.setSuffix(updatedPerson.getSuffix());
             existingPerson.setPersonType(updatedPerson.getPersonType());
             existingPerson.setLegalGuardianType(updatedPerson.getLegalGuardianType());
+            existingPerson.setEmploymentStatus(updatedPerson.getEmploymentStatus());
 
             // Save the updated person back to the database
             personService.savePerson(existingPerson);
-
+            // return updated person
+            Person person = personService.getPersonById(existingPerson.getPersonId());
             // Add success message
+            model.addAttribute("person", person);
             model.addAttribute("message", "Person details updated successfully.");
 
             // Redirect to the full details view after a successful update
-            return "redirect:/person/view/" + personId;
+            return "person/person-info :: personal-info";
         } catch (Exception e) {
             LOGGER.error("Error updating person details: {}", e.getMessage());
 
