@@ -5,8 +5,6 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-<!--    <meta name="_csrf" th:content="${_csrf.token}"/>-->
-<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
     <title>Records Management - User Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"/>
@@ -24,12 +22,5 @@
 
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 <script type="text/javascript" th:src="@{/webjars/htmx.org/2.0.2/dist/htmx.min.js}"></script>
-<script>
-//    document.addEventListener('htmx:configRequest', function(event) {
-//        var csrfToken = document.querySelector('meta[name="_csrf"]').getAttribute('content');
-//        var csrfHeader = document.querySelector('meta[name="_csrf_header"]').getAttribute('content');
-//        event.detail.headers[csrfHeader] = csrfToken;
-//    });
-</script>
 </body>
 </html>

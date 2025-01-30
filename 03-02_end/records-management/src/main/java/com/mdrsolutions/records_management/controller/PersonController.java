@@ -80,7 +80,7 @@ public class PersonController {
 
     @GetMapping("/person/cancel/{personId}")
     public String cancelPersonInfo(@PathVariable("personId") Long personId, Model model){
-        LOGGER.info("viewPersonInfo(...) - returning to the person-info form from cancel");
+        LOGGER.info("cancelPersonInfo(...) - returning to the person-info form from cancel");
         Person person = personService.getPersonById(personId);
         model.addAttribute("person", person);
 
