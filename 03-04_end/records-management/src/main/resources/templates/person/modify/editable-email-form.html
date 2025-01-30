@@ -17,22 +17,30 @@
         <div class="mb-3">
             <label for="email" class="form-label">Email Address</label>
             <input id="email" type="email" th:field="*{emailAddress}" class="form-control"
-                   placeholder="email@example.com" required>
+                   placeholder="email@example.com">
         </div>
         <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-success me-2"
                     th:hx-post="@{/person/{personId}/email/save(personId=${personId})}"
                     hx-target="#email-list-container"
-                    hx-swap="afterend"
-                    hx-trigger="click"
+                    hx-swap="afterbegin"
+                    hx-trigger="click, keyup[key=='Enter']"
                     hx-on::after-request="this.closest('form').innerHTML = ''">
                 Save
             </button>
             <button type="button" class="btn btn-secondary"
                     th:hx-get="@{/person/view/{personId}(personId=${personId})}"
-                    hx-target="body" hx-swap="outerHTML">Cancel
+                    hx-target="#content" hx-swap="innerHTML">Cancel
             </button>
         </div>
     </form>
+    <script>
+        document.getElementById('email-form').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();  // Prevent form submission
+                this.querySelector('button').click();  // Trigger HTMX request
+            }
+        });
+    </script>
 </div>
 </html>
