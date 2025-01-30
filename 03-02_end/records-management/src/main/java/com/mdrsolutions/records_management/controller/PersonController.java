@@ -51,7 +51,9 @@ public class PersonController {
     }
 
     @GetMapping("/person/view/{personId}")
-    public String viewPersonFullDetails(@PathVariable("personId") Long personId, Model model, HttpServletRequest request) {
+    public String viewPersonFullDetails(@PathVariable("personId") Long personId, 
+                                        Model model, 
+                                        HttpServletRequest request) {
         LOGGER.info("viewPersonFullDetails(...) - Loading full details view for person ID: {}", personId);
 
         Person person = personService.getPersonById(personId);
