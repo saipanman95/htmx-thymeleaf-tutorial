@@ -41,3 +41,4 @@ target/
 
 ### logs path ##
 logs/
+/logs/
