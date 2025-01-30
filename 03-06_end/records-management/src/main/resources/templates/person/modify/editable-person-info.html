@@ -91,7 +91,7 @@
                 <div class="d-flex justify-content-end mt-3">
                     <button type="submit" class="btn btn-success">Save</button>
                     <a th:hx-get="@{/person/cancel/{personId}(personId=${person.personId})}"
-                       hx-target="#person-info-content" hx-swap="innerHTML transition:true"
+                       hx-target="#person-info-content" hx-swap="innerHTML"
                        th:href="@{/person/view/{personId}(personId=${person.personId})}"
                        class="btn btn-secondary ms-2">Cancel</a>
                 </div>

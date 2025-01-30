@@ -8,8 +8,8 @@
     <title>Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
-<body >
-<div layout:fragment="content" class="slide-it" >
+<body>
+<div layout:fragment="content">
     <div class="container mt-5">
         <h2 class="text-white text-uppercase">Dashboard</h2>
 
@@ -22,7 +22,7 @@
         </div>
 
         <!-- User Info Section -->
-        <div id="user-info-content" >
+        <div id="user-info-content">
             <div th:if="${#strings.equals(mode, 'edit-username')}">
                 <div th:replace="~{dashboard/modify/user-info-edit :: user-info-edit}"></div>
             </div>
@@ -36,17 +36,17 @@
         <!-- Other Dashboard Sections -->
         <div th:if="${isHtmxRequest}">
             <div id="personal-info" th:hx-get="@{/person/{personId}(personId=${personId})}"
-                 hx-trigger="load delay:.5s"
+                 hx-trigger="load delay:3s"
                  hx-target="#personal-info"
-                 hx-swap="innerHTML"  >
+                 hx-swap="innerHTML transition:true"  >
                 <div style="height: 190.8px; color: gray;" class="rounded mt-4 mb-4 p-4 border border-dark bg-dark">
                     <h4 class="card-title">Personal Information - Loading...</h4>
                 </div>
             </div>
             <div id="students-info" th:hx-get="@{/students/{personId}(personId=${personId})}"
-                 hx-trigger="load delay:1s"
+                 hx-trigger="load delay:4s"
                  hx-target="#students-info"
-                 hx-swap="innerHTML">
+                 hx-swap="innerHTML transition:true">
                 <div style="height: 406.8px; color: gray;" class="rounded mt-4 mb-4 p-4 border border-dark bg-dark">
                     <h4 class="card-title">Student Information - Loading...</h4>
                 </div>

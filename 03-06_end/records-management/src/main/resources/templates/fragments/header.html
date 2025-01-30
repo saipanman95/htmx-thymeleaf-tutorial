@@ -59,9 +59,7 @@
                     </li>
                     <!-- Public Links -->
                     <li>
-                        <a class="nav-link text-white-50" th:hx-get="@{/dashboard}" hx-target="body" hx-swap="outerHTML transition:true"
-                           th:href="@{/dashboard}"
-                        ><i class="fa-solid fa-house"></i> Home</a>
+                        <a class="nav-link text-white-50" th:href="@{/dashboard}"><i class="fa-solid fa-house"></i> Home</a>
                     </li>
                     <li th:if="${#authorization.expression('isAnonymous()')}">
                         <a class="nav-link text-white-50" th:href="@{/login}">Login</a>
