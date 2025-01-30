@@ -4,8 +4,10 @@
 <div th:fragment="email-form(email, personId)">
   <form th:action="@{/person/{personId}/email/save(personId=${personId})}"
         th:object="${email}" method="post"
+        th:hx-post="@{/person/{personId}/email/save(personId=${personId})}"
         hx-target="#email-list-container"
-        hx-swap="beforebegin">
+        hx-swap="beforebegin"
+  >
     <!-- Hidden input for emailId to ensure it's passed when editing -->
     <input type="hidden" th:field="*{emailId}" />
 

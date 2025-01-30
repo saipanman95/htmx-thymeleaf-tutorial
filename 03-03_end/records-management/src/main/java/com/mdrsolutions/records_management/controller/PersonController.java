@@ -152,12 +152,14 @@ public class PersonController {
     public String saveEmail(@ModelAttribute Email email, @PathVariable("personId") Long personId, Model model) {
         // Verify that 'email' here contains the ID correctly and not the email string.
         LOGGER.info("Saving email for personId: {}, emailId: {}", personId, email.getEmailId());
+
         Person person = personService.getPersonById(personId);
         emailService.saveOrUpdateEmail(person, email);
-        model.addAttribute("emails", person.getEmails());
+
+        model.addAttribute("emails",person.getEmails());
         model.addAttribute("personId", personId);
 
-        //return "redirect:/person/view/" + personId;
+//        return "redirect:/person/view/" + personId;
         return "person/email-item :: email-item";
     }
 
