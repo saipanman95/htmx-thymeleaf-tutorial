@@ -165,7 +165,7 @@ public class PersonController {
         model.addAttribute("personId", personId);
 
         //return "redirect:/person/view/" + personId;
-        return "person/email-item :: email-item";
+        return "person/emails-info :: emails-info";
     }
 
 
