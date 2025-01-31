@@ -10,7 +10,7 @@
                 <button class="btn btn-outline-light btn-sm position-relative"
                         th:hx-get="@{/person/edit/{personId}(personId=${person.personId})}"
                         hx-target="#person-info-content"
-                        hx-swap="innerHTML transition:true show:.container:top">
+                        hx-swap="innerHTML transition:true">
                     <i class="fa-solid fa-pencil"></i> Edit
                 </button>
 
