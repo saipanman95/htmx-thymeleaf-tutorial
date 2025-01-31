@@ -42,7 +42,8 @@
               <a href="#" class="btn btn-sm btn-outline-danger"
                  th:hx-delete="@{/person/{personId}/employer/delete/{employerId}(personId=${personId}, employerId=${employer.employerId})}"
                  hx-target="closest .col-md-4"
-                 hx-swap="outerHTML">
+                 hx-swap="outerHTML"
+                 hx-headers="{'X-CSRF-TOKEN': '${_csrf.token}'}">
                 <i class="fa-solid fa-trash"></i> Delete
               </a>
             </div>

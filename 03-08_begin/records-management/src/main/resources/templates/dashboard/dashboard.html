@@ -9,8 +9,8 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body >
-<div layout:fragment="content" class="slide-it" >
-    <div class="container mt-5">
+<div layout:fragment="content">
+    <div class="container mt-5 slide-it">
         <h2 class="text-white text-uppercase">Dashboard</h2>
 
         <!-- Display Success or Error Messages -->
@@ -36,20 +36,20 @@
         <!-- Other Dashboard Sections -->
         <div th:if="${isHtmxRequest}">
             <div id="personal-info" th:hx-get="@{/person/{personId}(personId=${personId})}"
-                 hx-trigger="load delay:.5s"
+                 hx-trigger="load delay:2s"
                  hx-target="#personal-info"
-                 hx-swap="innerHTML"  >
-                <div style="height: 190.8px; color: gray;" class="rounded mt-4 mb-4 p-4 border border-dark bg-dark">
-                    <h4 class="card-title">Personal Information - Loading...</h4>
-                </div>
+                 hx-swap="innerHTML"
+                 class="outer-fade">
+                <div class="loading-dashboard-elem">
+                    Person Information Loading...</div>
             </div>
             <div id="students-info" th:hx-get="@{/students/{personId}(personId=${personId})}"
-                 hx-trigger="load delay:1s"
+                 hx-trigger="load delay:2s"
                  hx-target="#students-info"
-                 hx-swap="innerHTML">
-                <div style="height: 406.8px; color: gray;" class="rounded mt-4 mb-4 p-4 border border-dark bg-dark">
-                    <h4 class="card-title">Student Information - Loading...</h4>
-                </div>
+                 hx-swap="innerHTML"
+                 class="outer-fade">
+                <div class="loading-dashboard-elem">
+                    Students Information Loading...</div>
             </div>
         </div>
         <div th:if="${!isHtmxRequest}">

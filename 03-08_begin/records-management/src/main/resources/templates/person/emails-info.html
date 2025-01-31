@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div th:fragment="emails-info(emails, personId)" id="email-parent" >
-    <div class="card bg-dark text-white mt-4 ">
+    <div class="card p-3 bg-dark text-white mt-4 ">
         <div class="card-body position-relative " id="email-list">
             <h4 class="card-title">Email Addresses</h4>
 
@@ -10,7 +10,7 @@
                 <button class="btn btn-outline-light btn-sm"
                         th:hx-get="@{/person/{personId}/email/add(personId=${personId})}"
                         hx-target="#email-list"
-                        hx-swap="innerHTML transition:true show:#email-parent:bottom">
+                        hx-swap="innerHTML transition:true show:window:top">
                     <i class="fa-solid fa-plus"></i> Add Email
                 </button>
             </div>

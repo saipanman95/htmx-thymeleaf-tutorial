@@ -10,7 +10,7 @@
                 <button class="btn btn-outline-light btn-sm"
                         th:hx-get="@{/person/{personId}/email/add(personId=${personId})}"
                         hx-target="#email-list"
-                        hx-swap="innerHTML transition:true show:#email-parent:bottom">
+                        hx-swap="innerHTML transition:true show:window:top">
                     <i class="fa-solid fa-plus"></i> Add Email
                 </button>
             </div>

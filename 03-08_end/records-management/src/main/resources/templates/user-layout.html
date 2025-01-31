@@ -5,6 +5,8 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
+<!--    <meta name="_csrf" th:content="${_csrf.token}"/>-->
+<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
     <title>Records Management - User Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"/>
@@ -22,17 +24,5 @@
 
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 <script type="text/javascript" th:src="@{/webjars/htmx.org/2.0.3/dist/htmx.min.js}"></script>
-<script>
-    document.body.addEventListener('htmx:configRequest', function(event) {
-        const target = event.target;
-        const csrfHeader = target.getAttribute('data-csrf-header');
-        const csrfToken = target.getAttribute('data-csrf-token');
-
-        // If CSRF attributes are found, add them to the request headers
-        if (csrfHeader && csrfToken) {
-            event.detail.headers[csrfHeader] = csrfToken;
-        }
-    });
-</script>
 </body>
 </html>

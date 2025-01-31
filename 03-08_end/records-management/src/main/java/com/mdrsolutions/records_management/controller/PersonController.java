@@ -156,12 +156,14 @@ public class PersonController {
 
 
     @DeleteMapping("/person/{personId}/email/delete/{emailId}")
-    public @ResponseBody String deleteEmail(@PathVariable("personId") Long personId, @PathVariable("emailId") Long emailId) {
+    public RedirectView deleteEmail(@PathVariable("personId") Long personId, @PathVariable("emailId") Long emailId, RedirectAttributes redirectAttributes) {
         LOGGER.info("deleteEmail(...) - emailId {}", emailId);
-        emailService.deleteEmail(emailId);
-
+        emailService.deleteEmail(emailId); // Assuming you have a service method for deleting the email
+        redirectAttributes.addFlashAttribute("successMessage", "Email Deleted!");
+        RedirectView redirectView = new RedirectView("/person/view/" + personId);
+        redirectView.setStatusCode(HttpStatus.SEE_OTHER);
         LOGGER.info("completed call to delete email");
-        return "";
+        return redirectView;
     }
 
     //phones
