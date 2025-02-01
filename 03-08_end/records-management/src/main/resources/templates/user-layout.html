@@ -5,8 +5,6 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-<!--    <meta name="_csrf" th:content="${_csrf.token}"/>-->
-<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
     <title>Records Management - User Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"/>
@@ -15,7 +13,7 @@
 <body class="gradient-custom" hx-boost="true">
 <header th:insert="~{fragments/header :: userHeader}"></header> <!-- User-specific header -->
 
-<div class="container">
+<div class="container" id="content">
     <div th:insert="~{fragments/messages :: messages}"></div>
     <div layout:fragment="content"></div> <!-- Content will be injected here -->
 </div>

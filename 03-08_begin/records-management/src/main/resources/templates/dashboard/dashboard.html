@@ -8,7 +8,7 @@
     <title>Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
-<body >
+<body>
 <div layout:fragment="content">
     <div class="container mt-5 slide-it">
         <h2 class="text-white text-uppercase">Dashboard</h2>
@@ -22,7 +22,7 @@
         </div>
 
         <!-- User Info Section -->
-        <div id="user-info-content" >
+        <div id="user-info-content">
             <div th:if="${#strings.equals(mode, 'edit-username')}">
                 <div th:replace="~{dashboard/modify/user-info-edit :: user-info-edit}"></div>
             </div>
