@@ -147,17 +147,18 @@ public class PersonController {
         if (emailById.isPresent()) {
             model.addAttribute("email", emailById.get());
             model.addAttribute("personId", personId);
-            model.addAttribute("edit", true);
+            model.addAttribute("edit",true);
             return "person/modify/editable-email-form :: email-form";
         }
         model.addAttribute("errorMessage", "email does not exist");
         return "person/modify/editable-email-form :: email-form";
     }
 
-    @PutMapping("/person/{personId}/email/update")
+    @PutMapping(value = "/person/{personId}/email/update")
     public String updateEmail(@ModelAttribute Email email,
-                            @PathVariable("personId") Long personId,
-                            Model model) {
+                              @PathVariable("personId") Long personId,
+                              Model model) {
+
         // Verify that 'email' here contains the ID correctly and not the email string.
         LOGGER.info("Updating email for personId: {}, emailId: {}", personId, email.getEmailId());
 
@@ -168,6 +169,7 @@ public class PersonController {
 
         //return "redirect:/person/view/" + personId;
         return "person/emails-info :: emails-info";
+//        return "person/email-item :: email-item";
     }
 
     @PostMapping("/person/{personId}/email/save")
@@ -188,8 +190,7 @@ public class PersonController {
 
 
     @DeleteMapping("/person/{personId}/email/delete/{emailId}")
-    public @ResponseBody String deleteEmail(@PathVariable("personId") Long personId,
-                                            @PathVariable("emailId") Long emailId) {
+    public @ResponseBody String deleteEmail(@PathVariable("personId") Long personId, @PathVariable("emailId") Long emailId) {
         LOGGER.info("deleteEmail(...) - emailId {}", emailId);
         emailService.deleteEmail(emailId);
 
