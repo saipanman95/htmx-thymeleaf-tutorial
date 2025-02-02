@@ -34,7 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public FormContentFilter formContentFilter() { //added with hx-pu
+    public FormContentFilter formContentFilter(){
         return new FormContentFilter();
     }
 }

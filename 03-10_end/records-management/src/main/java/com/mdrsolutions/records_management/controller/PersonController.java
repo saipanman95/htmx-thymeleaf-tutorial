@@ -1,25 +1,21 @@
 package com.mdrsolutions.records_management.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
 import com.mdrsolutions.records_management.entity.*;
 import com.mdrsolutions.records_management.repository.PersonRepository;
 import com.mdrsolutions.records_management.service.*;
 import com.mdrsolutions.records_management.util.CheckMissingDetails;
-import jakarta.servlet.http.HttpServletMapping;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Enumeration;
 import java.util.Optional;
 
 @Controller
@@ -139,7 +135,7 @@ public class PersonController {
     public String showAddEmailForm(@PathVariable("personId") Long personId, Model model) {
         model.addAttribute("email", new Email());
         model.addAttribute("personId", personId);
-        model.addAttribute("edit",false);
+        model.addAttribute("edit", false);
         return "person/modify/editable-email-form :: email-form";
     }
 
@@ -151,30 +147,27 @@ public class PersonController {
         if (emailById.isPresent()) {
             model.addAttribute("email", emailById.get());
             model.addAttribute("personId", personId);
-            model.addAttribute("edit",true);
+            model.addAttribute("edit", true);
             return "person/modify/editable-email-form :: email-form";
         }
         model.addAttribute("errorMessage", "email does not exist");
         return "person/modify/editable-email-form :: email-form";
     }
 
-    @PutMapping(value = "/person/{personId}/email/update")
+    @PutMapping("/person/{personId}/email/update")
     public String updateEmail(@ModelAttribute Email email,
-                              @PathVariable("personId") Long personId,
-                              Model model) {
-
+                            @PathVariable("personId") Long personId,
+                            Model model) {
         // Verify that 'email' here contains the ID correctly and not the email string.
         LOGGER.info("Updating email for personId: {}, emailId: {}", personId, email.getEmailId());
-        LOGGER.info("email address = {}", email.getEmailAddress());
 
         Person person = personService.getPersonById(personId);
-
         emailService.saveOrUpdateEmail(person, email);
         model.addAttribute("emails", person.getEmails());
         model.addAttribute("personId", personId);
 
+        //return "redirect:/person/view/" + personId;
         return "person/emails-info :: emails-info";
-//        return "person/email-item :: email-item";
     }
 
     @PostMapping("/person/{personId}/email/save")
@@ -189,8 +182,8 @@ public class PersonController {
         model.addAttribute("emails", person.getEmails());
         model.addAttribute("personId", personId);
 
+        //return "redirect:/person/view/" + personId;
         return "person/emails-info :: emails-info";
-//        return "person/email-item :: email-item";
     }
 
 
