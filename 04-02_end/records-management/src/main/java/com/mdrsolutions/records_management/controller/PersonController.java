@@ -56,14 +56,24 @@ public class PersonController {
     }
 
     @GetMapping("/person/view/{personId}")
-    public String viewPersonFullDetails(@PathVariable("personId") Long personId, Model model) {
+    public String viewPersonFullDetails(@PathVariable("personId") Long personId,
+                                        Model model,
+                                        HttpServletRequest request) {
         LOGGER.info("viewPersonFullDetails(...) - Loading full details view for person ID: {}", personId);
+
         Person person = personService.getPersonById(personId);
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+
         model.addAttribute("person", person);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
-        return "person/person-full-details";
+
+        boolean isHtmxRequest = request.getHeader("HX-Request") != null;
+        if(!isHtmxRequest){
+            return "person/person-full-details";
+        } else {
+            return "person/person-full-details :: person-full-details";
+        }
     }
 
     @GetMapping("/person/edit/{personId}")
@@ -102,15 +112,18 @@ public class PersonController {
             existingPerson.setSuffix(updatedPerson.getSuffix());
             existingPerson.setPersonType(updatedPerson.getPersonType());
             existingPerson.setLegalGuardianType(updatedPerson.getLegalGuardianType());
+            existingPerson.setEmploymentStatus(updatedPerson.getEmploymentStatus());
 
             // Save the updated person back to the database
             personService.savePerson(existingPerson);
-
+            // return updated person
+            Person person = personService.getPersonById(existingPerson.getPersonId());
             // Add success message
+            model.addAttribute("person", person);
             model.addAttribute("message", "Person details updated successfully.");
 
             // Redirect to the full details view after a successful update
-            return "redirect:/person/view/" + personId;
+            return "person/person-info :: personal-info";
         } catch (Exception e) {
             LOGGER.error("Error updating person details: {}", e.getMessage());
 
@@ -136,6 +149,7 @@ public class PersonController {
                                     @PathVariable("emailId") Long emailId, Model model) {
         LOGGER.info("hx-trigger id {}", elementId);
         Optional<Email> emailById = emailService.getEmailById(emailId);// Assuming you have a service to get an email by ID
+
         if (emailById.isPresent()) {
             model.addAttribute("email", emailById.get());
             model.addAttribute("personId", personId);
@@ -170,7 +184,7 @@ public class PersonController {
 //        return "person/email-item :: email-item";
     }
 
-    @PostMapping(value = "/person/{personId}/email/save",headers = "HX-Request")
+    @PostMapping(value = "/person/{personId}/email/save", headers = "HX-Request")
     public String saveEmail(@ModelAttribute Email email,
                             @PathVariable("personId") Long personId,
                             Model model) {

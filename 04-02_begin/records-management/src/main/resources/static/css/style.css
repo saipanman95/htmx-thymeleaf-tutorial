@@ -170,3 +170,8 @@ li a.nav-link:hover {
 a.edit-delete-icons:hover {
     color: rgba(150,178,255, 1) !important;
 }
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}

@@ -44,7 +44,7 @@
             </button>
             <button type="button" class="btn btn-secondary"
                     th:hx-get="@{/person/view/{personId}(personId=${personId})}"
-                    hx-target="#content" hx-swap="innerHTML">Cancel</button>
+                    hx-target="#content" hx-swap="innerHTML transition:true">Cancel</button>
         </div>
     </form>
 </div>

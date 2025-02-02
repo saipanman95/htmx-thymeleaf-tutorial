@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div th:fragment="emails-info(emails, personId)" id="email-parent" >
-
-    <div class="card bg-dark text-white mt-4 ">
-        <div id="alert-message"></div>
-        <div class="card-body position-relative " id="email-list">
+<div th:fragment="emails-info(emails, personId)" id="email-parent">
+    <div class="card p-3 bg-dark text-white mt-4" id="email-list">
+        <div class="card-body position-relative">
             <h4 class="card-title">Email Addresses</h4>
 
             <!-- Button to Add a New Email -->
