@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div th:fragment="email-form(email, personId)">
     <h4>Add Email</h4>
-    <form th:action="@{/person/{personId}/email/save(personId=${personId})}" th:object="${email}" method="post">
+    <form th:action="@{/person/{personId}/email/save(personId=${personId})}"
+          th:object="${email}" method="post">
         <input type="hidden" th:field="*{emailId}"/>
 
         <div class="mb-3">
@@ -30,7 +31,7 @@
             </button>
             <button type="button" class="btn btn-secondary"
                     th:hx-get="@{/person/view/{personId}(personId=${personId})}"
-                    hx-target="body" hx-swap="outerHTML transition:true">Cancel
+                    hx-target="#content" hx-swap="innerHTML">Cancel
             </button>
         </div>
     </form>

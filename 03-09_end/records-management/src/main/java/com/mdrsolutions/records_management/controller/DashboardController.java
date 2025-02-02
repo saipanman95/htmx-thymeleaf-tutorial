@@ -34,7 +34,9 @@ public class DashboardController {
 
     // If the user is authenticated, redirect them to the dashboard
     @GetMapping("/")
-    public String homePage(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request, Model model) {
+    public String homePage(@AuthenticationPrincipal UserDetails userDetails,
+                           HttpServletRequest request,
+                           Model model) {
         if (userDetails != null) {
             LOGGER.info("homePage(...)");
             Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
@@ -67,7 +69,9 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public String getDashboard(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request, Model model) {
+    public String getDashboard(@AuthenticationPrincipal UserDetails userDetails,
+                               HttpServletRequest request,
+                               Model model) {
         Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
         boolean isHtmxRequest = request.getHeader("HX-Request") != null;
         LOGGER.info("getDashboard(...)");

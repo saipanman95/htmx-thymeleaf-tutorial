@@ -9,8 +9,8 @@
             <div class="position-absolute top-0 end-0 m-2">
                 <button class="btn btn-outline-light btn-sm position-relative"
                         th:hx-get="@{/person/view/{personId}(personId=${person.personId})}"
-                        hx-target="body"
-                        hx-swap="outerHTML transition:true show:window:top swap:.05s">
+                        hx-target="#content"
+                        hx-swap="innerHTML transition:true show:window:top swap:1s">
                     <i class="fa-solid fa-eye"></i> View Person
                     <span class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill"
                           th:text="${missingDetailsCount}"
