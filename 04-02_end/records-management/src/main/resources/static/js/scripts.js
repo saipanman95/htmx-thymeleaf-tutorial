@@ -1,5 +1,4 @@
-// scripts.js
-
+//used for http request (put, patch, and delete)
 document.body.addEventListener('htmx:configRequest', function(event) {
     const target = event.target;
     const csrfHeader = target.getAttribute('data-csrf-header');
@@ -10,16 +9,6 @@ document.body.addEventListener('htmx:configRequest', function(event) {
         event.detail.headers[csrfHeader] = csrfToken;
     }
 });
-
-//if(!window.emailUpdatedListenerAdded){
-//    window.emailUpdatedListenerAdded = true;
-//    console.log('Adding event listener for emailUpdated');
-//    document.body.addEventListener('emailUpdated', function(event) {
-//        console.log('emailUpdated event received:', event.detail);
-//        alert(event.detail.message);
-//    });
-//
-//}
 
 // Listen directly for the 'emailUpdated' event
 if(!window.emailUpdatedListenerAdded){

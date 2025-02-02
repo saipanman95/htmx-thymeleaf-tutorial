@@ -13,7 +13,7 @@
 <body class="gradient-custom" hx-boost="true">
 <header th:insert="~{fragments/header :: userHeader}"></header> <!-- User-specific header -->
 
-<div class="container">
+<div class="container" id="content">
     <div th:insert="~{fragments/messages :: messages}"></div>
     <div layout:fragment="content"></div> <!-- Content will be injected here -->
 </div>
