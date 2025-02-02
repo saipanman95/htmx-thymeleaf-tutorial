@@ -149,6 +149,7 @@ public class PersonController {
                                     @PathVariable("emailId") Long emailId, Model model) {
         LOGGER.info("hx-trigger id {}", elementId);
         Optional<Email> emailById = emailService.getEmailById(emailId);// Assuming you have a service to get an email by ID
+
         if (emailById.isPresent()) {
             model.addAttribute("email", emailById.get());
             model.addAttribute("personId", personId);
@@ -178,7 +179,7 @@ public class PersonController {
 //        return "person/email-item :: email-item";
     }
 
-    @PostMapping(value = "/person/{personId}/email/save",headers = "HX-Request")
+    @PostMapping(value = "/person/{personId}/email/save", headers = "HX-Request")
     public String saveEmail(@ModelAttribute Email email,
                             @PathVariable("personId") Long personId,
                             Model model) {
