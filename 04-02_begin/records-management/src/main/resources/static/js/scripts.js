@@ -10,3 +10,4 @@ document.body.addEventListener('htmx:configRequest', function(event) {
     }
 });
 
+
