@@ -27,4 +27,13 @@ public class EmailService {
     public void deleteEmail(Long emailId) {
         emailRepository.deleteById(emailId);
     }
+
+    public boolean emailExistsForPerson(String emailAddress, Person person) {
+        Optional<Email> optionalEmail = emailRepository.findByEmailAddress(emailAddress);
+        if(optionalEmail.isPresent()){
+            Email email = optionalEmail.get();
+            return email.getPerson().getPersonId().equals(person.getPersonId());
+        }
+        return false;
+    }
 }
