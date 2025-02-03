@@ -19,9 +19,9 @@ public class PhoneNumberService {
         return phoneNumberRepository.findById(phoneId);
     }
 
-    public void saveOrUpdatePhone(Person person, PhoneNumber phoneNumber) {
+    public PhoneNumber saveOrUpdatePhone(Person person, PhoneNumber phoneNumber) {
         phoneNumber.setPerson(person);
-        phoneNumberRepository.save(phoneNumber);
+        return phoneNumberRepository.save(phoneNumber);
     }
 
     public void deletePhone(Long phoneId){
