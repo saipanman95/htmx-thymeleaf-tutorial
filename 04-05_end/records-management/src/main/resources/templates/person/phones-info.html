@@ -86,7 +86,7 @@
                     hx-encoding="application/x-www-form-urlencoded">Save</button>
             <button type="button" class="btn btn-secondary"
                     th:hx-get="@{/person/view/{personId}(personId=${personId})}"
-                    hx-target="body" hx-swap="outerHTML">Cancel</button>
+                    hx-target="#content" hx-swap="innerHTML">Cancel</button>
         </div>
     </form>
 </div>
