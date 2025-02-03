@@ -178,8 +178,8 @@ public class PersonController {
 
         String message = email.getEmailAddress() + " was updated";
         String jsonTrigger = "{\"emailUpdated\":{\"level\":\"info\",\"target\":\"#alert-message\", \"message\":\"" + message +"\"}}";
-        response.setHeader("HX-Trigger", jsonTrigger);
 
+        response.setHeader("HX-Trigger", jsonTrigger);
         return "person/emails-info :: emails-info";
 //        return "person/email-item :: email-item";
     }

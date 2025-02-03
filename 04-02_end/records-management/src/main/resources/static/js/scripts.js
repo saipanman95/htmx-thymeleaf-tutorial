@@ -12,37 +12,37 @@ document.body.addEventListener('htmx:configRequest', function(event) {
 
 // Listen directly for the 'emailUpdated' event
 if(!window.emailUpdatedListenerAdded){
-    window.emailUpdatedListenerAdded = true;
+   window.emailUpdatedListenerAdded = true;
 
-    document.body.addEventListener('emailUpdated', function(event) {
+   document.body.addEventListener('emailUpdated', function(event) {
 
-        const message = event.detail.message || 'Email updated successfully';
-        const level = event.detail.level || 'info';
+       const message = event.detail.message || 'Email updated successfully';
+       const level = event.detail.level || 'info';
 
-        // Delay the alert display to allow transitions to complete
-        setTimeout(function() {
-            const targetElement = document.getElementById('alert-message');
+       // Delay the alert display to allow transitions to complete
+       setTimeout(function() {
+           const targetElement = document.getElementById('alert-message');
 
-            if (targetElement) {
-                const alertDiv = document.createElement('div');
-                alertDiv.className = `alert alert-${level}`;
-                alertDiv.role = 'alert';
-                alertDiv.innerText = message;
+           if (targetElement) {
+               const alertDiv = document.createElement('div');
+               alertDiv.className = `alert alert-${level}`;
+               alertDiv.role = 'alert';
+               alertDiv.innerText = message;
 
-                targetElement.appendChild(alertDiv);
+               targetElement.appendChild(alertDiv);
 
-                // Remove the alert after 3 seconds
-                setTimeout(function() {
-                    alertDiv.classList.add('fade-out');
-                    alertDiv.addEventListener('transitionend', function() {
-                        alertDiv.remove();
-                    }, { once: true });
-                }, 3000);
+               // Remove the alert after 3 seconds
+               setTimeout(function() {
+                   alertDiv.classList.add('fade-out');
+                   alertDiv.addEventListener('transitionend', function() {
+                       alertDiv.remove();
+                   }, { once: true });
+               }, 3000);
 
-            } else {
-                console.error('Alert target element not found');
-            }
-        }, 600); // Adjust delay based on your transition duration
-    });
+           } else {
+               console.error('Alert target element not found');
+           }
+       }, 600); // Adjust delay based on your transition duration
+   });
 }
 

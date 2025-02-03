@@ -163,6 +163,7 @@ public class PersonController {
     @PutMapping(value = "/person/{personId}/email/update", headers = "HX-Request")
     public String updateEmail(@ModelAttribute Email email,
                               @PathVariable("personId") Long personId,
+                              HttpServletResponse response,
                               Model model) {
 
         // Verify that 'email' here contains the ID correctly and not the email string.
@@ -175,6 +176,10 @@ public class PersonController {
         model.addAttribute("emails", person.getEmails());
         model.addAttribute("personId", personId);
 
+        String message = email.getEmailAddress() + " was updated";
+        String jsonTrigger = "{\"emailUpdated\":{\"level\":\"info\",\"target\":\"#alert-message\", \"message\":\"" + message +"\"}}";
+
+        response.setHeader("HX-Trigger", jsonTrigger);
         return "person/emails-info :: emails-info";
 //        return "person/email-item :: email-item";
     }
