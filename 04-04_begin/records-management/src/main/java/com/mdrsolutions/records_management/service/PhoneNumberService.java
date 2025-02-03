@@ -27,4 +27,10 @@ public class PhoneNumberService {
     public void deletePhone(Long phoneId){
         phoneNumberRepository.deleteById(phoneId);
     }
+    public boolean isDuplicatePhoneNumberForPerson(Person person, String number) {
+        Optional<PhoneNumber> optionalPhoneNumber = phoneNumberRepository.findByNumber(number);
+        return optionalPhoneNumber.map(phoneNumber ->
+                phoneNumber.getNumber().equalsIgnoreCase(number)
+        ).orElse(false);
+    }
 }

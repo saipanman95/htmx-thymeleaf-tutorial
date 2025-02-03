@@ -1,25 +1,18 @@
 package com.mdrsolutions.records_management.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
 import com.mdrsolutions.records_management.entity.*;
-import com.mdrsolutions.records_management.repository.PersonRepository;
 import com.mdrsolutions.records_management.service.*;
-import com.mdrsolutions.records_management.util.CheckMissingDetails;
-import jakarta.servlet.http.HttpServletMapping;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.Enumeration;
 import java.util.Optional;
 
 @Controller
@@ -76,7 +69,7 @@ public class PersonController {
     }
 
     @GetMapping("/person/cancel/{personId}")
-    public String cancelPersonInfo(@PathVariable("personId") Long personId, Model model){
+    public String cancelPersonInfo(@PathVariable("personId") Long personId, Model model) {
         LOGGER.info("viewPersonInfo(...) - returning to the person-info form from cancel");
         Person person = personService.getPersonById(personId);
         model.addAttribute("person", person);
@@ -126,7 +119,7 @@ public class PersonController {
     public String showAddEmailForm(@PathVariable("personId") Long personId, Model model) {
         model.addAttribute("email", new Email());
         model.addAttribute("personId", personId);
-        model.addAttribute("edit",false);
+        model.addAttribute("edit", false);
         return "person/modify/editable-email-form :: email-form";
     }
 
@@ -139,7 +132,7 @@ public class PersonController {
         if (emailById.isPresent()) {
             model.addAttribute("email", emailById.get());
             model.addAttribute("personId", personId);
-            model.addAttribute("edit",true);
+            model.addAttribute("edit", true);
             return "person/modify/editable-email-form :: email-form";
         }
         model.addAttribute("errorMessage", "email does not exist");
@@ -160,7 +153,7 @@ public class PersonController {
 
         boolean emailExists = emailService.emailExistsForPerson(email.getEmailAddress(), person);
 
-        if(emailExists){
+        if (emailExists) {
             LOGGER.info("emailExists = {}", emailExists);
             // Email already exists, set error message
             String alertMessage = "The email address " + email.getEmailAddress() + " already exists for this person.";
@@ -190,7 +183,7 @@ public class PersonController {
         }
     }
 
-    @PostMapping(value = "/person/{personId}/email/save",headers = "HX-Request")
+    @PostMapping(value = "/person/{personId}/email/save", headers = "HX-Request")
     public String saveEmail(@ModelAttribute Email email,
                             @PathVariable("personId") Long personId,
                             Model model) {
@@ -227,7 +220,7 @@ public class PersonController {
     @GetMapping("/person/{personId}/phone/edit/{phoneId}")
     public String showEditPhoneForm(@PathVariable("personId") Long personId,
                                     @PathVariable("phoneId") Long phoneId, Model model) {
-       // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
+        // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PhoneNumber> phoneNumber = phoneNumberService.getPhoneNumberById(phoneId);
         if (phoneNumber.isPresent()) {
             model.addAttribute("phone", phoneNumber.get());
@@ -245,6 +238,25 @@ public class PersonController {
         Person person = personService.getPersonById(personId);
         phoneNumberService.saveOrUpdatePhone(person, phoneNumber);
         return "redirect:/person/view/" + personId;
+    }
+
+    private boolean isBlank(String str) {
+        return str == null || str.trim().isEmpty();
+    }
+
+    private String prepareErrorResponse(String alertMessage,
+                                        String alertLevel, Long personId,
+                                        PhoneNumber phoneNumber, Model model,
+                                        HttpServletResponse response) {
+        model.addAttribute("alertMessage", alertMessage);
+        model.addAttribute("alertLevel", alertLevel);
+        model.addAttribute("phone", phoneNumber);
+        model.addAttribute("personId", personId);
+
+        response.setHeader("HX-Reselect", "#phone-alert-message");
+        response.setHeader("HX-Reswap", "beforebegin");
+
+        return "person/phones-info :: phones-info";
     }
 
 
@@ -270,7 +282,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/person-address/edit/{addressId}")
     public String showEditPersonAddressForm(@PathVariable("personId") Long personId,
-                                    @PathVariable("addressId") Long addressId, Model model) {
+                                            @PathVariable("addressId") Long addressId, Model model) {
         // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PersonAddress> personAddress = personAddressService.getPersonAddressById(addressId);
         if (personAddress.isPresent()) {
@@ -313,7 +325,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/employer/edit/{employerId}")
     public String showEditEmployerForm(@PathVariable("personId") Long personId,
-                                            @PathVariable("employerId") Long employerId, Model model) {
+                                       @PathVariable("employerId") Long employerId, Model model) {
         Optional<Employer> employer = employerService.getEmployerById(employerId);
         if (employer.isPresent()) {
             model.addAttribute("employer", employer.get());
