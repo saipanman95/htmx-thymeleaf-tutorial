@@ -1,18 +1,25 @@
 package com.mdrsolutions.records_management.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
 import com.mdrsolutions.records_management.entity.*;
+import com.mdrsolutions.records_management.repository.PersonRepository;
 import com.mdrsolutions.records_management.service.*;
+import com.mdrsolutions.records_management.util.CheckMissingDetails;
+import jakarta.servlet.http.HttpServletMapping;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Enumeration;
 import java.util.Optional;
 
 @Controller
@@ -49,14 +56,24 @@ public class PersonController {
     }
 
     @GetMapping("/person/view/{personId}")
-    public String viewPersonFullDetails(@PathVariable("personId") Long personId, Model model) {
+    public String viewPersonFullDetails(@PathVariable("personId") Long personId,
+                                        Model model,
+                                        HttpServletRequest request) {
         LOGGER.info("viewPersonFullDetails(...) - Loading full details view for person ID: {}", personId);
+
         Person person = personService.getPersonById(personId);
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+
         model.addAttribute("person", person);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
-        return "person/person-full-details";
+
+        boolean isHtmxRequest = request.getHeader("HX-Request") != null;
+        if(!isHtmxRequest){
+            return "person/person-full-details";
+        } else {
+            return "person/person-full-details :: person-full-details";
+        }
     }
 
     @GetMapping("/person/edit/{personId}")
@@ -69,7 +86,7 @@ public class PersonController {
     }
 
     @GetMapping("/person/cancel/{personId}")
-    public String cancelPersonInfo(@PathVariable("personId") Long personId, Model model) {
+    public String cancelPersonInfo(@PathVariable("personId") Long personId, Model model){
         LOGGER.info("viewPersonInfo(...) - returning to the person-info form from cancel");
         Person person = personService.getPersonById(personId);
         model.addAttribute("person", person);
@@ -95,15 +112,18 @@ public class PersonController {
             existingPerson.setSuffix(updatedPerson.getSuffix());
             existingPerson.setPersonType(updatedPerson.getPersonType());
             existingPerson.setLegalGuardianType(updatedPerson.getLegalGuardianType());
+            existingPerson.setEmploymentStatus(updatedPerson.getEmploymentStatus());
 
             // Save the updated person back to the database
             personService.savePerson(existingPerson);
-
+            // return updated person
+            Person person = personService.getPersonById(existingPerson.getPersonId());
             // Add success message
+            model.addAttribute("person", person);
             model.addAttribute("message", "Person details updated successfully.");
 
             // Redirect to the full details view after a successful update
-            return "redirect:/person/view/" + personId;
+            return "person/person-info :: personal-info";
         } catch (Exception e) {
             LOGGER.error("Error updating person details: {}", e.getMessage());
 
@@ -119,7 +139,7 @@ public class PersonController {
     public String showAddEmailForm(@PathVariable("personId") Long personId, Model model) {
         model.addAttribute("email", new Email());
         model.addAttribute("personId", personId);
-        model.addAttribute("edit", false);
+        model.addAttribute("edit",false);
         return "person/modify/editable-email-form :: email-form";
     }
 
@@ -129,10 +149,11 @@ public class PersonController {
                                     @PathVariable("emailId") Long emailId, Model model) {
         LOGGER.info("hx-trigger id {}", elementId);
         Optional<Email> emailById = emailService.getEmailById(emailId);// Assuming you have a service to get an email by ID
+
         if (emailById.isPresent()) {
             model.addAttribute("email", emailById.get());
             model.addAttribute("personId", personId);
-            model.addAttribute("edit", true);
+            model.addAttribute("edit",true);
             return "person/modify/editable-email-form :: email-form";
         }
         model.addAttribute("errorMessage", "email does not exist");
