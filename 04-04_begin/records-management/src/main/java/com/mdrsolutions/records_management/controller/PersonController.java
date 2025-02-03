@@ -234,7 +234,7 @@ public class PersonController {
     public String showAddPhoneForm(@PathVariable("personId") Long personId, Model model) {
         model.addAttribute("phone", new PhoneNumber());
         model.addAttribute("personId", personId);
-        return "person/modify/editable-phone-form :: phone-form";
+        return "person/phones-info :: phone-form";
     }
 
     @GetMapping("/person/{personId}/phone/edit/{phoneId}")
@@ -245,19 +245,43 @@ public class PersonController {
         if (phoneNumber.isPresent()) {
             model.addAttribute("phone", phoneNumber.get());
             model.addAttribute("personId", personId);
-            return "person/modify/editable-phone-form :: phone-form";
+            return "person/phones-info :: phone-form";
         }
         model.addAttribute("errorMessage", "phone does not exist");
-        return "person/modify/editable-phone-form :: phone-form";
+        return "person/phones-info :: phone-form";
     }
 
-    @PostMapping("/person/{personId}/phone/save")
-    public String savePhone(@ModelAttribute PhoneNumber phoneNumber, @PathVariable("personId") Long personId, Model model) {
+    @PostMapping(value = "/person/{personId}/phone/save", headers = "HX-Request")
+    public String savePhone(@ModelAttribute PhoneNumber phoneNumber,
+                            @PathVariable("personId") Long personId,
+                            Model model,
+                            HttpServletResponse response) {
         // Verify that 'email' here contains the ID correctly and not the email string.
         LOGGER.info("Saving phone for personId: {}, phoneId: {}", personId, phoneNumber.getPhoneId());
         Person person = personService.getPersonById(personId);
-        phoneNumberService.saveOrUpdatePhone(person, phoneNumber);
-        return "redirect:/person/view/" + personId;
+
+        String phoneNum = phoneNumber.getNumber();
+        if(isBlank(phoneNum)){
+            LOGGER.info("Phone number is blank");
+            return prepareErrorResponse("This phone number cannot be blank.",
+                    "danger", personId, phoneNumber, model, response);
+        }
+
+        if(phoneNumberService.isDuplicatePhoneNumberForPerson(person, phoneNum)){
+            LOGGER.info("Duplicate phone number is detected");
+            return prepareErrorResponse("This phone number already exists.",
+                    "danger", personId, phoneNumber, model, response);
+        }
+        PhoneNumber updatedPhoneNumber = phoneNumberService.saveOrUpdatePhone(person, phoneNumber);
+
+        model.addAttribute("phoneNumbers", updatedPhoneNumber);
+        model.addAttribute("personId", personId);
+        model.addAttribute("alertMessage", "Phone number saved successfully");
+        model.addAttribute("alertLevel", "success");
+
+        response.setHeader("HX-Reselect", "#phones-info");
+
+        return "person/phones-info :: phones-info";
     }
 
     private boolean isBlank(String str) {
@@ -272,6 +296,9 @@ public class PersonController {
         model.addAttribute("alertLevel", alertLevel);
         model.addAttribute("phone", phoneNumber);
         model.addAttribute("personId", personId);
+
+        response.setHeader("HX-Reselect", "#phone-alert-message");
+        response.setHeader("HX-Reswap", "beforebegin");;
 
         return "person/phones-info :: phones-info";
     }

@@ -249,3 +249,113 @@
 2025-02-03T18:21:56.994+10:00 DEBUG 13826 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@2074574832 wrapping conn0: url=jdbc:h2:mem:records-management user=SA] read-only
 2025-02-03T18:21:56.997+10:00 DEBUG 13826 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@2074574832 wrapping conn0: url=jdbc:h2:mem:records-management user=SA]
 2025-02-03T18:23:08.518+10:00  WARN 13826 --- [RecordsManagement] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2025-02-03T18:56:43.600+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : Driver class org.h2.Driver found in Thread context class loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@68da7f3f
+2025-02-03T18:56:43.938+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2025-02-03T18:56:43.945+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension.............false
+2025-02-03T18:56:43.946+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : autoCommit......................true
+2025-02-03T18:56:43.946+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : catalog.........................none
+2025-02-03T18:56:43.946+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionInitSql...............none
+2025-02-03T18:56:43.946+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionTestQuery.............none
+2025-02-03T18:56:43.947+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionTimeout...............30000
+2025-02-03T18:56:43.947+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSource......................none
+2025-02-03T18:56:43.947+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceClassName.............none
+2025-02-03T18:56:43.947+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI..................none
+2025-02-03T18:56:43.951+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceProperties............{password=<masked>}
+2025-02-03T18:56:43.951+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : driverClassName................."org.h2.Driver"
+2025-02-03T18:56:43.951+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName......none
+2025-02-03T18:56:43.951+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : healthCheckProperties...........{}
+2025-02-03T18:56:43.954+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry.............none
+2025-02-03T18:56:43.955+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : idleTimeout.....................600000
+2025-02-03T18:56:43.955+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout.......1
+2025-02-03T18:56:43.955+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries..........false
+2025-02-03T18:56:43.957+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : jdbcUrl.........................jdbc:h2:mem:records-management
+2025-02-03T18:56:43.957+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : keepaliveTime...................0
+2025-02-03T18:56:43.958+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold..........0
+2025-02-03T18:56:43.958+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : maxLifetime.....................1800000
+2025-02-03T18:56:43.961+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : maximumPoolSize.................10
+2025-02-03T18:56:43.961+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : metricRegistry..................none
+2025-02-03T18:56:43.961+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory...........none
+2025-02-03T18:56:43.961+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : minimumIdle.....................10
+2025-02-03T18:56:43.964+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : password........................<masked>
+2025-02-03T18:56:43.964+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : poolName........................"HikariPool-1"
+2025-02-03T18:56:43.964+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : readOnly........................false
+2025-02-03T18:56:43.964+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : registerMbeans..................false
+2025-02-03T18:56:43.967+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : scheduledExecutor...............none
+2025-02-03T18:56:43.967+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : schema..........................none
+2025-02-03T18:56:43.967+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : threadFactory...................internal
+2025-02-03T18:56:43.967+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : transactionIsolation............default
+2025-02-03T18:56:43.970+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : username........................"sa"
+2025-02-03T18:56:43.970+10:00 DEBUG 15643 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : validationTimeout...............5000
+2025-02-03T18:56:45.313+10:00  WARN 15643 --- [RecordsManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-03T18:56:50.220+10:00  INFO 15643 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-03T18:56:50.222+10:00  INFO 15643 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-02-03T18:57:11.040+10:00  INFO 15643 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.DashboardController     : getDashboard(...)
+2025-02-03T18:57:11.040+10:00  INFO 15643 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2025-02-03T18:57:14.796+10:00  INFO 15643 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PersonController        : viewPersonFullDetails(...) - Loading full details view for person ID: 1
+2025-02-03T18:57:14.799+10:00 DEBUG 15643 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@1850452632 wrapping conn0: url=jdbc:h2:mem:records-management user=SA] read-only
+2025-02-03T18:57:14.803+10:00 DEBUG 15643 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@1850452632 wrapping conn0: url=jdbc:h2:mem:records-management user=SA]
+2025-02-03T18:57:36.083+10:00  INFO 15643 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.PersonController        : Saving phone for personId: 1, phoneId: null
+2025-02-03T18:57:36.083+10:00 DEBUG 15643 --- [RecordsManagement] [http-nio-8080-exec-4] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@253889307 wrapping conn0: url=jdbc:h2:mem:records-management user=SA] read-only
+2025-02-03T18:57:36.085+10:00 DEBUG 15643 --- [RecordsManagement] [http-nio-8080-exec-4] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@253889307 wrapping conn0: url=jdbc:h2:mem:records-management user=SA]
+2025-02-03T18:57:36.085+10:00  INFO 15643 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.PersonController        : Phone number is blank
+2025-02-03T18:58:30.074+10:00  WARN 15643 --- [RecordsManagement] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2025-02-03T18:58:38.775+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : Driver class org.h2.Driver found in Thread context class loader org.springframework.boot.devtools.restart.classloader.RestartClassLoader@68da7f3f
+2025-02-03T18:58:39.083+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : HikariPool-1 - configuration:
+2025-02-03T18:58:39.086+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : allowPoolSuspension.............false
+2025-02-03T18:58:39.086+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : autoCommit......................true
+2025-02-03T18:58:39.087+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : catalog.........................none
+2025-02-03T18:58:39.087+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionInitSql...............none
+2025-02-03T18:58:39.087+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionTestQuery.............none
+2025-02-03T18:58:39.088+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : connectionTimeout...............30000
+2025-02-03T18:58:39.088+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSource......................none
+2025-02-03T18:58:39.088+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceClassName.............none
+2025-02-03T18:58:39.088+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceJNDI..................none
+2025-02-03T18:58:39.090+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : dataSourceProperties............{password=<masked>}
+2025-02-03T18:58:39.091+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : driverClassName................."org.h2.Driver"
+2025-02-03T18:58:39.091+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : exceptionOverrideClassName......none
+2025-02-03T18:58:39.091+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : healthCheckProperties...........{}
+2025-02-03T18:58:39.093+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : healthCheckRegistry.............none
+2025-02-03T18:58:39.093+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : idleTimeout.....................600000
+2025-02-03T18:58:39.094+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : initializationFailTimeout.......1
+2025-02-03T18:58:39.094+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : isolateInternalQueries..........false
+2025-02-03T18:58:39.096+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : jdbcUrl.........................jdbc:h2:mem:records-management
+2025-02-03T18:58:39.096+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : keepaliveTime...................0
+2025-02-03T18:58:39.096+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : leakDetectionThreshold..........0
+2025-02-03T18:58:39.096+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : maxLifetime.....................1800000
+2025-02-03T18:58:39.099+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : maximumPoolSize.................10
+2025-02-03T18:58:39.099+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : metricRegistry..................none
+2025-02-03T18:58:39.100+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : metricsTrackerFactory...........none
+2025-02-03T18:58:39.100+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : minimumIdle.....................10
+2025-02-03T18:58:39.103+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : password........................<masked>
+2025-02-03T18:58:39.103+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : poolName........................"HikariPool-1"
+2025-02-03T18:58:39.103+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : readOnly........................false
+2025-02-03T18:58:39.103+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : registerMbeans..................false
+2025-02-03T18:58:39.105+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : scheduledExecutor...............none
+2025-02-03T18:58:39.105+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : schema..........................none
+2025-02-03T18:58:39.106+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : threadFactory...................internal
+2025-02-03T18:58:39.106+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : transactionIsolation............default
+2025-02-03T18:58:39.108+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : username........................"sa"
+2025-02-03T18:58:39.108+10:00 DEBUG 15787 --- [RecordsManagement] [restartedMain] com.zaxxer.hikari.HikariConfig           : validationTimeout...............5000
+2025-02-03T18:58:40.410+10:00  WARN 15787 --- [RecordsManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-03T18:58:47.135+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-03T18:58:47.137+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-02-03T18:58:47.232+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.DashboardController     : getDashboard(...)
+2025-02-03T18:58:47.232+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2025-02-03T18:58:48.469+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-7] c.m.r.controller.PersonController        : getPersonDetails(...)
+2025-02-03T18:58:48.472+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-7] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@83010988 wrapping conn0: url=jdbc:h2:mem:records-management user=SA] read-only
+2025-02-03T18:58:48.476+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-7] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@83010988 wrapping conn0: url=jdbc:h2:mem:records-management user=SA]
+2025-02-03T18:58:48.965+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-8] c.m.r.controller.StudentController       : getStudentsByPersonId(...)
+2025-02-03T18:58:51.200+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PersonController        : viewPersonFullDetails(...) - Loading full details view for person ID: 1
+2025-02-03T18:58:51.200+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-9] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@2055074065 wrapping conn0: url=jdbc:h2:mem:records-management user=SA] read-only
+2025-02-03T18:58:51.201+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-9] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@2055074065 wrapping conn0: url=jdbc:h2:mem:records-management user=SA]
+2025-02-03T18:58:56.611+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PersonController        : Saving phone for personId: 1, phoneId: null
+2025-02-03T18:58:56.612+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@1304526282 wrapping conn0: url=jdbc:h2:mem:records-management user=SA] read-only
+2025-02-03T18:58:56.613+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@1304526282 wrapping conn0: url=jdbc:h2:mem:records-management user=SA]
+2025-02-03T18:58:56.613+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PersonController        : Phone number is blank
+2025-02-03T18:59:09.253+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.PersonController        : Saving phone for personId: 1, phoneId: null
+2025-02-03T18:59:09.253+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-3] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@89346929 wrapping conn0: url=jdbc:h2:mem:records-management user=SA] read-only
+2025-02-03T18:59:09.255+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-3] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@89346929 wrapping conn0: url=jdbc:h2:mem:records-management user=SA]
+2025-02-03T18:59:23.418+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.PersonController        : Saving phone for personId: 1, phoneId: null
+2025-02-03T18:59:23.418+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-4] o.s.jdbc.datasource.DataSourceUtils      : Setting JDBC Connection [HikariProxyConnection@807055417 wrapping conn0: url=jdbc:h2:mem:records-management user=SA] read-only
+2025-02-03T18:59:23.420+10:00 DEBUG 15787 --- [RecordsManagement] [http-nio-8080-exec-4] o.s.jdbc.datasource.DataSourceUtils      : Resetting read-only flag of JDBC Connection [HikariProxyConnection@807055417 wrapping conn0: url=jdbc:h2:mem:records-management user=SA]
+2025-02-03T18:59:23.421+10:00  INFO 15787 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.PersonController        : Duplicate phone number is detected

@@ -307,6 +307,7 @@ public class PersonController {
         return "person/phones-info :: phones-info";
     }
 
+
     @DeleteMapping("/person/{personId}/phone/delete/{phoneId}")
     public RedirectView deletePhone(@PathVariable("personId") Long personId, @PathVariable("phoneId") Long phoneId, RedirectAttributes redirectAttributes) {
         LOGGER.info("deleteEmail(...) - phoneId {}", phoneId);
