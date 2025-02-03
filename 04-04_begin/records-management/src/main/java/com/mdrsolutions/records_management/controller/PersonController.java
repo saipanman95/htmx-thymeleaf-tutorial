@@ -174,8 +174,8 @@ public class PersonController {
 
         boolean emailExists = emailService.emailExistsForPerson(email.getEmailAddress(), person);
 
-        if (emailExists) {
-            LOGGER.info("emailExists = {}", emailExists);
+        if(emailExists){
+            LOGGER.info("emailExists = {}",emailExists);
             // Email already exists, set error message
             String alertMessage = "The email address " + email.getEmailAddress() + " already exists for this person.";
             String alertLevel = "danger"; // Bootstrap class for error
@@ -191,7 +191,6 @@ public class PersonController {
             return "fragments/alert-message :: alert-message";
 
         } else {
-            LOGGER.info("email does not exist");
             emailService.saveOrUpdateEmail(person, email);
             model.addAttribute("emails", person.getEmails());
             model.addAttribute("personId", personId);
@@ -280,7 +279,6 @@ public class PersonController {
         return "person/phones-info :: phones-info";
     }
 
-
     @DeleteMapping("/person/{personId}/phone/delete/{phoneId}")
     public RedirectView deletePhone(@PathVariable("personId") Long personId, @PathVariable("phoneId") Long phoneId, RedirectAttributes redirectAttributes) {
         LOGGER.info("deleteEmail(...) - phoneId {}", phoneId);
@@ -303,7 +301,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/person-address/edit/{addressId}")
     public String showEditPersonAddressForm(@PathVariable("personId") Long personId,
-                                            @PathVariable("addressId") Long addressId, Model model) {
+                                    @PathVariable("addressId") Long addressId, Model model) {
         // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PersonAddress> personAddress = personAddressService.getPersonAddressById(addressId);
         if (personAddress.isPresent()) {
@@ -346,7 +344,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/employer/edit/{employerId}")
     public String showEditEmployerForm(@PathVariable("personId") Long personId,
-                                       @PathVariable("employerId") Long employerId, Model model) {
+                                            @PathVariable("employerId") Long employerId, Model model) {
         Optional<Employer> employer = employerService.getEmployerById(employerId);
         if (employer.isPresent()) {
             model.addAttribute("employer", employer.get());
