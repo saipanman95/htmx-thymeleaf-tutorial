@@ -273,9 +273,6 @@ public class PersonController {
         model.addAttribute("phone", phoneNumber);
         model.addAttribute("personId", personId);
 
-        response.setHeader("HX-Reselect", "#phone-alert-message");
-        response.setHeader("HX-Reswap", "beforebegin");
-
         return "person/phones-info :: phones-info";
     }
 
@@ -301,7 +298,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/person-address/edit/{addressId}")
     public String showEditPersonAddressForm(@PathVariable("personId") Long personId,
-                                    @PathVariable("addressId") Long addressId, Model model) {
+                                            @PathVariable("addressId") Long addressId, Model model) {
         // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PersonAddress> personAddress = personAddressService.getPersonAddressById(addressId);
         if (personAddress.isPresent()) {
@@ -344,7 +341,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/employer/edit/{employerId}")
     public String showEditEmployerForm(@PathVariable("personId") Long personId,
-                                            @PathVariable("employerId") Long employerId, Model model) {
+                                       @PathVariable("employerId") Long employerId, Model model) {
         Optional<Employer> employer = employerService.getEmployerById(employerId);
         if (employer.isPresent()) {
             model.addAttribute("employer", employer.get());
