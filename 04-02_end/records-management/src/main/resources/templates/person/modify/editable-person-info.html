@@ -96,7 +96,7 @@
                             th:attr="data-csrf-header=${_csrf.headerName}, data-csrf-token=${_csrf.token}"
                             hx-target="#person-info-content">Save</button>
                     <a th:hx-get="@{/person/cancel/{personId}(personId=${person.personId})}"
-                       hx-target="#person-info-content" hx-swap="innerHTML"
+                       hx-target="#person-info-content" hx-swap="innerHTML transition:true"
                        th:href="@{/person/view/{personId}(personId=${person.personId})}"
                        class="btn btn-secondary ms-2">Cancel</a>
                 </div>
