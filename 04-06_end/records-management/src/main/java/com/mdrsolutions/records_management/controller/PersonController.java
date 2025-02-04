@@ -1,19 +1,31 @@
 package com.mdrsolutions.records_management.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
 import com.mdrsolutions.records_management.entity.*;
+import com.mdrsolutions.records_management.repository.PersonRepository;
 import com.mdrsolutions.records_management.service.*;
+import com.mdrsolutions.records_management.util.CheckMissingDetails;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
+import jakarta.servlet.http.HttpServletMapping;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.util.*;
 
@@ -131,7 +143,7 @@ public class PersonController {
     }
 
     @GetMapping("/person/{personId}/email/add")
-    @HxRequest(triggerId = "add-email-button", target = "email-list")
+    @HxRequest(triggerId = "add-email-button")
     public String showAddEmailForm(@PathVariable("personId") Long personId, Model model) {
         model.addAttribute("email", new Email());
         model.addAttribute("personId", personId);
@@ -148,6 +160,7 @@ public class PersonController {
         LOGGER.info("hx-trigger id {}", elementId);
         LOGGER.info(htmxRequest.getTriggerId());
         Optional<Email> emailById = emailService.getEmailById(emailId);// Assuming you have a service to get an email by ID
+
         if (emailById.isPresent()) {
             model.addAttribute("email", emailById.get());
             model.addAttribute("personId", personId);
@@ -238,6 +251,7 @@ public class PersonController {
     }
 
     @GetMapping("/person/{personId}/phone/edit/{phoneId}")
+    @HxRequest
     public String showEditPhoneForm(@PathVariable("personId") Long personId,
                                     @PathVariable("phoneId") Long phoneId, Model model) {
        // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
