@@ -2,7 +2,8 @@
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{user-layout}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+      layout:decorate="~{user-layout}" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:hx="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
@@ -35,9 +36,9 @@
         </div>
         <!-- Other Dashboard Sections -->
         <div th:if="${isHtmxRequest}">
-            <div id="personal-info" th:hx-get="@{/person/{personId}(personId=${personId})}"
+            <div id="personal-info" hx:get="@{/person/{personId}(personId=${personId})}"
                  hx-trigger="load delay:.5s"
-                 hx-target="#personal-info"
+                 hx:target="${'#personal-info'}"
                  hx-swap="innerHTML"
                  class="outer-fade">
                 <div class="loading-dashboard-elem">
