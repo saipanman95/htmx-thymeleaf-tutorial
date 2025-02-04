@@ -21,7 +21,7 @@ if(!window.emailUpdatedListenerAdded){
 
        // Delay the alert display to allow transitions to complete
        setTimeout(function() {
-           const targetElement = document.getElementById('alert-message');
+           const targetElement = document.getElementById('email-alert-message');
            targetElement.innerHTML = "";
 
            if (targetElement) {

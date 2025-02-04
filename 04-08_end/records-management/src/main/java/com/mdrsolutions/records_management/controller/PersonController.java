@@ -7,6 +7,8 @@ import com.mdrsolutions.records_management.repository.PersonRepository;
 import com.mdrsolutions.records_management.service.*;
 import com.mdrsolutions.records_management.util.CheckMissingDetails;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxResponse;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxReswap;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 import jakarta.servlet.http.HttpServletMapping;
 import jakarta.servlet.http.HttpServletRequest;
@@ -173,10 +175,9 @@ public class PersonController {
 
     @PutMapping(value = "/person/{personId}/email/update")
     @HxRequest
-    public String updateEmail(@ModelAttribute Email email,
-                              @PathVariable("personId") Long personId,
-                              HttpServletResponse response,
-                              Model model) {
+    public HtmxResponse updateEmail(@ModelAttribute Email email,
+                                    @PathVariable("personId") Long personId,
+                                    Model model) {
 
         // Verify that 'email' here contains the ID correctly and not the email string.
         LOGGER.info("Updating email for personId: {}, emailId: {}", personId, email.getEmailId());
@@ -197,10 +198,10 @@ public class PersonController {
             model.addAttribute("alertLevel", alertLevel);
 
             // Set HX-Retarget to the alert message placeholder
-            response.setHeader("HX-Retarget", "#alert-message");
-
-            // Return the fragment that contains the alert message
-            return "fragments/alert-message :: alert-message";
+            return HtmxResponse.builder()
+                    .retarget("#email-alert-message")
+                    .view("fragments/alert-message :: alert-message")
+                    .build();
 
         } else {
             emailService.saveOrUpdateEmail(person, email);
@@ -208,10 +209,12 @@ public class PersonController {
             model.addAttribute("personId", personId);
 
             String message = email.getEmailAddress() + " was updated";
-            String jsonTrigger = "{\"emailUpdated\":{\"level\":\"info\",\"target\":\"#alert-message\", \"message\":\"" + message + "\"}}";
-            response.setHeader("HX-Trigger", jsonTrigger);
+            String jsonTrigger = "{\"emailUpdated\":{\"level\":\"info\",\"target\":\"#email-alert-message\", \"message\":\"" + message + "\"}}";
 
-            return "person/emails-info :: emails-info";
+            return HtmxResponse.builder()
+                    .trigger(jsonTrigger)
+                    .view("person/emails-info :: emails-info")
+                    .build();
         }
     }
 
@@ -267,22 +270,21 @@ public class PersonController {
 
     @PostMapping(value = "/person/{personId}/phone/save")
     @HxRequest
-    public String savePhone(@ModelAttribute PhoneNumber phoneNumber,
+    public HtmxResponse savePhone(@ModelAttribute PhoneNumber phoneNumber,
                             @PathVariable("personId") Long personId,
-                            Model model,
-                            HttpServletResponse response) {
+                            Model model) {
         LOGGER.info("Saving phone for personId: {}, phoneId: {}", personId, phoneNumber.getPhoneId());
         Person person = personService.getPersonById(personId);
 
         String phoneNum = phoneNumber.getNumber();
         if (isBlank(phoneNum)) {
             LOGGER.info("Phone number is blank");
-            return prepareErrorResponse("This phone number cannot be blank.", "danger", personId, phoneNumber, model, response);
+            return prepareErrorResponse("This phone number cannot be blank.", "danger", personId, phoneNumber, model);
         }
 
         if (phoneNumberService.isDuplicatePhoneNumberForPerson(person, phoneNum)) {
             LOGGER.info("Duplicate phone number detected");
-            return prepareErrorResponse("This phone number already exists.", "danger", personId, phoneNumber, model, response);
+            return prepareErrorResponse("This phone number already exists.", "danger", personId, phoneNumber, model);
         }
 
         // If we reach here, the phone number is valid and not a duplicate
@@ -294,27 +296,29 @@ public class PersonController {
         model.addAttribute("alertMessage", "Phone number saved successfully.");
         model.addAttribute("alertLevel", "success");
 
-        response.setHeader("HX-Reselect", "#phones-info");
-        return "person/phones-info :: phones-info";
+        return HtmxResponse.builder()
+                .reselect("#phones-info")
+                .view("person/phones-info :: phones-info")
+                .build();
     }
 
     private boolean isBlank(String str) {
         return str == null || str.trim().isEmpty();
     }
 
-    private String prepareErrorResponse(String alertMessage,
+    private HtmxResponse prepareErrorResponse(String alertMessage,
                                         String alertLevel, Long personId,
-                                        PhoneNumber phoneNumber, Model model,
-                                        HttpServletResponse response) {
+                                        PhoneNumber phoneNumber, Model model) {
         model.addAttribute("alertMessage", alertMessage);
         model.addAttribute("alertLevel", alertLevel);
         model.addAttribute("phone", phoneNumber);
         model.addAttribute("personId", personId);
 
-        response.setHeader("HX-Reselect", "#phone-alert-message");
-        response.setHeader("HX-Reswap", "beforebegin");
-
-        return "person/phones-info :: phones-info";
+        return HtmxResponse.builder()
+                .reselect("#phone-alert-message")
+                .reswap(HtmxReswap.beforeBegin())
+                .view("person/phones-info :: phones-info")
+                .build();
     }
 
 
