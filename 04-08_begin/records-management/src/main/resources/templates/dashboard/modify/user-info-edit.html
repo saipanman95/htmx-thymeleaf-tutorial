@@ -34,21 +34,21 @@
                 <div th:if="${mode == 'edit-password'}">
                     <div class="form-group">
                         <label for="userEmail">Email Address</label>
-                        <input class="form-control" id="userEmail" name="email" style="background-color: silver;" readonly th:value="${user.email}" type="email">
+                        <input class="form-control" id="userEmail" name="email" style="background-color: silver;" readonly th:value="${user.email}" type="email" autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label for="password">New Password</label>
-                        <input class="form-control" id="password" name="password" required type="password">
+                        <input class="form-control" id="password" name="password" required type="password" autocomplete="new-password">
                     </div>
                     <div class="form-group mt-3">
                         <label for="confirmPassword">Confirm Password</label>
-                        <input class="form-control" id="confirmPassword" name="confirmPassword" required type="password">
+                        <input class="form-control" id="confirmPassword" name="confirmPassword" required type="password" autocomplete="new-password">
                     </div>
                 </div>
 
                 <div class="mt-4">
                     <button class="btn btn-primary" type="submit">Save Changes</button>
-                    <a class="btn btn-secondary" th:hx-get="@{/user-info/edit}"
+                    <a class="btn btn-secondary" th:hx-get="@{/user-info/view}"
                        hx-target="#user-info-content" th:href="@{/dashboard}">Cancel</a>
                 </div>
             </form>

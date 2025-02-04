@@ -1,21 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div th:fragment="emails-info(emails, personId)" id="email-parent" >
-
-    <!-- Alert Message Placeholder -->
-    <div id="email-alert-message">
-        <br>
-        <div th:if="${alertMessage}"
-             class="alert"
-             th:classappend="${alertLevel != null ? ' alert-' + alertLevel  + ' alert-dismissible fade show': ''}"
-             role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            <span th:text="${alertMessage}"></span>
-        </div>
-    </div>
-
-    <div class="card bg-dark text-white mt-4 ">
-        <div class="card-body position-relative " id="email-list">
+<div th:fragment="emails-info(emails, personId)" id="email-parent">
+    <div class="card p-3 bg-dark text-white mt-4" id="email-list">
+        <div class="card-body position-relative">
             <h4 class="card-title">Email Addresses</h4>
 
             <!-- Button to Add a New Email -->

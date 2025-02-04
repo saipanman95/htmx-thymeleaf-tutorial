@@ -2,6 +2,7 @@ package com.mdrsolutions.records_management.controller;
 
 import com.mdrsolutions.records_management.entity.User;
 import com.mdrsolutions.records_management.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -50,8 +51,8 @@ public class UserController {
                 .orElse("<span class='text-success'>Username available</span>");
     }
 
-    @GetMapping("/user-info/edit")
-    public String showEditUserForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    @GetMapping("/user-info/view")
+    public String showUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         return getCurrentUser(userDetails)
                 .map(user -> {
                     model.addAttribute("user", user);
