@@ -6,6 +6,7 @@ import com.mdrsolutions.records_management.entity.User;
 import com.mdrsolutions.records_management.service.CheckPersonMissingFieldService;
 import com.mdrsolutions.records_management.service.StudentService;
 import com.mdrsolutions.records_management.service.UserService;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxPushUrl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +70,7 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
+    @HxPushUrl
     public String getDashboard(@AuthenticationPrincipal UserDetails userDetails,
                                HttpServletRequest request,
                                Model model) {

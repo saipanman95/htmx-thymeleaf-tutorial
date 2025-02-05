@@ -6,9 +6,7 @@ import com.mdrsolutions.records_management.entity.User;
 import com.mdrsolutions.records_management.service.CheckPersonMissingFieldService;
 import com.mdrsolutions.records_management.service.StudentService;
 import com.mdrsolutions.records_management.service.UserService;
-import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxLocation;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxPushUrl;
-import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxReplaceUrl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +35,9 @@ public class DashboardController {
 
     // If the user is authenticated, redirect them to the dashboard
     @GetMapping("/")
-    public String homePage(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request, Model model) {
+    public String homePage(@AuthenticationPrincipal UserDetails userDetails,
+                           HttpServletRequest request,
+                           Model model) {
         if (userDetails != null) {
             LOGGER.info("homePage(...)");
             Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
@@ -69,9 +69,11 @@ public class DashboardController {
         return "welcome";  // Load the welcome page for unauthenticated users
     }
 
-    @HxPushUrl
     @GetMapping("/dashboard")
-    public String getDashboard(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request, Model model) {
+    @HxPushUrl
+    public String getDashboard(@AuthenticationPrincipal UserDetails userDetails,
+                               HttpServletRequest request,
+                               Model model) {
         Optional<User> optionalUser = userService.findByEmail(userDetails.getUsername());
         boolean isHtmxRequest = request.getHeader("HX-Request") != null;
         LOGGER.info("getDashboard(...)");

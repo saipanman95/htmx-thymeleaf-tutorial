@@ -6,10 +6,7 @@ import com.mdrsolutions.records_management.entity.*;
 import com.mdrsolutions.records_management.repository.PersonRepository;
 import com.mdrsolutions.records_management.service.*;
 import com.mdrsolutions.records_management.util.CheckMissingDetails;
-import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxRequest;
-import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxResponse;
-import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxReswap;
-import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
+import io.github.wimdeblauwe.htmx.spring.boot.mvc.*;
 import jakarta.servlet.http.HttpServletMapping;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -65,6 +62,7 @@ public class PersonController {
     }
 
     @GetMapping("/person/view/{personId}")
+    @HxPushUrl(HtmxValue.TRUE)
     public String viewPersonFullDetails(@PathVariable("personId") Long personId,
                                         Model model,
                                         HttpServletRequest request) {
@@ -86,6 +84,7 @@ public class PersonController {
     }
 
     @GetMapping("/person/edit/{personId}")
+    @HxReplaceUrl
     public String editPersonFullDetails(@PathVariable("personId") Long personId, Model model) {
         LOGGER.info("editPersonFullDetails(...) - Loading full details view for person ID: {}", personId);
         Person person = personService.getPersonById(personId);
@@ -220,6 +219,7 @@ public class PersonController {
 
     @PostMapping(value = "/person/{personId}/email/save")
     @HxRequest
+    @HxRefresh
     public String saveEmail(@ModelAttribute Email email,
                             @PathVariable("personId") Long personId,
                             Model model) {
