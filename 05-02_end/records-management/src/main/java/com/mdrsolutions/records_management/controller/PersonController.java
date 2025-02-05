@@ -220,29 +220,46 @@ public class PersonController {
     @PostMapping(value = "/person/{personId}/email/save")
     @HxRequest
     @HxRefresh
-    public String saveEmail(@ModelAttribute Email email,
-                            @PathVariable("personId") Long personId,
-                            Model model) {
+    public HtmxResponse saveEmail(@ModelAttribute Email email,
+                                  @PathVariable("personId") Long personId,
+                                  Model model) {
         // Verify that 'email' here contains the ID correctly and not the email string.
         LOGGER.info("Saving email for personId: {}, emailId: {}", personId, email.getEmailId());
 
         Person person = personService.getPersonById(personId);
         emailService.saveOrUpdateEmail(person, email);
+
+        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+        model.addAttribute("person", person);
+        model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
+        model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+
         model.addAttribute("emails", person.getEmails());
         model.addAttribute("personId", personId);
 
-        return "person/emails-info :: emails-info";
-//        return "person/email-item :: email-item";
+        return HtmxResponse.builder()
+                .view("person/emails-info :: emails-info")
+                .view("person/person-mark-for-review :: mark-for-review-info")
+                .build();
     }
 
 
     @DeleteMapping("/person/{personId}/email/delete/{emailId}")
-    public @ResponseBody String deleteEmail(@PathVariable("personId") Long personId, @PathVariable("emailId") Long emailId) {
+    public HtmxView deleteEmail(@PathVariable("personId") Long personId,
+                                @PathVariable("emailId") Long emailId,
+                                Model model) {
         LOGGER.info("deleteEmail(...) - emailId {}", emailId);
         emailService.deleteEmail(emailId);
 
+        Person person = personService.getPersonById(personId);
+
+        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+        model.addAttribute("person", person);
+        model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
+        model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+
         LOGGER.info("completed call to delete email");
-        return "";
+        return new HtmxView("person/person-mark-for-review :: mark-for-review-info");
     }
 
     //phones
@@ -257,7 +274,7 @@ public class PersonController {
     @HxRequest
     public String showEditPhoneForm(@PathVariable("personId") Long personId,
                                     @PathVariable("phoneId") Long phoneId, Model model) {
-       // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
+        // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PhoneNumber> phoneNumber = phoneNumberService.getPhoneNumberById(phoneId);
         if (phoneNumber.isPresent()) {
             model.addAttribute("phone", phoneNumber.get());
@@ -271,8 +288,8 @@ public class PersonController {
     @PostMapping(value = "/person/{personId}/phone/save")
     @HxRequest
     public HtmxResponse savePhone(@ModelAttribute PhoneNumber phoneNumber,
-                            @PathVariable("personId") Long personId,
-                            Model model) {
+                                  @PathVariable("personId") Long personId,
+                                  Model model) {
         LOGGER.info("Saving phone for personId: {}, phoneId: {}", personId, phoneNumber.getPhoneId());
         Person person = personService.getPersonById(personId);
 
@@ -307,8 +324,8 @@ public class PersonController {
     }
 
     private HtmxResponse prepareErrorResponse(String alertMessage,
-                                        String alertLevel, Long personId,
-                                        PhoneNumber phoneNumber, Model model) {
+                                              String alertLevel, Long personId,
+                                              PhoneNumber phoneNumber, Model model) {
         model.addAttribute("alertMessage", alertMessage);
         model.addAttribute("alertLevel", alertLevel);
         model.addAttribute("phone", phoneNumber);
@@ -344,7 +361,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/person-address/edit/{addressId}")
     public String showEditPersonAddressForm(@PathVariable("personId") Long personId,
-                                    @PathVariable("addressId") Long addressId, Model model) {
+                                            @PathVariable("addressId") Long addressId, Model model) {
         // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PersonAddress> personAddress = personAddressService.getPersonAddressById(addressId);
         if (personAddress.isPresent()) {
@@ -387,7 +404,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/employer/edit/{employerId}")
     public String showEditEmployerForm(@PathVariable("personId") Long personId,
-                                            @PathVariable("employerId") Long employerId, Model model) {
+                                       @PathVariable("employerId") Long employerId, Model model) {
         Optional<Employer> employer = employerService.getEmployerById(employerId);
         if (employer.isPresent()) {
             model.addAttribute("employer", employer.get());

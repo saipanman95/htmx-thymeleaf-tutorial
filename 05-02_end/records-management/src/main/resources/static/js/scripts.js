@@ -1,3 +1,4 @@
+htmx.config.allowNestedOobSwaps = false;
 //used for http request (put, patch, and delete)
 document.body.addEventListener('htmx:configRequest', function(event) {
     const target = event.target;
