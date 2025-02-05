@@ -1,5 +1,4 @@
-// scripts.js
-
+//used for http request (put, patch, and delete)
 document.body.addEventListener('htmx:configRequest', function(event) {
     const target = event.target;
     const csrfHeader = target.getAttribute('data-csrf-header');
@@ -11,37 +10,27 @@ document.body.addEventListener('htmx:configRequest', function(event) {
     }
 });
 
-//if(!window.emailUpdatedListenerAdded){
-//    window.emailUpdatedListenerAdded = true;
-//    console.log('Adding event listener for emailUpdated');
-//    document.body.addEventListener('emailUpdated', function(event) {
-//        console.log('emailUpdated event received:', event.detail);
-//        alert(event.detail.message);
-//    });
-//
-//}
-
 // Listen directly for the 'emailUpdated' event
 if(!window.emailUpdatedListenerAdded){
-    window.emailUpdatedListenerAdded = true;
+   window.emailUpdatedListenerAdded = true;
 
-    document.body.addEventListener('emailUpdated', function(event) {
+   document.body.addEventListener('emailUpdated', function(event) {
 
-        const message = event.detail.message || 'Email updated successfully';
-        const level = event.detail.level || 'info';
+       const message = event.detail.message || 'Email updated successfully';
+       const level = event.detail.level || 'info';
 
-        // Delay the alert display to allow transitions to complete
-        setTimeout(function() {
-            const targetElement = document.getElementById('email-alert-message');
-            targetElement.innerHTML = "";
+       // Delay the alert display to allow transitions to complete
+       setTimeout(function() {
+           const targetElement = document.getElementById('email-alert-message');
+           targetElement.innerHTML = "";
 
-            if (targetElement) {
-                const alertDiv = document.createElement('div');
-                alertDiv.className = `alert alert-${level}`;
-                alertDiv.role = 'alert';
-                alertDiv.innerText = message;
+           if (targetElement) {
+               const alertDiv = document.createElement('div');
+               alertDiv.className = `alert alert-${level}`;
+               alertDiv.role = 'alert';
+               alertDiv.innerText = message;
 
-                targetElement.appendChild(alertDiv);
+               targetElement.appendChild(alertDiv);
 
                 // Remove the alert after 3 seconds
                 setTimeout(function() {
@@ -53,15 +42,10 @@ if(!window.emailUpdatedListenerAdded){
                     }, { once: true });
                 }, 3000);
 
-            } else {
-                console.error('Alert target element not found');
-            }
-        }, 600); // Adjust delay based on your transition duration
-    });
-
-    // Retriggering replace of content
-//    document.body.addEventListener('emailUpdated', function(event){
-//
-//    });
+           } else {
+               console.error('Alert target element not found');
+           }
+       }, 600); // Adjust delay based on your transition duration
+   });
 }
 
