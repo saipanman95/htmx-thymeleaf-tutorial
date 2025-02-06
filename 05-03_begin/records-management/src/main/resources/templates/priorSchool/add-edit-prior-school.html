@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:hx-on="http://www.w3.org/1999/xhtml" lang="en">
 <div th:fragment="prior-school-form">
   <div class="card bg-dark text-white mt-4">
     <div class="card-body">
@@ -96,7 +96,7 @@
           <!-- Submit Button -->
           <button type="submit" class="btn btn-success me-2"
                   th:hx-post="@{/prior-schools/student/{studentId}/save(studentId=${studentId})}"
-                  hx-trigger="click">
+                  hx-swap="outerHTML">
             Save
           </button>
           <!-- Cancel Button -->

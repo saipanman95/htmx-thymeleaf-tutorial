@@ -57,7 +57,7 @@ public class PriorSchoolController {
     }
 
     @PostMapping("/student/{studentId}/save")
-    public String savePriorSchool(@PathVariable Long studentId,
+    public @ResponseBody String savePriorSchool(@PathVariable Long studentId,
                                   @ModelAttribute PriorSchoolDto priorSchoolDto,
                                   Model model) {
         LOGGER.info("savePriorSchool(...) - studentId: {}", studentId);
@@ -72,7 +72,7 @@ public class PriorSchoolController {
         model.addAttribute("priorSchools", priorSchools);
         model.addAttribute("studentId", studentId);
 
-        return "priorSchool/prior-schools :: prior-schools";
+        return "";
     }
 
     @PostMapping("/school/{id}/update")

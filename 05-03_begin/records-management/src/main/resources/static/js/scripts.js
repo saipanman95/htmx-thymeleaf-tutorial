@@ -1,6 +1,5 @@
 // scripts.js
 htmx.config.allowNestedOobSwaps = false;
-htmx.config.useTemplateFragments = true;
 
 function swapFade(elementId, shown){
     const element = document.querySelector('#'+elementId);
@@ -13,15 +12,22 @@ function swapFade(elementId, shown){
     }
 }
 
-function removeStyleClass(className){
-    // Select all elements with the specified class name
-    const elements = document.querySelectorAll(`.${className}`);
+function removeStyleClasses(classNames) {
+    // Split the comma-delimited string into an array of class names
+    const classes = classNames.split(',').map(className => className.trim());
 
-    // Loop through the elements and remove the class
-    elements.forEach(element => {
-        element.classList.remove(className);
+    // Loop through each class name
+    classes.forEach(className => {
+        // Select all elements with the current class name
+        const elements = document.querySelectorAll(`.${className}`);
+
+        // Remove the class from each element
+        elements.forEach(element => {
+            element.classList.remove(className);
+        });
     });
 }
+
 
 document.body.addEventListener('htmx:configRequest', function(event) {
     const target = event.target;
@@ -72,5 +78,3 @@ if(!window.emailUpdatedListenerAdded){
         }, 600); // Adjust delay based on your transition duration
     });
 }
-
-

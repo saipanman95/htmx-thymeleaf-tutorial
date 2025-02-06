@@ -1,6 +1,6 @@
 // scripts.js
 htmx.config.allowNestedOobSwaps = false;
-htmx.config.useTemplateFragments = true;
+//htmx.config.useTemplateFragments = true;
 
 function swapFade(elementId, shown){
     const element = document.querySelector('#'+elementId);
