@@ -4,7 +4,6 @@ import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
 import com.mdrsolutions.records_management.controller.dto.PriorSchoolDto;
 import com.mdrsolutions.records_management.controller.dto.StudentDto;
 import com.mdrsolutions.records_management.entity.Person;
-import com.mdrsolutions.records_management.entity.PriorSchool;
 import com.mdrsolutions.records_management.entity.Student;
 import com.mdrsolutions.records_management.service.CheckStudentMissingFieldService;
 import com.mdrsolutions.records_management.service.PriorSchoolService;
@@ -84,7 +83,7 @@ public class StudentController {
                                       @ModelAttribute Student student, Model model) {
         // Update the student
         LOGGER.info("updateStudent(...) - studentId: {}", studentId);
-        Student existingStudent = studentService.getStudentById(studentId); 
+        Student existingStudent = studentService.getStudentById(studentId);
 
         existingStudent.setFirstName(student.getFirstName());
         existingStudent.setMiddleName(student.getMiddleName());

@@ -4,6 +4,7 @@ import com.mdrsolutions.records_management.controller.dto.MissingDetailsDto;
 import com.mdrsolutions.records_management.entity.*;
 import com.mdrsolutions.records_management.service.*;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.*;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -49,21 +50,30 @@ public class PersonController {
         return "dashboard/person-info :: personal-info";
     }
 
-    @HxPushUrl(HtmxValue.TRUE)
     @GetMapping("/person/view/{personId}")
-    public String viewPersonFullDetails(@PathVariable("personId") Long personId, Model model) {
+    @HxPushUrl(HtmxValue.TRUE)
+    public String viewPersonFullDetails(@PathVariable("personId") Long personId,
+                                        Model model,
+                                        HttpServletRequest request) {
         LOGGER.info("viewPersonFullDetails(...) - Loading full details view for person ID: {}", personId);
+
         Person person = personService.getPersonById(personId);
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+
         model.addAttribute("person", person);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
-        return "person/person-full-details";
+        boolean isHtmxRequest = request.getHeader("HX-Request") != null;
+        if(!isHtmxRequest){
+            return "person/person-full-details";
+        } else {
+            return "person/person-full-details :: person-full-details";
+        }
     }
 
-    @HxReplaceUrl
     @GetMapping("/person/edit/{personId}")
+    @HxReplaceUrl
     public String editPersonFullDetails(@PathVariable("personId") Long personId, Model model) {
         LOGGER.info("editPersonFullDetails(...) - Loading full details view for person ID: {}", personId);
         Person person = personService.getPersonById(personId);
@@ -103,12 +113,14 @@ public class PersonController {
 
             // Save the updated person back to the database
             personService.savePerson(existingPerson);
-
+            // return updated person
+            Person person = personService.getPersonById(existingPerson.getPersonId());
             // Add success message
+            model.addAttribute("person", person);
             model.addAttribute("message", "Person details updated successfully.");
 
             // Redirect to the full details view after a successful update
-            return "redirect:/person/view/" + personId;
+            return "person/person-info :: personal-info";
         } catch (Exception e) {
             LOGGER.error("Error updating person details: {}", e.getMessage());
 
@@ -151,8 +163,8 @@ public class PersonController {
     @PutMapping(value = "/person/{personId}/email/update")
     @HxRequest
     public HtmxResponse updateEmail(@ModelAttribute Email email,
-                              @PathVariable("personId") Long personId,
-                              Model model) {
+                                    @PathVariable("personId") Long personId,
+                                    Model model) {
 
         // Verify that 'email' here contains the ID correctly and not the email string.
         LOGGER.info("Updating email for personId: {}, emailId: {}", personId, email.getEmailId());
@@ -177,6 +189,7 @@ public class PersonController {
                     .retarget("#email-alert-message")
                     .view("fragments/alert-message :: alert-message")
                     .build();
+
         } else {
             emailService.saveOrUpdateEmail(person, email);
             model.addAttribute("emails", person.getEmails());
@@ -192,9 +205,9 @@ public class PersonController {
         }
     }
 
-
     @PostMapping(value = "/person/{personId}/email/save")
     @HxRequest
+    @HxRefresh
     public HtmxResponse saveEmail(@ModelAttribute Email email,
                                   @PathVariable("personId") Long personId,
                                   Model model) {
@@ -203,30 +216,33 @@ public class PersonController {
 
         Person person = personService.getPersonById(personId);
         emailService.saveOrUpdateEmail(person, email);
-        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
 
+        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+        model.addAttribute("person", person);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+
         model.addAttribute("emails", person.getEmails());
         model.addAttribute("personId", personId);
 
         return HtmxResponse.builder()
                 .view("person/emails-info :: emails-info")
-                .view("person/person-mark-for-review :: mark-for-review-info").build();
-        //return "person/emails-info :: emails-info";
-//        return "person/email-item :: email-item";
+                .view("person/person-mark-for-review :: mark-for-review-info")
+                .build();
     }
 
 
     @DeleteMapping("/person/{personId}/email/delete/{emailId}")
     public HtmxView deleteEmail(@PathVariable("personId") Long personId,
-                                    @PathVariable("emailId") Long emailId,
-                                    Model model) {
+                                @PathVariable("emailId") Long emailId,
+                                Model model) {
         LOGGER.info("deleteEmail(...) - emailId {}", emailId);
         emailService.deleteEmail(emailId);
-        Person person = personService.getPersonById(personId);
-        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
 
+        Person person = personService.getPersonById(personId);
+
+        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+        model.addAttribute("person", person);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
@@ -243,9 +259,10 @@ public class PersonController {
     }
 
     @GetMapping("/person/{personId}/phone/edit/{phoneId}")
+    @HxRequest
     public String showEditPhoneForm(@PathVariable("personId") Long personId,
                                     @PathVariable("phoneId") Long phoneId, Model model) {
-       // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
+        // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PhoneNumber> phoneNumber = phoneNumberService.getPhoneNumberById(phoneId);
         if (phoneNumber.isPresent()) {
             model.addAttribute("phone", phoneNumber.get());
@@ -259,64 +276,54 @@ public class PersonController {
     @PostMapping(value = "/person/{personId}/phone/save")
     @HxRequest
     public HtmxResponse savePhone(@ModelAttribute PhoneNumber phoneNumber,
-                            @PathVariable("personId") Long personId,
-                            Model model) {
+                                  @PathVariable("personId") Long personId,
+                                  Model model) {
         LOGGER.info("Saving phone for personId: {}, phoneId: {}", personId, phoneNumber.getPhoneId());
         Person person = personService.getPersonById(personId);
 
-        String alertMessage;
-        String alertLevel = "success";
+        String phoneNum = phoneNumber.getNumber();
+        if (isBlank(phoneNum)) {
+            LOGGER.info("Phone number is blank");
+            return prepareErrorResponse("This phone number cannot be blank.", "danger", personId, phoneNumber, model);
+        }
 
-        HtmxResponse response =  HtmxResponse.builder()
+        if (phoneNumberService.isDuplicatePhoneNumberForPerson(person, phoneNum)) {
+            LOGGER.info("Duplicate phone number detected");
+            return prepareErrorResponse("This phone number already exists.", "danger", personId, phoneNumber, model);
+        }
+
+        // If we reach here, the phone number is valid and not a duplicate
+        phoneNumberService.saveOrUpdatePhone(person, phoneNumber);
+        Set<PhoneNumber> updatedPhoneNumbers = person.getPhoneNumbers();
+
+        model.addAttribute("phoneNumbers", updatedPhoneNumbers);
+        model.addAttribute("personId", personId);
+        model.addAttribute("alertMessage", "Phone number saved successfully.");
+        model.addAttribute("alertLevel", "success");
+
+        return HtmxResponse.builder()
+                .reselect("#phones-info")
+                .view("person/phones-info :: phones-info")
+                .build();
+    }
+
+    private boolean isBlank(String str) {
+        return str == null || str.trim().isEmpty();
+    }
+
+    private HtmxResponse prepareErrorResponse(String alertMessage,
+                                              String alertLevel, Long personId,
+                                              PhoneNumber phoneNumber, Model model) {
+        model.addAttribute("alertMessage", alertMessage);
+        model.addAttribute("alertLevel", alertLevel);
+        model.addAttribute("phone", phoneNumber);
+        model.addAttribute("personId", personId);
+
+        return HtmxResponse.builder()
                 .reselect("#phone-alert-message")
                 .reswap(HtmxReswap.beforeBegin())
                 .view("person/phones-info :: phones-info")
                 .build();
-
-        if(phoneNumber.getNumber() == null || phoneNumber.getNumber().isEmpty() || phoneNumber.getNumber().isBlank()){
-            LOGGER.info("Phone number is blank");
-            alertMessage = "This phone number cannot be blank.";
-            alertLevel = "danger";
-
-            model.addAttribute("alertMessage", alertMessage);
-            model.addAttribute("alertLevel", alertLevel);
-
-            model.addAttribute("phone", phoneNumber);
-            model.addAttribute("personId", personId);
-
-            // Set the HX-Reselect header for refinement after hx-select
-            return response;
-        }
-
-        if (phoneNumberService.isDuplicatePhoneNumberForPerson(person, phoneNumber.getNumber())) {
-            // Handling duplicate phone number scenario
-            alertMessage = "This phone number already exists.";
-            alertLevel = "danger";
-
-            model.addAttribute("alertMessage", alertMessage);
-            model.addAttribute("alertLevel", alertLevel);
-
-            model.addAttribute("phone", phoneNumber);
-            model.addAttribute("personId", personId);
-
-            // Set the HX-Reselect header for refinement after hx-select
-            return response;
-        } else {
-            // Save or update phone number
-            phoneNumberService.saveOrUpdatePhone(person, phoneNumber);
-
-            alertMessage = "Phone number saved successfully.";
-            Set<PhoneNumber> updatedPhoneNumbers = person.getPhoneNumbers();
-
-            model.addAttribute("phoneNumbers", updatedPhoneNumbers);
-            model.addAttribute("personId", personId);
-
-            model.addAttribute("alertMessage", alertMessage);
-            model.addAttribute("alertLevel", alertLevel);
-
-            return HtmxResponse.builder()
-                    .view("person/phones-info :: phones-info").build();
-        }
     }
 
 
@@ -342,7 +349,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/person-address/edit/{addressId}")
     public String showEditPersonAddressForm(@PathVariable("personId") Long personId,
-                                    @PathVariable("addressId") Long addressId, Model model) {
+                                            @PathVariable("addressId") Long addressId, Model model) {
         // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PersonAddress> personAddress = personAddressService.getPersonAddressById(addressId);
         if (personAddress.isPresent()) {
@@ -385,7 +392,7 @@ public class PersonController {
 
     @GetMapping("/person/{personId}/employer/edit/{employerId}")
     public String showEditEmployerForm(@PathVariable("personId") Long personId,
-                                            @PathVariable("employerId") Long employerId, Model model) {
+                                       @PathVariable("employerId") Long employerId, Model model) {
         Optional<Employer> employer = employerService.getEmployerById(employerId);
         if (employer.isPresent()) {
             model.addAttribute("employer", employer.get());

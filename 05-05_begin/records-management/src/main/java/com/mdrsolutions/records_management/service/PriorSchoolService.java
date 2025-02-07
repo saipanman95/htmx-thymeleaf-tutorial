@@ -6,7 +6,6 @@ import com.mdrsolutions.records_management.entity.Student;
 import com.mdrsolutions.records_management.repository.PriorSchoolRepository;
 import com.mdrsolutions.records_management.repository.StudentRepository;
 import com.mdrsolutions.records_management.util.DateConverter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.util.Pair;
@@ -84,6 +83,7 @@ public class PriorSchoolService {
     public Optional<PriorSchool> findMostRecentSchool(Long studentId) {
         List<PriorSchool> lastPriorSchool = priorSchoolRepository.findMostRecentPriorSchools(studentId);
         return lastPriorSchool.isEmpty() ? Optional.empty() : Optional.of(lastPriorSchool.getFirst());
+
     }
 
     public Long findStudentIdByPriorSchoolId(Long priorSchoolId){
@@ -149,4 +149,6 @@ public class PriorSchoolService {
                 DateConverter.convert(priorSchool.getDateLastAttended())
         );
     }
+
 }
+

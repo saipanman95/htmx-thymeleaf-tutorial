@@ -79,14 +79,14 @@
             <button type="submit" class="btn btn-success me-2"
                     th:hx-post="@{/person/{personId}/phone/save(personId=${personId})}"
                     hx-target="#phones-info"
-                    hx-swap="outerHTML"
+                    hx-swap="beforebegin"
                     hx-select="#phones-info"
                     th:attr="data-csrf-header=${_csrf.headerName}, data-csrf-token=${_csrf.token}"
                     hx-trigger="click"
                     hx-encoding="application/x-www-form-urlencoded">Save</button>
             <button type="button" class="btn btn-secondary"
                     th:hx-get="@{/person/view/{personId}(personId=${personId})}"
-                    hx-target="body" hx-swap="outerHTML">Cancel</button>
+                    hx-target="#content" hx-swap="innerHTML">Cancel</button>
         </div>
     </form>
 </div>
