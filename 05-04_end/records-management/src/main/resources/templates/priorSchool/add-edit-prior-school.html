@@ -94,18 +94,16 @@
         <!-- Buttons -->
         <div class="mt-4">
           <!-- Submit Button -->
-          <button type="submit" class="btn btn-success me-2"
-                  th:if="${!editSchool}"
+          <button type="submit" class="btn btn-success me-2" th:if="${!editSchool}"
                   th:hx-post="@{/prior-schools/student/{studentId}/save(studentId=${studentId})}"
                   hx-target="#prior-school-content"
                   hx-swap="beforeend transition:true show:#prior-school-content:bottom swap:.05s"
                   hx-on::after-request="swapFade('prior-school-form', false);">
             Save
           </button>
-          <button type="submit" class="btn btn-success me-2"
-                  th:if="${editSchool}"
+          <button type="submit" class="btn btn-success me-2" th:if="${editSchool}"
                   th:hx-put="@{/prior-schools/school/{priorSchoolId}/update(priorSchoolId=${priorSchoolDto.priorSchoolId})}"
-                  hx:target="'#prior-school-' + ${priorSchoolDto.priorSchoolId}"
+                  th:hx-target="'#prior-school-' + ${priorSchoolDto.priorSchoolId}"
                   hx-swap="outerHTML transition:true show:#prior-school-content:bottom swap:.05s"
                   hx-on::after-request="swapFade('prior-school-form', false);"
                   th:attr="data-csrf-header=${_csrf.headerName}, data-csrf-token=${_csrf.token}">

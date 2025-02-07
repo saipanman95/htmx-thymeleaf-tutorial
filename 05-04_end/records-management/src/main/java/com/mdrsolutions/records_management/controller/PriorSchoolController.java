@@ -102,7 +102,8 @@ public class PriorSchoolController {
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
-        return new HtmxView("priorSchool/prior-school-table-row :: prior-school",
+        return new HtmxView(
+                "priorSchool/prior-school-table-row :: prior-school",
                 "student/mark-for-review :: mark-for-review-info");
     }
 
