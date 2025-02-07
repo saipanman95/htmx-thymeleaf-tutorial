@@ -98,8 +98,7 @@
                   th:hx-post="@{/prior-schools/student/{studentId}/save(studentId=${studentId})}"
                   hx-target="#prior-school-content"
                   hx-swap="beforeend transition:true show:#prior-school-content:bottom swap:.05s"
-                  hx-on::after-request="swapFade('prior-school-form', false);"
-                  hx-trigger="click">
+                  hx-on::after-request="swapFade('prior-school-form', false);">
             Save
           </button>
           <!-- Cancel Button -->

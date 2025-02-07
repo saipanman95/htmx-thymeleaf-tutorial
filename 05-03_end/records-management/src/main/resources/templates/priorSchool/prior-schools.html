@@ -5,9 +5,9 @@
     <div class="card-body" id="prior-school-content">
       <h4 class="card-title">Prior Schools</h4>
       <button class="btn btn-primary mb-3"
-              onclick="swapFade('prior-school-form', true); removeStyleClasses('slide-it, slide-individual')"
               hx-swap="innerHTML transition:true show:#prior-school-form:bottom swap:.05s"
               hx-target="#prior-school-form"
+              onclick="swapFade('prior-school-form',true); removeStyleClasses('slide-it', 'slide-individual');"
               th:hx-get="@{/prior-schools/student/{studentId}/add(studentId=${studentId})}">
         Add Prior School
       </button>
@@ -42,6 +42,7 @@
             <button class="btn btn-outline-light btn-sm"
                     hx-swap="innerHTML transition:true show:#prior-school-form:bottom swap:.05s"
                     hx-target="#prior-school-form"
+                    onclick="swapFade('prior-school-form',true); removeStyleClasses('slide-it', 'slide-individual');"
                     th:hx-get="@{/prior-schools/school/{id}/edit(id=${priorSchoolDto.priorSchoolId})}">
               Edit
             </button>
@@ -60,3 +61,4 @@
   <div id="prior-school-form" hx-swap-oob="true"></div>
 
 </div>
+

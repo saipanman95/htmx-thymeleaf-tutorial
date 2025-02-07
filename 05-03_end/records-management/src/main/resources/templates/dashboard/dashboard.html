@@ -55,7 +55,7 @@
         </div>
         <div th:if="${!isHtmxRequest}">
             <div th:insert="~{dashboard/person-info :: personal-info(person=${person}, missingDetailsCount=${missingDetailsCount}, missingDetailsList=${missingDetailsList})}"></div>
-            <div th:insert="~{dashboard/students :: students(personId=${personId}, missingDetailsCount=${missingDetailsCount}, missingDetailsList=${missingDetailsList})}"></div>
+            <div th:insert="~{dashboard/students :: students}"></div>
         </div>
     </div>
 </div>
