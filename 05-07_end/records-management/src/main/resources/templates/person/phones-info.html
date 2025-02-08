@@ -31,7 +31,9 @@
             </div>
 
             <div class="row mt-3">
-                <div class="col-md-4" th:each="phone : ${phoneNumbers}" th:id="'phone-id-' + ${phone.phoneId}">
+                <div class="col-md-4" th:each="phone : ${phoneNumbers}"
+                     th:classappend="${fadeOut} ? 'fade-out-implosion' : ''"
+                     th:id="'phone-id-' + ${phone.phoneId}">
                     <div class="mb-2 border rounded p-2 position-relative">
                         <strong th:text="${phone.type}">Type:</strong>
                         <div th:text="${phone.number}">123-123-1234</div>
