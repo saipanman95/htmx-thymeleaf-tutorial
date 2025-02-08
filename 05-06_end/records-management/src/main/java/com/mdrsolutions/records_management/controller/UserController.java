@@ -51,8 +51,8 @@ public class UserController {
                 .orElse("<span class='text-success'>Username available</span>");
     }
 
-    @GetMapping("/user-info/edit")
-    public String showEditUserForm(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+    @GetMapping("/user-info/view")
+    public String showUser(@AuthenticationPrincipal UserDetails userDetails, Model model) {
         return getCurrentUser(userDetails)
                 .map(user -> {
                     model.addAttribute("user", user);
@@ -80,6 +80,7 @@ public class UserController {
                                  Model model) {
         LOGGER.info("updateUsername(...) - email: {}", email);
         Optional<User> originalUser = getCurrentUser(userDetails);
+
         if (originalUser.isPresent()) {
             if (!isValidEmail(email)) {
                 model.addAttribute("user", originalUser.get());
@@ -92,7 +93,7 @@ public class UserController {
                 model.addAttribute("user", originalUser.get());
                 model.addAttribute("mode", "edit-username");
                 model.addAttribute("errorMessage", "User Email already taken! Please select another!");
-                return "redirect:/dashboard";
+                return "dashboard/dashboard";
             }
 
             // Update email and persist
