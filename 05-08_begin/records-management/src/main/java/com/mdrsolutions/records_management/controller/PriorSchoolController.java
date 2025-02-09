@@ -7,7 +7,6 @@ import com.mdrsolutions.records_management.entity.Student;
 import com.mdrsolutions.records_management.service.CheckStudentMissingFieldService;
 import com.mdrsolutions.records_management.service.PriorSchoolService;
 import com.mdrsolutions.records_management.service.StudentService;
-import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxResponse;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HtmxView;
 import io.github.wimdeblauwe.htmx.spring.boot.mvc.HxRequest;
 import org.slf4j.Logger;
@@ -54,6 +53,7 @@ public class PriorSchoolController {
         model.addAttribute("priorSchoolDto", priorSchoolDto);
         model.addAttribute("studentId", studentId);
         model.addAttribute("editSchool", false);
+
         return "priorSchool/add-edit-prior-school :: prior-school-form";
     }
 
@@ -77,12 +77,13 @@ public class PriorSchoolController {
         PriorSchoolDto psDto = priorSchoolService.savePriorSchool(priorSchoolDto, studentId);
 
         Student student = studentService.getStudentById(studentId);
+
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(student);
 
         model.addAttribute("priorSchoolDto", psDto);
-        model.addAttribute("studentId", studentId);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+        model.addAttribute("studentId", studentId);
 
         return FragmentsRendering
                 .with("priorSchool/prior-school-table-row :: prior-school")
@@ -96,25 +97,27 @@ public class PriorSchoolController {
                                                       @ModelAttribute PriorSchoolDto priorSchoolDto,
                                                       Model model) {
         LOGGER.info("updatePriorSchool(...) - priorSchoolId: {}", priorSchoolId);
-        
+
         Pair<Student, PriorSchoolDto> studentPriorSchoolPair = priorSchoolService.savePriorSchoolWith(priorSchoolDto, priorSchoolDto.studentId());
         List<PriorSchoolDto> priorSchoolDtoList = priorSchoolService.getPriorSchoolDtosByStudentId(priorSchoolDto.studentId());
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(studentPriorSchoolPair.getFirst());
 
         // Refresh the list
         model.addAttribute("priorSchoolDto", studentPriorSchoolPair.getSecond());
-        model.addAttribute("studentId", studentPriorSchoolPair.getFirst().getStudentId());
+        model.addAttribute("studentId", priorSchoolDto.studentId());
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
         return List.of(
-                new ModelAndView("priorSchool/prior-school-table-row :: prior-school", Map.of(
-                        "priorSchoolDto", studentPriorSchoolPair.getSecond()
-                )),
-                new ModelAndView("student/mark-for-review :: mark-for-review-info", Map.of(
-                        "missingDetailsCount", missingDetailsDto.getMissingCount(),
-                        "missingDetailsList", missingDetailsDto.getMissingFields()
-                ))
+                new ModelAndView("priorSchool/prior-school-table-row :: prior-school",
+                        Map.of("priorSchoolDto", studentPriorSchoolPair.getSecond())
+                ),
+                new ModelAndView("student/mark-for-review :: mark-for-review-info",
+                        Map.of(
+                                "missingDetailsCount", missingDetailsDto.getMissingCount(),
+                                "missingDetailsList", missingDetailsDto.getMissingFields()
+                        )
+                )
         );
     }
 

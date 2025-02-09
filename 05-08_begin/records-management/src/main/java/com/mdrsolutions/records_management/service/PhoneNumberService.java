@@ -5,7 +5,6 @@ import com.mdrsolutions.records_management.entity.PhoneNumber;
 import com.mdrsolutions.records_management.repository.PhoneNumberRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,20 +24,15 @@ public class PhoneNumberService {
         phoneNumberRepository.save(phoneNumber);
     }
 
-    public List<PhoneNumber> findPhonesByPersonId(Long personId){
-        return phoneNumberRepository.findByPersonPersonId(personId);
-    }
-
     public void deletePhone(Long phoneId){
         phoneNumberRepository.deleteById(phoneId);
     }
 
     public boolean isDuplicatePhoneNumberForPerson(Person person, String number) {
         Optional<PhoneNumber> optionalPhoneNumber = phoneNumberRepository.findByNumber(number);
-        if(optionalPhoneNumber.isPresent()){
-            return optionalPhoneNumber.get().getNumber().equalsIgnoreCase(number);
-        }
-        return false;
+        return optionalPhoneNumber.map(phoneNumber ->
+                phoneNumber.getNumber().equalsIgnoreCase(number)
+        ).orElse(false);
     }
 
 }
