@@ -212,8 +212,8 @@ public class PersonController {
     @HxRequest
     @HxRefresh
     public View saveEmail(@ModelAttribute Email email,
-                                  @PathVariable("personId") Long personId,
-                                  Model model) {
+                          @PathVariable("personId") Long personId,
+                          Model model) {
         // Verify that 'email' here contains the ID correctly and not the email string.
         LOGGER.info("Saving email for personId: {}, emailId: {}", personId, email.getEmailId());
 
@@ -240,18 +240,15 @@ public class PersonController {
                                 @PathVariable("emailId") Long emailId,
                                 Model model) {
         LOGGER.info("deleteEmail(...) - emailId {}", emailId);
-
         Optional<Email> emailById = emailService.getEmailById(emailId);
-
         emailService.deleteEmail(emailId);
 
         Person person = personService.getPersonById(personId);
 
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
-
-        emailById.ifPresent(email -> model.addAttribute("email", email));
+        model.addAttribute("email", emailById.get());
         model.addAttribute("personId", personId);
-        model.addAttribute("fadeOut",true);
+        model.addAttribute("fadeOut", true);
         model.addAttribute("person", person);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
@@ -268,7 +265,6 @@ public class PersonController {
     public String showAddPhoneForm(@PathVariable("personId") Long personId, Model model) {
         model.addAttribute("phone", new PhoneNumber());
         model.addAttribute("personId", personId);
-
         return "person/phones-info :: phone-form";
     }
 
@@ -276,7 +272,7 @@ public class PersonController {
     @HxRequest
     public String showEditPhoneForm(@PathVariable("personId") Long personId,
                                     @PathVariable("phoneId") Long phoneId, Model model) {
-
+        // Optional<Email> emailById = emailService.getEmailById(phoneId);// Assuming you have a service to get an email by ID
         Optional<PhoneNumber> phoneNumber = phoneNumberService.getPhoneNumberById(phoneId);
         if (phoneNumber.isPresent()) {
             model.addAttribute("phone", phoneNumber.get());
@@ -284,15 +280,14 @@ public class PersonController {
             return "person/phones-info :: phone-form";
         }
         model.addAttribute("errorMessage", "phone does not exist");
-
         return "person/phones-info :: phone-form";
     }
 
     @PostMapping(value = "/person/{personId}/phone/save")
     @HxRequest
     public View savePhone(@ModelAttribute PhoneNumber phoneNumber,
-                                  @PathVariable("personId") Long personId,
-                                  Model model) {
+                          @PathVariable("personId") Long personId,
+                          Model model) {
         LOGGER.info("Saving phone for personId: {}, phoneId: {}", personId, phoneNumber.getPhoneId());
         Person person = personService.getPersonById(personId);
 
@@ -327,8 +322,8 @@ public class PersonController {
     }
 
     private View prepareErrorResponse(String alertMessage,
-                                              String alertLevel, Long personId,
-                                              PhoneNumber phoneNumber, Model model) {
+                                      String alertLevel, Long personId,
+                                      PhoneNumber phoneNumber, Model model) {
         model.addAttribute("alertMessage", alertMessage);
         model.addAttribute("alertLevel", alertLevel);
         model.addAttribute("phone", phoneNumber);
@@ -356,9 +351,9 @@ public class PersonController {
 
         model.addAttribute("phone", phoneNumberById.get());
         model.addAttribute("personId", personId);
-        model.addAttribute("missingDetailsCount",missingDetailsDto.getMissingCount());
-        model.addAttribute("fadeOut",true);
+        model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+        model.addAttribute("fadeOut", true);
 
         return FragmentsRendering
                 .with("person/phone-item :: phone-item")
@@ -433,9 +428,9 @@ public class PersonController {
 
     @PostMapping("/person/{personId}/employer/save")
     public void saveEmployer(@ModelAttribute Employer employer,
-                               @PathVariable("personId") Long personId,
-                               Model model
-                               ) {
+                             @PathVariable("personId") Long personId,
+                             Model model
+    ) {
         // Verify that 'personAddress' here contains the ID correctly and not the email string.
         LOGGER.info("Saving phone for personId: {}, employerId: {}", personId, employer.getEmployerId());
         Person person = personService.getPersonById(personId);

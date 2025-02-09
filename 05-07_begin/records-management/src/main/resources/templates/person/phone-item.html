@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="phone-item(phone, personId)">
-    <div th:classappend="${fadeOut} ? 'fade-out-implosion' : ''"
-         class="col-md-4" th:id="'phone-id-' + ${phone.phoneId}">
+    <div class="col-md-4" th:id="'phone-id-' + ${phone.phoneId}">
         <div class="mb-2 border rounded p-2 position-relative">
             <strong th:text="${phone.type}">Type:</strong>
             <div th:text="${phone.number}">123-123-1234</div>
