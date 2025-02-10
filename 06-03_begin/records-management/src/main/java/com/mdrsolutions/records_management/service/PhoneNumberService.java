@@ -35,10 +35,9 @@ public class PhoneNumberService {
 
     public boolean isDuplicatePhoneNumberForPerson(Person person, String number) {
         Optional<PhoneNumber> optionalPhoneNumber = phoneNumberRepository.findByNumber(number);
-        if(optionalPhoneNumber.isPresent()){
-            return optionalPhoneNumber.get().getNumber().equalsIgnoreCase(number);
-        }
-        return false;
+        return optionalPhoneNumber.map(phoneNumber ->
+                phoneNumber.getNumber().equalsIgnoreCase(number)
+        ).orElse(false);
     }
 
 }

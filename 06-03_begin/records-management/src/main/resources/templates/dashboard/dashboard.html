@@ -9,9 +9,9 @@
     <title>Dashboard</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
-<body >
-<div layout:fragment="content" class="slide-it" >
-    <div class="container mt-5">
+<body>
+<div layout:fragment="content">
+    <div class="container mt-5 slide-it">
         <h2 class="text-white text-uppercase">Dashboard</h2>
 
         <!-- Display Success or Error Messages -->
@@ -23,7 +23,7 @@
         </div>
 
         <!-- User Info Section -->
-        <div id="user-info-content" >
+        <div id="user-info-content">
             <div th:if="${#strings.equals(mode, 'edit-username')}">
                 <div th:replace="~{dashboard/modify/user-info-edit :: user-info-edit}"></div>
             </div>
@@ -38,21 +38,19 @@
         <div th:if="${isHtmxRequest}">
             <div id="personal-info" hx:get="@{/person/{personId}(personId=${personId})}"
                  hx-trigger="load delay:.5s"
-                 hx-target="#personal-info"
+                 hx:target="${'#personal-info'}"
                  hx-swap="innerHTML"
                  class="outer-fade">
                 <div class="loading-dashboard-elem">
-                    Personal Information - Loading...
-                </div>
+                    Person Information Loading...</div>
             </div>
-            <div id="students-info" hx:get="@{/students/{personId}/personId(personId=${personId})}"
+            <div id="students-info" th:hx-get="@{/students/{personId}/personId(personId=${personId})}"
                  hx-trigger="load delay:1s"
                  hx-target="#students-info"
                  hx-swap="innerHTML"
                  class="outer-fade">
                 <div class="loading-dashboard-elem">
-                    Student Information - Loading...
-                </div>
+                    Students Information Loading...</div>
             </div>
         </div>
         <div th:if="${!isHtmxRequest}">
