@@ -1,11 +1,36 @@
 body {
     padding-top: 80px; /* Adjust based on the height of your navbar */
 }
+.error {
+    text-align:center;
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+}
 header {
     z-index: 1000;
 }
+.outer-fade {
+    opacity: 0;
+    animation: outerFadeIn 1.5s ease-in forwards;
+}
+
+@keyframes outerFadeIn { to { opacity: 1; } }
+
+.loading-dashboard-elem {
+    opacity: 0;
+    animation: loadingFadeIn 0.3s ease-in forwards;
+    border: 2px #212529 solid; background: #212529;
+    border-radius: 5px;
+    height: 100px; margin-top: 20px; padding: 10px;
+    color: white; font-size: 24px;
+    visibility: visible;
+}
+
+@keyframes loadingFadeIn { to { opacity: 1; } }
+
 .gradient-custom {
-/* fallback for old browsers */
+    /* fallback for old browsers */
     background: #6a11cb;
 
     /* Chrome 10-25, Safari 5.1-6 */
@@ -60,6 +85,16 @@ li a.nav-link {
 li a.nav-link:hover {
     text-decoration: underline;
     color: silver !important;
+}
+.welcome-footer {
+   background-color: #343a40 !important; /* Dark gray background */
+   color: #d3d3d3 !important; /* Light gray text */
+   padding: 40px 0 !important; /* Add padding to the footer (top and bottom) */
+   margin-top: 30px; /* Add margin between the main content and the footer */
+   position: absolute;
+   width:100%;
+   bottom: 1px;
+   left: 0;
 }
 .footer {
     background-color: #343a40 !important; /* Dark gray background */
