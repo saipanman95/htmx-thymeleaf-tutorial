@@ -4123,3 +4123,36 @@ Caused by: org.thymeleaf.exceptions.TemplateInputException: Error resolving temp
 2025-02-10T13:01:21.097+10:00  INFO 45338 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PriorSchoolController   : updatePriorSchool(...) - priorSchoolId: 2
 2025-02-10T13:21:17.239+10:00  INFO 45338 --- [RecordsManagement] [http-nio-8080-exec-10] c.m.r.controller.StudentController       : updateStudent(...) - studentId: 1
 2025-02-10T13:21:17.252+10:00  INFO 45338 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.StudentController       : getDetailsMarkedForReview(...) - studentId :1
+2025-02-10T13:35:02.064+10:00  WARN 47126 --- [RecordsManagement] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-02-10T13:35:03.984+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-02-10T13:35:03.986+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-02-10T13:35:17.502+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.DashboardController     : getDashboard(...)
+2025-02-10T13:35:17.502+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2025-02-10T13:35:18.101+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.PersonController        : getPersonDetails(...)
+2025-02-10T13:35:18.598+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-7] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2025-02-10T13:35:20.911+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-8] c.m.r.controller.StudentController       : viewStudentFullDetails(...) - studentId: 1
+2025-02-10T13:35:27.352+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.StudentController       : updateStudent(...) - studentId: 1
+2025-02-10T13:35:27.364+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-7] c.m.r.controller.StudentController       : getDetailsMarkedForReview(...) - studentId :1
+2025-02-10T13:35:36.496+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.StudentController       : updateStudent(...) - studentId: 1
+2025-02-10T13:35:36.506+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-10] c.m.r.controller.StudentController       : getDetailsMarkedForReview(...) - studentId :1
+2025-02-10T13:35:43.170+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.PriorSchoolController   : updatePriorSchool(...) - priorSchoolId: 2
+2025-02-10T13:35:46.696+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.DashboardController     : getDashboard(...)
+2025-02-10T13:35:46.696+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2025-02-10T13:35:47.281+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-9] c.m.r.controller.PersonController        : getPersonDetails(...)
+2025-02-10T13:35:47.777+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-10] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2025-02-10T13:35:48.628+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PersonController        : viewPersonFullDetails(...) - Loading full details view for person ID: 1
+2025-02-10T13:35:50.478+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.PersonController        : editPersonFullDetails(...) - Loading full details view for person ID: 1
+2025-02-10T13:35:55.132+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-2] c.m.r.controller.PersonController        : updatePersonFullDetails(...) - Updating details for person ID: 1
+2025-02-10T13:36:09.495+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.PersonController        : editPersonFullDetails(...) - Loading full details view for person ID: 1
+2025-02-10T13:36:19.845+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-5] c.m.r.controller.PersonController        : updatePersonFullDetails(...) - Updating details for person ID: 1
+2025-02-10T13:36:41.734+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.PersonController        : deleteEmail(...) - emailId 1
+2025-02-10T13:36:41.747+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-6] c.m.r.controller.PersonController        : completed call to delete email
+2025-02-10T13:36:45.014+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-7] c.m.r.controller.PersonController        : deleteEmail(...) - emailId 2
+2025-02-10T13:36:45.018+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-7] c.m.r.controller.PersonController        : completed call to delete email
+2025-02-10T13:36:57.796+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PersonController        : deleteEmail(...) - phoneId 1
+2025-02-10T13:37:00.780+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.PersonController        : deleteEmail(...) - phoneId 2
+2025-02-10T13:37:13.499+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.DashboardController     : getDashboard(...)
+2025-02-10T13:37:13.499+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-3] c.m.r.controller.DashboardController     : getDashboard(...) - optionalUser is Present
+2025-02-10T13:37:14.091+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-1] c.m.r.controller.PersonController        : getPersonDetails(...)
+2025-02-10T13:37:14.590+10:00  INFO 47126 --- [RecordsManagement] [http-nio-8080-exec-4] c.m.r.controller.StudentController       : getStudentsByPersonId(...) - personId:1
+2025-02-10T13:37:21.914+10:00  WARN 47126 --- [RecordsManagement] [SpringApplicationShutdownHook] o.s.b.f.support.DisposableBeanAdapter    : Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]

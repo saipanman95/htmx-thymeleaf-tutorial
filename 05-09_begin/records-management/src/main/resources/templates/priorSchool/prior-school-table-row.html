@@ -23,7 +23,7 @@
         <button class="btn btn-outline-light btn-sm"
                 hx-swap="innerHTML transition:true show:#prior-school-form:bottom swap:.05s"
                 hx-target="#prior-school-form"
-                onclick="swapFade('prior-school-form', true); removeStyleClasses('slide-it, slide-individual');"
+                onclick="swapFade('prior-school-form',true); removeStyleClasses('slide-it', 'slide-individual');"
                 th:hx-get="@{/prior-schools/school/{id}/edit(id=${priorSchoolDto.priorSchoolId})}">
           Edit
         </button>
