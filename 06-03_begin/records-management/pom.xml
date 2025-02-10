@@ -86,8 +86,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
-			<artifactId>bootstrap-sweetalert</artifactId>
-			<version>1.0.1</version>
+			<artifactId>sweetalert2</artifactId>
+			<version>11.15.10</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars</groupId>
