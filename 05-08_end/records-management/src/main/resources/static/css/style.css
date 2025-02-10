@@ -1,6 +1,12 @@
 body {
     padding-top: 80px; /* Adjust based on the height of your navbar */
 }
+.error {
+    text-align:center;
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+}
 header {
     z-index: 1000;
 }
