@@ -81,8 +81,12 @@ public class PersonAddressController {
         MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
 
         //add check for missingDetails on Address
-        MissingDetailsDto missingAddressDetailsDto = missingFieldService.checkForMissingFields(personAddressService.transform(newPersonAddressDto, person));
-
+        MissingDetailsDto missingAddressDetailsDto =
+                missingFieldService.checkForMissingFields(
+                        personAddressService.transform(newPersonAddressDto,
+                                person)
+                );
+        //regular model attributes
         model.addAttribute("person", person);
         model.addAttribute("addressDto", newPersonAddressDto);
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
@@ -98,7 +102,7 @@ public class PersonAddressController {
         if (!missingAddressDetailsDto.getMissingFields().isEmpty()) {
             String details = missingAddressDetailsDto.getMissingFields()
                     .stream()
-                    .map(field -> "**" + field + ". \n\n")
+                    .map( field -> "<br> **" + field)
                     .collect(Collectors.joining());
             alertMessage = "Address was updated but there are details that need to be addressed in one or more addresses, which include: " + details;
             alertLevel = "warning";
@@ -115,7 +119,6 @@ public class PersonAddressController {
                 .fragment("person/person-mark-for-review :: mark-for-review-info")
                 .build();
     }
-
 
     @DeleteMapping("/person/{personId}/person-address/delete/{addressId}")
     public RedirectView deletePersonAddress(@PathVariable("personId") Long personId, @PathVariable("addressId") Long addressId, RedirectAttributes redirectAttributes) {
