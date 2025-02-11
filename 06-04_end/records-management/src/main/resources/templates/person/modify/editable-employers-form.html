@@ -97,18 +97,14 @@
 
             <!-- Save and Cancel Buttons -->
             <div class="d-flex justify-content-end">
-                <button class="btn btn-success me-2" type="submit"
-                        th:hx-post="@{/person/{personId}/employer/save(personId=${personId})}"
+                <button class="btn btn-success me-2"
+                        data-bs-dismiss="modal"
                         hx-swap="outerHTML"
                         hx-target="#employer-list"
-                        data-bs-dismiss="modal">
-                  Save
+                        th:hx-post="@{/person/{personId}/employer/save(personId=${personId})}"
+                        type="submit">Save
                 </button>
-                <button class="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                        type="button">
-                  Cancel
-                </button>
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
             </div>
         </form>
     </div>

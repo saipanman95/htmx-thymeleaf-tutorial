@@ -19,6 +19,7 @@
     <div th:insert="~{fragments/messages :: messages}"></div>
     <div layout:fragment="content"></div> <!-- Content will be injected here -->
 </div>
+<!-- Modal to host the Add/Edit form -->
 <th:block th:insert="~{modal-dialogs/bs-dialogs :: bs-dialogs}"></th:block>
 <footer th:insert="~{fragments/footer :: userFooter}"></footer>
 <script th:src="@{/webjars/sweetalert2/11.15.10/dist/sweetalert2.all.min.js}"></script>

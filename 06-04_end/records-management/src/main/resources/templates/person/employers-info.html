@@ -10,10 +10,10 @@
         <button class="btn btn-outline-light btn-sm"
                 th:hx-get="@{/person/{personId}/employer/add(personId=${personId})}"
                 hx-target="#employerModalContent"
-                hx-swap="innerHTML"
                 data-bs-toggle="modal"
                 data-bs-target="#employerModal"
-                hx-trigger="click">
+                hx-trigger="click"
+                hx-swap="innerHTML">
           <i class="fa-solid fa-plus"></i> Add Employer
         </button>
       </div>
@@ -39,10 +39,10 @@
               <a href="#" class="btn btn-sm btn-outline-light"
                  th:hx-get="@{/person/{personId}/employer/edit/{employerId}(personId=${personId}, employerId=${employer.employerId})}"
                  hx-target="#employerModalContent"
-                 hx-swap="innerHTML"
                  data-bs-toggle="modal"
                  data-bs-target="#employerModal"
-                 hx-trigger="click">
+                 hx-trigger="click"
+                 hx-swap="innerHTML">
                 <i class="fa-solid fa-pencil"></i> Edit
               </a>
               <a href="#" class="btn btn-sm btn-outline-danger"
