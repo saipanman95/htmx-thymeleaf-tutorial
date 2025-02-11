@@ -402,7 +402,7 @@ public class PersonController {
     }
 
     @PostMapping("/person/{personId}/employer/save")
-    public void saveEmployer(@ModelAttribute Employer employer,
+    public View saveEmployer(@ModelAttribute Employer employer,
                              @PathVariable("personId") Long personId,
                              Model model
     ) {
@@ -410,9 +410,24 @@ public class PersonController {
         LOGGER.info("Saving phone for personId: {}, employerId: {}", personId, employer.getEmployerId());
         Person person = personService.getPersonById(personId);
         employerService.saveOrUpdateEmployer(person, employer);
-        //return "redirect:/person/view/" + personId;
-    }
+        List<Employer> employers = employerService.findEmployersByPersonId(personId);
 
+        //getting updated person object after updating personAddress
+        person = personService.getPersonById(personId);
+
+        //checking for review messages
+        MissingDetailsDto missingDetailsDto = missingFieldService.checkForMissingFields(person);
+        model.addAttribute("person", person);
+        model.addAttribute("employers", employers);
+        model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
+        model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
+
+        LOGGER.info("about to return fragments for person employer save method");
+        return FragmentsRendering
+                .with("person/employers-info :: employers-info")
+                .fragment("person/person-mark-for-review :: mark-for-review-info")
+                .build();
+    }
 
     @DeleteMapping("/person/{personId}/employer/delete/{addressId}")
     public RedirectView deleteEmployer(@PathVariable("personId") Long personId, @PathVariable("employerId") Long employerId, RedirectAttributes redirectAttributes) {
