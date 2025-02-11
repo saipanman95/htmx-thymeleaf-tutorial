@@ -17,7 +17,8 @@
         <div class="col-3">Email</div>
         <div class="col-4">Actions</div>
     </div>
-    <th:block th:insert="~{admin/person-records :: person-records(personPage=${personPage})}"/>
 
+    <!-- Data rows: light background + dark text -->
+    <th:block th:insert="~{admin/person-records :: person-records(personPage=${personPage})}"/>
 </div>
 </html>

@@ -236,7 +236,7 @@ public class DataLoader implements CommandLineRunner {
         studentRepository.save(student3);
 
         //creating 200 fake persons --> added -06-05
-        IntStream.range(0, 1600)
+        IntStream.range(0, 600)
                 .forEach(i -> createFakePerson());
 
     }
