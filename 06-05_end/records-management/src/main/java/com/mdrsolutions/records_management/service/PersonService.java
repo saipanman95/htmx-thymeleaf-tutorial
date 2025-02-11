@@ -54,8 +54,8 @@ public class PersonService {
             // If you only want one email, pick the first:
             EmailDto emailDto =
                     person.getEmails().isEmpty()
-                    ? new EmailDto(null, "", null, person.getPersonId())
-                    : getFirstEmail(person.getEmails());
+                            ? new EmailDto(null, "", null, person.getPersonId())
+                            : getFirstEmail(person.getEmails());
 
             PersonDto dto = new PersonDto(
                     person.getPersonId(),

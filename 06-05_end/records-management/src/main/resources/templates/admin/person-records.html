@@ -21,14 +21,12 @@
             </button>
         </div>
     </div>
-    <div th:if="${personPage.hasNext()}"
-         th:hx-get="@{/admin/dashboard/page/{p}/size/{s}(p=${personPage.number + 2}, s=${personPage.size})}"
-         hx-trigger="revealed"
-         hx-swap="afterend"
-         hx-indicator="#spinner">
-        <div id="spinner" class="spinner"></div>
-    </div>
-
+  <div th:if="${personPage.hasNext()}"
+       th:hx-get="@{/admin/dashboard/page/{p}/size/{s}(p=${personPage.number + 2}, s=${personPage.size})}"
+       hx-trigger="revealed"
+       hx-swap="afterend"
+       hx-indicator="#spinner">
+    <div id="spinner" class="spinner"></div>
+  </div>
 </div>
-
 </html>

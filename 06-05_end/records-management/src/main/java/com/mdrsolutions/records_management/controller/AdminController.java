@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 @Controller
@@ -31,31 +30,24 @@ public class AdminController {
 
     @HxPushUrl(HtmxValue.TRUE)
     @GetMapping("/dashboard/page/{page}/size/{size}")
-    public String showAdminDashboard(Model model,
-                                     @PathVariable(name = "page", required = false) Integer page,
-                                     @PathVariable(name = "size", required = false) Integer size
-    ) throws InterruptedException {
+    public String showAdminDashboard(@PathVariable(name="page", required = false) Integer page,
+            @PathVariable(name = "size", required = false) Integer size,
+            Model model) throws InterruptedException {
+        // Load all persons or any subset you need
         int currentPage = (page == null || page < 1) ? 1 : page;
-        int pageSize = (size == null || size < 1) ? 20 : size;
+        int pageSize = (size == null || size <1) ? 20 : size;
 
-        LOGGER.info("showAdminDashboard(...) - page {}, size {}", currentPage, pageSize );
-
-        Page<PersonDto> personDtoPage = personService.findPaginated(PageRequest.of(currentPage -1, pageSize));
+        LOGGER.info("showAdminDashboard(...) - page {}, size {}", currentPage, pageSize);
+        Page<PersonDto> personDtoPage = personService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("personPage", personDtoPage);
-
         int totalPages = personDtoPage.getTotalPages();
-
-        if(totalPages > 0){
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .toList();
+        if(totalPages >0){
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().toList();
             model.addAttribute("pageNumbers", pageNumbers);
         }
-
-        // pausing 2 seconds for the effect of artificial latency
+        //pausing 1 second for the effect of artificial latency
         Thread.sleep(1000);
-
         // Return the Thymeleaf template name if greater than page 1
         if(currentPage > 1){
             return "admin/person-records :: person-records";
