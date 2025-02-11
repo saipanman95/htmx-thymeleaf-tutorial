@@ -87,7 +87,7 @@ public class StudentController {
                                 HtmxResponse htmxResponse) {
         // Update the student
         LOGGER.info("updateStudent(...) - studentId: {}", studentId);
-        Student existingStudent = studentService.getStudentById(studentId); 
+        Student existingStudent = studentService.getStudentById(studentId);
 
         existingStudent.setFirstName(student.getFirstName());
         existingStudent.setMiddleName(student.getMiddleName());
@@ -107,7 +107,7 @@ public class StudentController {
         model.addAttribute("missingDetailsCount", missingDetailsDto.getMissingCount());
         model.addAttribute("missingDetailsList", missingDetailsDto.getMissingFields());
 
-        htmxResponse.setPushUrl("/student/view/"+ studentId);
+        htmxResponse.setPushUrl("/student/view/"+ studentId );
         htmxResponse.addTrigger("triggerMarkForReview");
 
         return "student/student-details-info :: student-details-info";
@@ -144,8 +144,9 @@ public class StudentController {
 
     @GetMapping("/student/checkForReview/{studentId}")
     @HxRequest
-    public String getDetailsMarkedForReview(@PathVariable("studentId") Long studentId,
-                                            Model model){
+    public String getDetailsMarkedForReview(@PathVariable("studentId")Long studentId,
+                                            Model model) {
+        LOGGER.info("getDetailsMarkedForReview(...) - studentId :{}",studentId);
         Student student = studentService.getStudentById(studentId);
         Set<Person> guardians = student.getGuardians();
         guardians.size(); //Forces initialization
@@ -158,4 +159,5 @@ public class StudentController {
 
         return "student/mark-for-review :: mark-for-review-info";
     }
+
 }
