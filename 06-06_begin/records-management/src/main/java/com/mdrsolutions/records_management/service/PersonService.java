@@ -52,14 +52,32 @@ public class PersonService {
                     : null; // or 0L, if you prefer
 
             // If you only want one email, pick the first:
-            dtoList.add(mapToDto(person));
+            EmailDto emailDto =
+                    person.getEmails().isEmpty()
+                            ? new EmailDto(null, "", null, person.getPersonId())
+                            : getFirstEmail(person.getEmails());
+
+            PersonDto dto = new PersonDto(
+                    person.getPersonId(),
+                    person.getEmploymentStatus(),
+                    person.getPrefix(),
+                    person.getFirstName(),
+                    person.getMiddleName(),
+                    person.getLastName(),
+                    person.getSuffix(),
+                    person.getPersonType(),
+                    person.getLegalGuardianType(),
+                    userId,
+                    emailDto
+            );
+            dtoList.add(dto);
         }
 
         return dtoList;
     }
 
     // Added for lesson 06-05
-    public Page<PersonDto> findPaginated(Pageable pageable) {
+    public Page<PersonDto> findPaginated(Pageable pageable){
         //grabs from findAlPersonDtoList
         List<PersonDto> all = findAllPersonDtoList();
         int pageSize = pageable.getPageSize();
@@ -82,43 +100,6 @@ public class PersonService {
         );
     }
 
-    //added 06-06
-    public List<PersonDto> searchByNameOrEmail(String searchTerm) {
-        List<Person> persons = personRepository.searchByNameOrEmail(searchTerm);
-
-        return persons.stream()
-                .map(this::mapToDto)
-                .toList();
-    }
-
-    //added 06-06
-    private PersonDto mapToDto(Person person) {
-        EmailDto emailDto =
-                person.getEmails().isEmpty()
-                        ? new EmailDto(null, "", null, person.getPersonId())
-                        : getFirstEmail(person.getEmails());
-
-        Long userId = null;
-        if (person.getUser() != null) {
-            userId = person.getUser().getUserId();
-        }
-        PersonDto dto = new PersonDto(
-                person.getPersonId(),
-                person.getEmploymentStatus(),
-                person.getPrefix(),
-                person.getFirstName(),
-                person.getMiddleName(),
-                person.getLastName(),
-                person.getSuffix(),
-                person.getPersonType(),
-                person.getLegalGuardianType(),
-                userId,
-                emailDto
-        );
-        return dto;
-    }
-
-    //moved in 06-06
     private EmailDto getFirstEmail(Set<Email> emails) {
         for (Email email : emails) {
             //returning first email regardless...I know this is a hack
@@ -131,5 +112,4 @@ public class PersonService {
         }
         return new EmailDto(null, "", null, null);
     }
-
 }

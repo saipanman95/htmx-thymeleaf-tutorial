@@ -1,25 +1,22 @@
+<!DOCTYPE html>
 <html lang="en"
-      layout:decorate="~{user-layout}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{user-layout}">
 <head>
     <meta charset="UTF-8">
     <title>Person Full Details</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<div layout:fragment="content"
-     th:fragment="person-full-details">
+<div layout:fragment="content" th:fragment="person-full-details">
     <div class="container mt-5 slide-it">
         <h2 class="text-white  text-primary">Person Full Details</h2>
 
 
-        <div class="alert alert-success" role="alert" th:if="${message}">
-            <br>
+        <div th:if="${message}" class="alert alert-success" role="alert">
             <span th:text="${message}"></span>
         </div>
-        <div class="alert alert-danger" role="alert" th:if="${errorMessage}">
-            <br>
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
             <span th:text="${errorMessage}"></span>
         </div>
 
