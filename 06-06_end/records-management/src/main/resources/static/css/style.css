@@ -1,6 +1,12 @@
 body {
     padding-top: 80px; /* Adjust based on the height of your navbar */
 }
+.error {
+    text-align:center;
+    font-size: 24px;
+    font-weight: bold;
+    color: red;
+}
 header {
     z-index: 1000;
 }
@@ -24,7 +30,7 @@ header {
 @keyframes loadingFadeIn { to { opacity: 1; } }
 
 .gradient-custom {
-/* fallback for old browsers */
+    /* fallback for old browsers */
     background: #6a11cb;
 
     /* Chrome 10-25, Safari 5.1-6 */
@@ -81,20 +87,21 @@ li a.nav-link:hover {
     color: silver !important;
 }
 .welcome-footer {
-    background-color: #343a40 !important; /* Dark gray background */
-    color: #d3d3d3 !important; /* Light gray text */
-    padding: 40px 0 !important; /* Add padding to the footer (top and bottom) */
-    margin-top: 30px; /* Add margin between the main content and the footer */
-    position: absolute;
-    width:100%;
-    bottom: 1px;
-    left: 0;
+   background-color: #343a40 !important; /* Dark gray background */
+   color: #d3d3d3 !important; /* Light gray text */
+   padding: 40px 0 !important; /* Add padding to the footer (top and bottom) */
+   margin-top: 30px; /* Add margin between the main content and the footer */
+   position: absolute;
+   width:100%;
+   bottom: 1px;
+   left: 0;
 }
 .footer {
     background-color: #343a40 !important; /* Dark gray background */
     color: #d3d3d3 !important; /* Light gray text */
     padding: 40px 0 !important; /* Add padding to the footer (top and bottom) */
     margin-top: 30px; /* Add margin between the main content and the footer */
+
 }
 
 .footer h5 {
@@ -316,8 +323,4 @@ a.edit-delete-icons:hover {
 
 .htmx-request {
     display:block;
-}
-.active-search {
-    width: 300px !important;
-    margin-bottom: 10px;
 }
