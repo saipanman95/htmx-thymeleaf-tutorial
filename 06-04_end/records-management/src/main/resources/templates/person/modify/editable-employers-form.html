@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="employer-form(employer, personId)">
     <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Employer Form</h5>
+        <h5 class="modal-title" id="employerModalLbl">Employer Form</h5>
         <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
     </div>
     <div class="modal-body bg-light text-dark">
@@ -97,13 +97,17 @@
 
             <!-- Save and Cancel Buttons -->
             <div class="d-flex justify-content-end">
-                <button class="btn btn-success me-2" data-bs-dismiss="modal"
+                <button class="btn btn-success me-2" type="submit"
                         th:hx-post="@{/person/{personId}/employer/save(personId=${personId})}"
                         hx-swap="outerHTML"
                         hx-target="#employer-list"
-                        type="submit">Save</button>
-                <button class="btn btn-secondary" data-bs-dismiss="modal"
-                        type="button">Cancel
+                        data-bs-dismiss="modal">
+                  Save
+                </button>
+                <button class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        type="button">
+                  Cancel
                 </button>
             </div>
         </form>

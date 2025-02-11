@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<div th:fragment="editable-person-info(person)">
+<div th:fragment="editable-person-info(person)" >
     <div class="card bg-dark text-white mt-4">
         <div class="card-body">
             <h4 class="card-title">Edit Personal Information</h4>
+
             <form th:action="@{/person/update/{personId}(personId=${person.personId})}" th:object="${person}"
                   method="post">
                 <div class="container">
@@ -59,8 +60,7 @@
                         </div>
                         <div class="col">
                             <div class="mb-2">
-                                <label for="legalGuardianType" class="form-label">Legal Guardian (Use If Person Type is
-                                    Other)</label>
+                                <label for="legalGuardianType" class="form-label">Legal Guardian (Use If Person Type is Other)</label>
                                 <select th:field="*{legalGuardianType}" class="form-control bg-dark text-white"
                                         id="legalGuardianType">
                                     <option value=""></option>
@@ -87,6 +87,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="d-flex justify-content-end mt-3">
                     <button type="submit" class="btn btn-success"
                             hx-trigger="click"
@@ -94,16 +95,15 @@
                             hx-swap="innerHTML transition:true"
                             hx-indicator="#spinner"
                             th:attr="data-csrf-header=${_csrf.headerName}, data-csrf-token=${_csrf.token}"
-                            hx-target="#person-info-content">Save
-                    </button>
+                            hx-target="#person-info-content">Save</button>
                     <a th:hx-get="@{/person/cancel/{personId}(personId=${person.personId})}"
                        hx-target="#person-info-content" hx-swap="innerHTML transition:true"
                        th:href="@{/person/view/{personId}(personId=${person.personId})}"
                        class="btn btn-secondary ms-2">Cancel</a>
-                    <div id="spinner" class="spinner htmx-indicator"></div>
                 </div>
             </form>
         </div>
     </div>
+    <div id="spinner" class="spinner htmx-indicator"></div>
 </div>
 </html>

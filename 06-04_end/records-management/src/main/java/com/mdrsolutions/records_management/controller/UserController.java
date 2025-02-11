@@ -80,6 +80,7 @@ public class UserController {
                                  Model model) {
         LOGGER.info("updateUsername(...) - email: {}", email);
         Optional<User> originalUser = getCurrentUser(userDetails);
+
         if (originalUser.isPresent()) {
             if (!isValidEmail(email)) {
                 model.addAttribute("user", originalUser.get());
@@ -92,7 +93,7 @@ public class UserController {
                 model.addAttribute("user", originalUser.get());
                 model.addAttribute("mode", "edit-username");
                 model.addAttribute("errorMessage", "User Email already taken! Please select another!");
-                return "redirect:/dashboard";
+                return "dashboard/dashboard";
             }
 
             // Update email and persist
