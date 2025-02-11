@@ -5,7 +5,6 @@ import com.mdrsolutions.records_management.entity.Person;
 import com.mdrsolutions.records_management.repository.EmployerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,13 +19,9 @@ public class EmployerService {
         return employerRepository.findById(employerId);
     }
 
-    public Employer saveOrUpdateEmployer(Person person, Employer employer) {
+    public void saveOrUpdateEmployer(Person person, Employer employer) {
         employer.setPerson(person);
-        return employerRepository.save(employer);
-    }
-
-    public List<Employer> findEmployersByPersonId(Long personId){
-        return employerRepository.findByPerson_PersonId(personId);
+        employerRepository.save(employer);
     }
 
     public void deleteEmployer(Long employerId) {
