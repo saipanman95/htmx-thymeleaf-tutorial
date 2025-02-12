@@ -189,20 +189,16 @@ li a.nav-link:hover {
     600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
 }
 
-.slide-individual {
+[class*="slide-individual"] {
     view-transition-name: slide-individual;
 }
 
-/* Old state animation */
 ::view-transition-old(slide-individual) {
-    animation: color-fade-out 1000ms cubic-bezier(0.4, 0, 1, 1) both,
-    slide-to-left 600ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: color-fade-out 1000ms both, slide-to-left 600ms both;
 }
 
-/* New state animation */
 ::view-transition-new(slide-individual) {
-    animation: color-fade-in 1000ms cubic-bezier(0, 0, 0.2, 1) 90ms both,
-    slide-from-right 600ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  animation: color-fade-in 1000ms both, slide-from-right 600ms both;
 }
 
 .bg-custom-dark{
