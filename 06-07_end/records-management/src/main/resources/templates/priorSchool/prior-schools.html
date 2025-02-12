@@ -7,13 +7,13 @@
             <button class="btn btn-primary mb-3"
                     hx-swap="innerHTML transition:true show:#prior-school-form:bottom swap:.05s"
                     hx-target="#prior-school-form"
-                    onclick="swapFade('prior-school-form',true); "
+                    onclick="swapFade('prior-school-form',true); removeStyleClasses('slide-it', 'slide-individual');"
                     th:hx-get="@{/prior-schools/student/{studentId}/add(studentId=${studentId})}">
                 Add Prior School
             </button>
             <!-- Alternate Grid display-->
             <div class="wrapper-prior-schools-grid header">
-                <div class="box"> </div>
+                <div class="box"></div>
                 <div class="box">School Name</div>
                 <div class="box">City</div>
                 <div class="box">State</div>
@@ -23,15 +23,17 @@
                 <div class="box">Date Last Attended</div>
                 <div class="box">Actions</div>
             </div>
-            <form id="prior-school-list" method="post" hx-trigger="end"
+            <form hx-trigger="end" id="prior-school-list" method="post"
                   th:action="@{/prior-schools/student/{studentId}/priorSchools/reorder(studentId=${studentId})}">
                 <div class="htmx-indicator">Updating...</div>
-                <div class="wrapper-prior-schools-grid prior-school-collection body item"
+                <div class="wrapper-prior-schools-grid body"
                      th:each="priorSchoolDto : ${priorSchoolDtoList}"
-                     th:attr="data-id='prior-school-' + ${priorSchoolDto.priorSchoolId}"
+                     th:attr="data-id='prior-school-'+${priorSchoolDto.priorSchoolId}"
                      th:id="'prior-school-' + ${priorSchoolDto.priorSchoolId}">
                     <input type="hidden" name="priorSchoolIds[]" th:value="${priorSchoolDto.priorSchoolId}">
-                    <div class="box"><i class="fa-solid fa-grip-vertical"></i></div>
+                    <div class="box">
+                        <i class="fa-solid fa-grip-vertical"></i>
+                    </div>
                     <div class="box" th:text="${priorSchoolDto.schoolName}">School Name</div>
                     <div class="box" th:text="${priorSchoolDto.city}">City</div>
                     <div class="box" th:text="${priorSchoolDto.state}">State</div>
@@ -50,7 +52,7 @@
                             <button class="btn btn-outline-light btn-sm"
                                     hx-swap="innerHTML transition:true show:#prior-school-form:bottom swap:.05s"
                                     hx-target="#prior-school-form"
-                                    onclick="swapFade('prior-school-form',true); removeStyleClasses('slide-it, slide-individual');"
+                                    onclick="swapFade('prior-school-form',true); removeStyleClasses('slide-it', 'slide-individual');"
                                     th:hx-get="@{/prior-schools/school/{id}/edit(id=${priorSchoolDto.priorSchoolId})}">
                                 Edit
                             </button>
@@ -65,8 +67,9 @@
                     </div>
                 </div> <!-- wrapper-prior-schools-grid body-->
             </form>
-        </div>
+        </div> <!-- end of card body -->
     </div>
-    <div hx-swap-oob="true" id="#prior-school-form"></div>
+    <div hx-swap-oob="true" id="prior-school-form"></div>
+
 </div>
 

@@ -119,12 +119,12 @@ public class PriorSchoolController {
     @PostMapping("/student/{studentId}/priorSchools/reorder")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void reorderPriorSchools(@PathVariable Long studentId,
-                                      @RequestParam("priorSchoolIds[]") List<Long> priorSchoolIds) throws InterruptedException {
+                                    @RequestParam("priorSchoolIds[]") List<Long> priorSchoolIds) throws InterruptedException {
         LOGGER.info("reorderPriorSchools(...) - studentId: {}", studentId);
 
-        Thread.sleep(500);//artificial latency
-        priorSchoolService.updatePriorSchoolOrder(priorSchoolIds, studentId);
+        Thread.sleep(1000);
 
+        priorSchoolService.updatePriorSchoolOrder(priorSchoolIds, studentId);
     }
 
     @DeleteMapping("/delete/{id}")

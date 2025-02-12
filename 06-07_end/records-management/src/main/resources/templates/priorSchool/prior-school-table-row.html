@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!-- individual table row for insert -->
 <div th:fragment="prior-school">
-  <div th:class="'wrapper-prior-schools-grid body slide-individual '"
-       th:attr="data-id='prior-school-' + ${priorSchoolDto.priorSchoolId}"
+  <div class="wrapper-prior-schools-grid body slide-individual"
+       th:attr="data-id='prior-school-'+${priorSchoolDto.priorSchoolId}"
        th:id="'prior-school-' + ${priorSchoolDto.priorSchoolId}">
     <input type="hidden" name="priorSchoolIds[]" th:value="${priorSchoolDto.priorSchoolId}">
-    <div class="box"><i class="fa-solid fa-grip-vertical"></i></div>
+    <div class="box">
+      <i class="fa-solid fa-grip-vertical"></i>
+    </div>
     <div class="box" th:text="${priorSchoolDto.schoolName}">School Name</div>
     <div class="box" th:text="${priorSchoolDto.city}">City</div>
     <div class="box" th:text="${priorSchoolDto.state}">State</div>
@@ -27,7 +29,7 @@
         <button class="btn btn-outline-light btn-sm"
                 hx-swap="innerHTML transition:true show:#prior-school-form:bottom swap:.05s"
                 hx-target="#prior-school-form"
-                onclick="swapFade('prior-school-form',true); removeStyleClasses('slide-it, slide-individual');"
+                onclick="swapFade('prior-school-form',true); removeStyleClasses('slide-it', 'slide-individual');"
                 th:hx-get="@{/prior-schools/school/{id}/edit(id=${priorSchoolDto.priorSchoolId})}">
           Edit
         </button>

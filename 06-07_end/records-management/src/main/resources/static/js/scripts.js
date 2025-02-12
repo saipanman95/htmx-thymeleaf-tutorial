@@ -29,31 +29,29 @@ function removeStyleClasses(classNames) {
     });
 }
 
-htmx.onLoad( function(content){
+htmx.onLoad(function(content){
     initSortable(content);
-});
+})
 
-//making this reusable if it needs to be called again.
 function initSortable(content){
     var sortables = content.querySelectorAll('#prior-school-list');
-
     for(var i = 0; i < sortables.length; i++){
         var sortable = sortables[i];
 
         var sortableInstance = new Sortable(sortable, {
             animation: 150,
             filter: ".htmx-indicator",
-            onMove: function(evt){
+            onMove : function(evt){
                 return evt.related.className.indexOf('htmx-indicator') === -1;
             },
-            onEnd: function(evt){
+            onEnd : function(evt){
                 this.option("disabled", true);
             }
         });
 
         sortable.addEventListener("htmx:afterSwap", function(){
             sortableInstance.option("disabled", false);
-        });
+        })
     }
 }
 
