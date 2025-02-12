@@ -96,7 +96,7 @@
           <!-- Submit Button -->
           <button type="submit" class="btn btn-success me-2" th:if="${!editSchool}"
                   th:hx-post="@{/prior-schools/student/{studentId}/save(studentId=${studentId})}"
-                  hx-target="#prior-school-list"
+                  hx-target="#prior-school-content"
                   hx-swap="beforeend transition:true show:#prior-school-content:bottom swap:.25s"
                   hx-on::after-request="swapFade('prior-school-form', false); removeStyleClasses('slide-it, slide-individual');">
             Save
