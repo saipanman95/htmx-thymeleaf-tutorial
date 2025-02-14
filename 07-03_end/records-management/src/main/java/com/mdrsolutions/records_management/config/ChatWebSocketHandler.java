@@ -30,21 +30,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     private final SpringTemplateEngine springTemplateEngine;
 
     public ChatWebSocketHandler(ObjectMapper objectMapper, SpringTemplateEngine springTemplateEngine) {
+        super();
         this.objectMapper = objectMapper;
         this.springTemplateEngine = springTemplateEngine;
-    }
-
-    @Override
-    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        activeSessions.add(session);
-    }
-
-    @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-
-        Map<String, Object> value = objectMapper.readValue(message.getPayload(), new TypeReference<>() {});
-        String userMessage = (String) value.get("chatMessage");
-        sendToWSSessions(session, userMessage);
     }
 
     @Override
@@ -52,29 +40,42 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
         activeSessions.remove(session);
     }
 
-    private void sendToWSSessions(WebSocketSession currentSession, String userMessage) {
+    @Override
+    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        Map<String, Object> value = objectMapper.readValue(message.getPayload(), new TypeReference<Map<String, Object>>() {});
+        String userMessage = (String) value.get("chatMessage");
+        sendToWSSessions(session, userMessage);
+    }
+
+    @Override
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        activeSessions.add(session);
+    }
+
+    private void sendToWSSessions(WebSocketSession currentSession, String userMessage){
         LocalDateTime now = LocalDateTime.now();
+
         activeSessions.stream()
                 .filter(WebSocketSession::isOpen)
-                .forEach(session -> {
-                    // Determine the style based on the session identity
+                .forEach(session ->{
                     String style = session.equals(currentSession) ? "self" : "other";
                     ChatMessage chatMessage = new ChatMessage(
                             style,
                             currentSession.getPrincipal(),
                             userMessage,
-                            now);
-                    try {
+                            now
+                    );
+                    try{
                         session.sendMessage(new TextMessage(thymeleafMessage(chatMessage)));
-                    } catch (IOException e) {
-                        LOGGER.debug("Unable to send message to {}", session, e);
+                    } catch (IOException ex){
+                        LOGGER.debug("Unable to send message {}", session, ex);
                     }
+
                 });
     }
 
-    private String thymeleafMessage(ChatMessage message) {
-            Context context = new Context(null, Map.of("message", message));
-            return springTemplateEngine.process("ws/chat", Set.of("chat-message"), context);
+    private String thymeleafMessage(ChatMessage message){
+        Context context = new Context(null, Map.of("message", message));
+        return springTemplateEngine.process("ws/chat", Set.of("chat-message"), context);
     }
-
 }
