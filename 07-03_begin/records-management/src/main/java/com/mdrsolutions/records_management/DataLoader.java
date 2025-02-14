@@ -132,7 +132,8 @@ public class DataLoader implements CommandLineRunner {
         roles.add(userRole);
         roles.add(adminRole);
         User user = userService.createUser("jonjacobs95@mail.com", "securepassword", person, roles);
-
+        createFakePerson("user@mail.com", "password");
+        System.out.println("REGULAR USER NO ROLE = user@mail.com");
         // Create the first student
         Student student1 = new Student();
         student1.setFirstName("Jane");
@@ -256,13 +257,12 @@ public class DataLoader implements CommandLineRunner {
 
         //creating 200 fake persons --> added -06-05
         IntStream.range(0, 600)
-                .forEach(i -> createFakePerson());
-
+                .forEach(i -> createFakePerson(null, null));
     }
 
     //Added 06-05
     //used by Admin Controller demonstration to generate fake data.
-    public void createFakePerson(){
+    public void createFakePerson(String emailParam, String password){
         Set<Role> roles = new HashSet<>();
         roles.add(userRole);
 
@@ -270,7 +270,6 @@ public class DataLoader implements CommandLineRunner {
         user.setEmail(faker.internet().emailAddress());
         user.setEnabled(false);
         user.setRoles(roles);
-
         Person person = new Person();
         person.setPersonType(PersonType.FATHER);
         person.setEmploymentStatus(EmploymentStatus.EMPLOYED);
@@ -320,7 +319,11 @@ public class DataLoader implements CommandLineRunner {
 
         // Save the person (including the employers and addresses)
         personRepository.save(person);
-        userService.createUser(faker.internet().emailAddress(), "securepassword", person, roles);
 
+        if(emailParam != null && password != null){
+            user = userService.createUser(emailParam, password, person, roles);
+        }else {
+            userService.createUser(faker.internet().emailAddress(), "securepassword", person, roles);
+        }
     }
 }
